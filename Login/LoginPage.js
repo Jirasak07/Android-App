@@ -21,7 +21,7 @@ function LoginPage({ navigation }) {
       {
         text: "OK",
         onPress: () => {
-          navigation.navigate("content");
+          // navigation.navigate("content");
         },
       },
     ]);
@@ -49,7 +49,7 @@ function LoginPage({ navigation }) {
       <View style={styles.loginHead}>
         <Image
           source={require("../assets/Image/lanna-removebg-preview.png")}
-          style={{ aspectRatio: 1, resizeMode: "contain" }}
+          style={{ aspectRatio: 1.5, resizeMode: "contain" }}
         />
       </View>
       <View style={styles.bodyLogin}>
@@ -77,7 +77,6 @@ function LoginPage({ navigation }) {
 
 const styles = StyleSheet.create({
   containerLogin: {
-    backgroundColor: "#edf2f4",
     width: "95%",
     height: "60%",
     borderRadius: 5,
@@ -94,12 +93,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     paddingLeft: 10,
-    backgroundColor: "#ced4da",
+    backgroundColor: "#e5e5e5",
     width: 300,
     height: 50,
     borderRadius: 3,
     color: "#252422",
     fontSize: 18,
+    borderColor:'#023047',
   },
 });
 export default LoginPage;
