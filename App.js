@@ -1,9 +1,20 @@
 import { StatusBar } from "expo-status-bar";
-import { useRef } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./Login/LoginPage";
+import { StyleSheet, View } from "react-native";
 
 export default function App() {
-  return <LoginPage />;
+  return (
+    <View style={styles.container} >
+      <LoginPage />
+      <StatusBar style="auto" />
+    </View>
+  );
 }
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#2a9d8f",
+    alignItems: "center",
+    justifyContent: "center",
+    height:'100%'
+  },
+});

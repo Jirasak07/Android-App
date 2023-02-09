@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import axios from "axios";
 
 import { useRef, useState } from "react";
@@ -46,47 +45,37 @@ function LoginPage({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerLogin}>
-        <View style={styles.loginHead}>
-          <Image
-            source={require("../assets/Image/lanna-removebg-preview.png")}
-            style={{ aspectRatio: 1, resizeMode: "contain" }}
-          />
-        </View>
-        <View style={styles.bodyLogin}>
-          <Text style={{ fontSize: 18, fontWeight: "bold",}}>
-            ระบบจองรถ
-          </Text>
-          <TextInput
-            inputMode="email"
-            spellCheck={false}
-            onChangeText={setUsername}
-            placeholder=" Username"
-            style={styles.TextInput}
-            ref={userName}
-          />
-          <TextInput
-            onChangeText={setpassword}
-            placeholder=" Password"
-            secureTextEntry="true"
-            style={styles.TextInput}
-            ref={passWord}
-          />
-          <Button title="เข้าสู่ระบบ" color="#2a9d8f" onPress={onClick} />
-        </View>
+    <View style={styles.containerLogin}>
+      <View style={styles.loginHead}>
+        <Image
+          source={require("../assets/Image/lanna-removebg-preview.png")}
+          style={{ aspectRatio: 1, resizeMode: "contain" }}
+        />
       </View>
-      <StatusBar style="auto" />
+      <View style={styles.bodyLogin}>
+        <Text style={{ fontSize: 18, fontWeight: "bold" }}>ระบบจองรถ</Text>
+        <TextInput
+          inputMode="email"
+          spellCheck={false}
+          onChangeText={setUsername}
+          placeholder=" Username"
+          style={styles.TextInput}
+          ref={userName}
+        />
+        <TextInput
+          onChangeText={setpassword}
+          placeholder=" Password"
+          secureTextEntry="true"
+          style={styles.TextInput}
+          ref={passWord}
+        />
+        <Button title="เข้าสู่ระบบ" color="#2a9d8f" onPress={onClick} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#edf2f4",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   containerLogin: {
     backgroundColor: "#edf2f4",
     width: "95%",
@@ -102,8 +91,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   TextInput: {
-    marginTop:20,
-    marginBottom:10,
+    marginTop: 20,
+    marginBottom: 10,
     paddingLeft: 10,
     backgroundColor: "#ced4da",
     width: 300,
