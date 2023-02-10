@@ -14,7 +14,7 @@ export default function App() {
   const Tab = createBottomTabNavigator();
   return (
     <View style={styles.container} >
-      <LoginPage />
+      
       <StatusBar style="auto" />
     </View>
   );
