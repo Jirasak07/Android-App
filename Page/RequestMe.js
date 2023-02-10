@@ -2,90 +2,149 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Card } from "react-native-shadow-cards";
 import FaIcon from "react-native-vector-icons/FontAwesome5";
-import { NativeBaseProvider, Box } from "native-base";
 const RequestMe = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Card style={styles.cardAll}>
-          <View style={styles.icon}>
-            <FaIcon
-              name="clipboard-list"
-              style={{ fontSize: 50, color: "#fff",textAlign:'center', }}
-            />
-          </View>
-          <View style={styles.text_content}>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              ทั้งหมด
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 30, fontWeight: "700",textAlign:'center', }}>
-              0
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              รายการ
-            </Text>
-          </View>
-        </Card>
+      <View style={[styles.items, styles.cardAll]}>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 14,
+            fontWeight: "300",
+            textAlign: "center",
+          }}
+        >
+          การจองทั้งหมด
+        </Text>
 
-        <Card style={styles.cardPadding} >
-          <View style={styles.icon}>
-            <FaIcon
-              name="hourglass-end"
-              style={{ fontSize: 50, color: "#fff",textAlign:'center', }}
-            />
-          </View>
-          <View style={styles.text_content}>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              รอดำเนินการ
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 30, fontWeight: "700",textAlign:'center', }}>
-              0
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              รายการ
-            </Text>
-          </View>
-        </Card>
+        <View style={styles.text_content}>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 30,
+              fontWeight: "700",
+              textAlign: "center",
+            }}
+          >
+            0
+          </Text>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 14,
+              fontWeight: "300",
+              textAlign: "center",
+            }}
+          >
+            รายการ
+          </Text>
+        </View>
+      </View>
 
-        <Card style={styles.cardApprove} >
-          <View style={styles.icon}>
-            <FaIcon
-              name="check-circle"
-              style={{ fontSize: 50, color: "#fff",textAlign:'center', }}
-            />
-          </View>
-          <View style={styles.text_content}>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              อนุมัติแล้ว
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 30, fontWeight: "700",textAlign:'center', }}>
-              0
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              รายการ
-            </Text>
-          </View>
-        </Card>
+      <View style={[styles.items, styles.cardPadding]}>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 14,
+            fontWeight: "300",
+            textAlign: "center",
+          }}
+        >
+          รอดำเนินการ
+        </Text>
+        <View style={styles.text_content}>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 30,
+              fontWeight: "700",
+              textAlign: "center",
+            }}
+          >
+            0
+          </Text>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 14,
+              fontWeight: "300",
+              textAlign: "center",
+            }}
+          >
+            รายการ
+          </Text>
+        </View>
+      </View>
 
-        <Card style={styles.cardCancel} >
-          <View style={styles.icon}>
-            <FaIcon
-              name="ban"
-              style={{ fontSize: 50, color: "#fff",textAlign:'center', }}
-            />
-          </View>
-          <View style={styles.text_content}>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              ยกเลิกแล้ว
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 30, fontWeight: "700",textAlign:'center', }}>
-              0
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 14, fontWeight: "300",textAlign:'center' }}>
-              รายการ
-            </Text>
-          </View>
-        </Card>
+      <View style={[styles.items, styles.cardApprove]}>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 14,
+            fontWeight: "300",
+            textAlign: "center",
+          }}
+        >
+          อนุมัติแล้ว
+        </Text>
+
+        <View style={styles.text_content}>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 30,
+              fontWeight: "700",
+              textAlign: "center",
+            }}
+          >
+            0
+          </Text>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 14,
+              fontWeight: "300",
+              textAlign: "center",
+            }}
+          >
+            รายการ
+          </Text>
+        </View>
+      </View>
+
+      <View style={[styles.items, styles.cardCancel]}>
+        <Text
+          style={{
+            color: "#fff",
+            fontSize: 14,
+            fontWeight: "300",
+            textAlign: "center",
+          }}
+        >
+          ยกเลิกแล้ว
+        </Text>
+        <View style={styles.text_content}>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 30,
+              fontWeight: "700",
+              textAlign: "center",
+            }}
+          >
+            0
+          </Text>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 14,
+              fontWeight: "300",
+              textAlign: "center",
+            }}
+          >
+            รายการ
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -96,49 +155,41 @@ export default RequestMe;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "row",
     flexWrap: "wrap",
-    alignItems: "center",
-    backgroundColor: "#EFF2EF",
-  },
-  content: {
+    justifyContent: "center",
     marginTop: 50,
+    padding: 10,
+  },
+  items: {
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 5,
+    width: 150,
+    height: 100,
   },
   cardAll: {
-    padding: 10,
-    marginLeft:20,
-    marginBottom:10,
-    flexDirection: "row",
     backgroundColor: "#4B3F72",
+    borderRadius: 10,
   },
   cardPadding: {
-    padding: 10,
-    marginLeft:20,
-    marginBottom:10,
-    flexDirection: "row",
     backgroundColor: "#F2E94E",
+    borderRadius: 10,
   },
   cardCancel: {
-    padding: 10,
-    marginLeft:20,
-    marginBottom:10,
-    flexDirection: "row",
     backgroundColor: "#DA3E52",
+    borderRadius: 10,
   },
   cardApprove: {
-    padding: 10,
-    marginLeft:20,
-    marginBottom:10,
-    flexDirection: "row",
     backgroundColor: "#96E6B3",
+    borderRadius: 10,
   },
   icon: {
     justifyContent: "center",
     textAlign: "center",
-    flexGrow: 2,
     color: "#fff",
   },
   text_content: {
-    flexGrow: 2,
     justifyContent: "center",
     textAlign: "center",
     color: "#fff",
