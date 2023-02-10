@@ -5,18 +5,19 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import DashBoard from "./Page/DashBoard";
+import FaIcon from "react-native-vector-icons/FontAwesome";
 
 export default function App() {
-  const PageStack1 = createStackNavigator()
-  const tabPage1 =() =>{
-      <PageStack1.Navigator>
-        <PageStack1.Screen name="" />
-      </PageStack1.Navigator>
-  }
+  const PageStack1 = createStackNavigator();
+  const tabPage1 = () => {
+    <PageStack1.Navigator>
+      <PageStack1.Screen name="" />
+    </PageStack1.Navigator>;
+  };
   const Tab = createBottomTabNavigator();
   return (
-    <NavigationContainer>
-      <Tab.Navigator
+    <NavigationContainer >
+      <Tab.Navigator 
         tabBarOptions={{
           labelStyle: { fontSize: 12 },
           showLabel: true,
@@ -25,28 +26,27 @@ export default function App() {
         }}
       >
         <Tab.Screen
+        
           name="Dashboard"
           component={DashBoard}
           options={{
+            headerTitle:'',
             tabBarLabel: "Dashboard",
-            // tabBarIcon:
+            tabBarIcon: ({ color, size }) => {
+              return <FaIcon name="dashboard" size={18} color={color} />;
+            },
+            
           }}
         />
-        <Tab.Screen  name="Login"
+        <Tab.Screen
+          name="Login"
           component={LoginPage}
           options={{
             tabBarLabel: "Login",
             // tabBarIcon:
-          }} />
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    height:'100%',
-    height: "100%",
-  },
-});
