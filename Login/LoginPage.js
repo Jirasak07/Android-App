@@ -66,7 +66,8 @@ function LoginPage({ navigation }) {
           <TextInput
             onChangeText={setpassword}
             placeholder=" Password"
-            secureTextEntry="true"
+            // secureTextEntry="true"
+            inputMode="password"
             style={styles.TextInput}
             ref={passWord}
           />
