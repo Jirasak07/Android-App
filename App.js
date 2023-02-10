@@ -1,6 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import LoginPage from "./Login/LoginPage";
-import { StyleSheet, View } from "react-native";
 import { StyleSheet, View, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
