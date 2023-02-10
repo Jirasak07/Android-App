@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 function LoginPage({ navigation }) {
   const userName = useRef();
   const passWord = useRef();
@@ -19,21 +19,17 @@ function LoginPage({ navigation }) {
   const [password, setpassword] = useState("");
 
   const onClick = async () => {
-    const response = await axios({
-      method: "POST",
-      url: "https://api.lanna.co.th/Profile/checkuser",
-      data: { username, password },
-    });
+    const response = await axios.post("https://api.lanna.co.th/Profile/checkuser",{ username:username,password:password })
     const data = await response.data;
     console.log(data.Result);
     if (data.Result == "true") {
       const name = data.Data[0];
-      const FullName = JSON.stringify(name.FullName);
+      const FullName = name.FullName;
       console.log(FullName);
-      await AsyncStorage.setItem("Login", "1");
+      await AsyncStorage.setItem("@Login", "1");
       // const log = await AsyncStorage.getItem("Login");
       // console.log(log);
-      Alert.alert(`ยินดีต้อนรับ : ${FullName} `,'', [
+      Alert.alert("ยินดีต้อนรับ ", FullName , [
         {
           text: "ตกลง",
           onPress: () => {
@@ -56,17 +52,20 @@ function LoginPage({ navigation }) {
         <View style={styles.bodyLogin}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>ระบบจองรถ</Text>
           <TextInput
+            autoCapitalize={'none'}
             inputMode="email"
             spellCheck={false}
             onChangeText={setUsername}
-            placeholder=" Username"
+            placeholder="example@lanna.co.th"
             style={styles.TextInput}
             ref={userName}
           />
           <TextInput
             onChangeText={setpassword}
-            placeholder=" Password"
-            // secureTextEntry="true"
+            placeholder=" รหัสผ่าน"
+            secureTextEntry="true"
+            autoCapitalize={'none'}
+            keyboardType="default"
             inputMode="password"
             style={styles.TextInput}
             ref={passWord}

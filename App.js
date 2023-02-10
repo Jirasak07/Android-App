@@ -5,7 +5,17 @@ import LoginPage from "./Login/LoginPage";
 import Ionicons from "react-native-vector-icons";
 import TabBottom from "./Tab/TabBottom";
 import Booking from './Page/Booking'
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function App() {
+  const log = async () =>{
+     const data =  await AsyncStorage.getItem('@Login')
+console.log(data)
+  }
+ 
+  useEffect(() => {
+    log()
+  }, [])
   const theme = {
     ...DefaultTheme,
     colors: {
