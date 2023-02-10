@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor:'#E0E0CE',
+    backgroundColor: "#E1E2EF",
   },
   contentH: {
     marginTop: 20,
     height: 500,
   },
   card: {
-    padding: 10,
+    padding: 15,
     borderRadius: 10,
     flexDirection: "row",
   },
