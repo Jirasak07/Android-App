@@ -122,10 +122,8 @@ const RequestMe = () => {
 
               <Text>ชื่อผู้จอง : </Text>
               <Text>สถานะการจอง : </Text>
-              <Text>ช่วงวันที่</Text>
-              
-              <Text>รายละเอียดรถและคนขับ</Text>
-              <Text>รายละเอียดการจอง</Text>
+              <Text>ช่วงวันที่ :</Text>
+              <Text>รายละเอียดการจอง :</Text>
             </View>
           </View>
         </Modal>
