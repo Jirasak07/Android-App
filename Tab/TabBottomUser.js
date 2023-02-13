@@ -1,17 +1,12 @@
 import { View, Text } from "react-native";
-import {
-  createBottomTabNavigator,
-
-} from "@react-navigation/bottom-tabs";
-import {createStackNavigator} from '@react-navigation/stack'
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import MCIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import DriverManager from "../Page/DriverManage";
-import DashBoard from "../Page/DashBoard";
 import Booking from "../Page/Booking";
-import LogoutPage from "../Login/LogoutPage";
+import RequestMe from "../Page/RequestMe";
 export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (
@@ -67,7 +62,7 @@ export default function TabBottomUser() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Dashboard" component={DashBoard} />
+      <Tab.Screen name="Dashboard" component={RequestMe} />
       <Tab.Screen name="Booking" component={Booking} />
     </Tab.Navigator>
   );
