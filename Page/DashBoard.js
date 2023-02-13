@@ -56,7 +56,7 @@ export default function DashBoard({ navigation }) {
             <Text style={{ fontSize: 50, color: "#e05263" }}>0</Text>
           </View>
         </View>
-        <View style={{marginBottom:40,paddingHorizontal:10}} >
+        <View style={{ marginBottom: 40, paddingHorizontal: 10,marginTop:5 }}>
           <Calendarr />
         </View>
       </ScrollView>
@@ -77,7 +77,7 @@ const style = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,
-    justifyContent: "start",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
 });
