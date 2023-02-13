@@ -17,7 +17,7 @@ export default function App() {
   }, []);
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
-  navTheme.colors.background = "#6096ba";
+  navTheme.colors.background = "#edf2f4";
   return (
     <NavigationContainer theme={navTheme}>
       <Stack.Navigator
