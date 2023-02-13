@@ -12,7 +12,7 @@ import DriverManager from "../Page/DriverManage";
 import DashBoard from "../Page/DashBoard";
 import Booking from "../Page/Booking";
 import LogoutPage from "../Login/LogoutPage";
-export default function TabBottom() {
+export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -69,8 +69,6 @@ export default function TabBottom() {
     >
       <Tab.Screen name="Dashboard" component={DashBoard} />
       <Tab.Screen name="Booking" component={Booking} />
-      <Tab.Screen name="Config" component={DriverManager} />
-      <Tab.Screen name="User" component={LogoutPage} />
     </Tab.Navigator>
   );
 }

@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
 const globalStyles = StyleSheet.create({
   containerContent: {
-   paddingTop:30,
-   paddingHorizontal:5,
    flex:1
   },
   containerInfo:{
@@ -23,6 +21,7 @@ const globalStyles = StyleSheet.create({
     elevation: 10,
     marginTop:10,
     padding:10,
+    aspectRatio:1,
   },
   boxInfo2:{
     backgroundColor:'#ffd16699',

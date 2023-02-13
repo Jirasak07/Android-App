@@ -7,6 +7,7 @@ import TabBottom from "./Tab/TabBottom";
 import Booking from "./Page/Booking";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import TabBottomUser from "./Tab/TabBottomUser";
 export default function App() {
   const log = async () => {
     const data = await AsyncStorage.getItem("@Login");
@@ -40,7 +41,7 @@ export default function App() {
             },
           }}
         />
-        <Stack.Screen name="Home" component={TabBottom} />
+        <Stack.Screen name="Home" component={TabBottomUser} />
       </Stack.Navigator>
     </NavigationContainer>
   );
