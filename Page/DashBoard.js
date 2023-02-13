@@ -9,10 +9,12 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Calendarr from "../Calendar/Calendar";
 
+
 export default function DashBoard({ navigation }) {
   const destro = async () => {
     await AsyncStorage.removeItem("@Login");
   };
+
   return (
     <View style={globalStyles.containerContent}>
       <ScrollView style={{ paddingTop: 20, paddingHorizontal: 10 }}>
@@ -22,36 +24,36 @@ export default function DashBoard({ navigation }) {
         <Text style={{ paddingHorizontal: 15, fontSize: 16 }}>รายการ</Text>
         <View style={style.cardContainer}>
           <View style={[style.cardInfo, { backgroundColor: "#073b4c30" }]}>
-            <Entypo name="list" size={60} color={"#073b4c"} />
+            {/* <Entypo name="list" size={40} color={"#073b4c"} /> */}
             <Text style={{ fontWeight: "bold", padding: 5, color: "#073b4c" }}>
               ทั้งหมด
             </Text>
-            <Text style={{ fontSize: 70, color: "#073b4c" }}>0</Text>
+            <Text style={{ fontSize: 50, color: "#073b4c" }}>0</Text>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#f7b26730" }]}>
-            <MaterialCommunityIcons
+            {/* <MaterialCommunityIcons
               name="timer-sand"
-              size={60}
+              size={40}
               color={"#f7b267"}
-            />
+            /> */}
             <Text style={{ fontWeight: "bold", padding: 5, color: "#f7b267" }}>
               รอดำเนินการ
             </Text>
-            <Text style={{ fontSize: 70, color: "#f7b267" }}>0</Text>
+            <Text style={{ fontSize: 50, color: "#f7b267" }}>0</Text>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#49a07830" }]}>
-            <FontAwesome5 name="check-square" size={60} color={"#49a078"} />
+            {/* <FontAwesome5 name="check-square" size={40} color={"#49a078"} /> */}
             <Text style={{ fontWeight: "bold", padding: 5, color: "#49a078" }}>
               อนุมัติแล้ว
             </Text>
-            <Text style={{ fontSize: 70, color: "#49a078" }}>0</Text>
+            <Text style={{ fontSize: 50, color: "#49a078" }}>0</Text>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#e0526330" }]}>
-            <MaterialIcons name="cancel" size={60} color={"#e05263"} />
+            {/* <MaterialIcons name="cancel" size={40} color={"#e05263"} /> */}
             <Text style={{ fontWeight: "bold", padding: 5, color: "#e05263" }}>
               ยกเลิกแล้ว
             </Text>
-            <Text style={{ fontSize: 70, color: "#e05263" }}>0</Text>
+            <Text style={{ fontSize: 50, color: "#e05263" }}>0</Text>
           </View>
         </View>
         <View style={{marginBottom:40,paddingHorizontal:10}} >
@@ -71,17 +73,9 @@ const style = StyleSheet.create({
   cardInfo: {
     // backgroundColor: "#edf2f4",
     width: 160,
-    height: 190,
+    height: 110,
     borderRadius: 10,
     padding: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
     marginBottom: 10,
     justifyContent: "start",
     alignItems: "center",

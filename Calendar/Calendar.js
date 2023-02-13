@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Alert } from "react-native";
 import Dialog from "react-native-dialog";
 import { Calendar, LocaleConfig } from "react-native-calendars";
+import { format } from 'date-fns'
 LocaleConfig.locales["th"] = {
   monthNames: [
     "มกราคม",
@@ -52,7 +53,8 @@ function Calendarr() {
   const handleDelete = () => {
     setVisible(false);
   };
-  const dateNow = new Date()
+  const dateNow = format(new Date(),'yyyy-MM-dd');
+
   const [markedDate, setMarkedDate] = useState([]);
   useEffect(() => {
     setMarkedDate({
@@ -81,7 +83,8 @@ function Calendarr() {
         minDate={dateNow}
         locales={"th"}
         style={{ borderRadius: 10, padding: 10 }}
-        // markingType={"period"}
+        markingType={"period"}
+        markedDates={markedDate}
         calendarWidth={320}
         onDayPress={(day) => {
           Alert.alert(
