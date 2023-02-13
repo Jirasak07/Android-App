@@ -243,7 +243,7 @@ const RequestMe = () => {
                   ></TextInput>
                 </View>
 
-                <Pressable style={[styles.btnConfirm]}>
+                <Pressable style={[styles.btnConfirm, { marginTop: 10 }]}>
                   <Text style={{ color: "#fff", fontWeight: "700" }}>
                     ยืนยัน
                   </Text>
@@ -259,8 +259,17 @@ const RequestMe = () => {
               </Dialog.Title>
               <Dialog.Description>โปรดระบุสาเหตุการจอง</Dialog.Description>
               <Dialog.Input placeholder="ระบุสาเหตุ"></Dialog.Input>
-              <Dialog.Button label="ยืนยัน" />
-              <Dialog.Button label="ยกเลิก" onPress={() => setModalC(false)} />
+              <Dialog.Button
+                label="ยืนยัน"
+                style={[styles.btnConfirm, { marginRight: 10 }]}
+                color="#fff"
+              />
+              <Dialog.Button
+                label="ยกเลิก"
+                color="#fff"
+                style={styles.btnC}
+                onPress={() => setModalC(false)}
+              />
             </Dialog.Container>
           </View>
         </View>
@@ -369,7 +378,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#362FD9",
     padding: 10,
-    marginTop: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
