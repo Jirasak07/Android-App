@@ -8,7 +8,7 @@ const RequestMeList = () => {
       <View style={[styles.items, styles.cardAll]}>
         <Text
           style={{
-            color: "#fff",
+            color: "#00337C",
             fontSize: 14,
             fontWeight: "300",
             textAlign: "center",
@@ -20,7 +20,7 @@ const RequestMeList = () => {
         <View style={styles.text_content}>
           <Text
             style={{
-              color: "#fff",
+              color: "#00337C",
               fontSize: 30,
               fontWeight: "700",
               textAlign: "center",
@@ -30,7 +30,7 @@ const RequestMeList = () => {
           </Text>
           <Text
             style={{
-              color: "#fff",
+              color: "#00337C",
               fontSize: 14,
               fontWeight: "300",
               textAlign: "center",
@@ -44,7 +44,7 @@ const RequestMeList = () => {
       <View style={[styles.items, styles.cardPadding]}>
         <Text
           style={{
-            color: "#fff",
+            color: "#F2921D",
             fontSize: 14,
             fontWeight: "300",
             textAlign: "center",
@@ -55,7 +55,7 @@ const RequestMeList = () => {
         <View style={styles.text_content}>
           <Text
             style={{
-              color: "#fff",
+              color: "#F2921D",
               fontSize: 30,
               fontWeight: "700",
               textAlign: "center",
@@ -65,7 +65,7 @@ const RequestMeList = () => {
           </Text>
           <Text
             style={{
-              color: "#fff",
+              color: "#F2921D",
               fontSize: 14,
               fontWeight: "300",
               textAlign: "center",
@@ -79,7 +79,7 @@ const RequestMeList = () => {
       <View style={[styles.items, styles.cardApprove]}>
         <Text
           style={{
-            color: "#fff",
+            color: "#379237",
             fontSize: 14,
             fontWeight: "300",
             textAlign: "center",
@@ -91,7 +91,7 @@ const RequestMeList = () => {
         <View style={styles.text_content}>
           <Text
             style={{
-              color: "#fff",
+              color: "#379237",
               fontSize: 30,
               fontWeight: "700",
               textAlign: "center",
@@ -101,7 +101,7 @@ const RequestMeList = () => {
           </Text>
           <Text
             style={{
-              color: "#fff",
+              color: "#379237",
               fontSize: 14,
               fontWeight: "300",
               textAlign: "center",
@@ -115,7 +115,7 @@ const RequestMeList = () => {
       <View style={[styles.items, styles.cardCancel]}>
         <Text
           style={{
-            color: "#fff",
+            color: "#DC0000",
             fontSize: 14,
             fontWeight: "300",
             textAlign: "center",
@@ -126,7 +126,7 @@ const RequestMeList = () => {
         <View style={styles.text_content}>
           <Text
             style={{
-              color: "#fff",
+              color: "#DC0000",
               fontSize: 30,
               fontWeight: "700",
               textAlign: "center",
@@ -136,7 +136,7 @@ const RequestMeList = () => {
           </Text>
           <Text
             style={{
-              color: "#fff",
+              color: "#DC0000",
               fontSize: 14,
               fontWeight: "300",
               textAlign: "center",
@@ -169,19 +169,19 @@ const styles = StyleSheet.create({
     height: 100,
   },
   cardAll: {
-    backgroundColor: "#4B3F72",
+    backgroundColor: "#ffffff",
     borderRadius: 10,
   },
   cardPadding: {
-    backgroundColor: "#F2E94E",
+    backgroundColor: "#fff",
     borderRadius: 10,
   },
   cardCancel: {
-    backgroundColor: "#DA3E52",
+    backgroundColor: "#fff",
     borderRadius: 10,
   },
   cardApprove: {
-    backgroundColor: "#96E6B3",
+    backgroundColor: "#fff",
     borderRadius: 10,
   },
   icon: {

@@ -5,6 +5,7 @@ import {
   ScrollView,
   Pressable,
   Modal,
+  TextInput,
   Button,
 } from "react-native";
 import React, { useState } from "react";
@@ -12,11 +13,38 @@ import RequestMeList from "./RequestMeList";
 import { Card } from "react-native-shadow-cards";
 import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import FaIcon from "react-native-vector-icons/FontAwesome";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const RequestMe = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalE, setModalE] = useState(false);
   const [modalC, setModalC] = useState(false);
+
+  const [datePicker, setDatePicker] = useState(false);
+
+  const [date, setDate] = useState(new Date());
+
+  const [timePicker, setTimePicker] = useState(false);
+
+  const [time, setTime] = useState(new Date(Date.now()));
+
+  function showDatePicker() {
+    setDatePicker(true);
+  }
+
+  function showTimePicker() {
+    setTimePicker(true);
+  }
+
+  function onDateSelected(event, value) {
+    setDate(value);
+    setDatePicker(false);
+  }
+
+  function onTimeSelected(event, value) {
+    setTime(value);
+    setTimePicker(false);
+  }
   return (
     <View style={styles.container}>
       <View>
@@ -120,10 +148,71 @@ const RequestMe = () => {
                 </Pressable>
               </View>
 
-              <Text>ชื่อผู้จอง : </Text>
-              <Text>สถานะการจอง : </Text>
-              <Text>ช่วงวันที่ :</Text>
-              <Text>รายละเอียดการจอง :</Text>
+              <Text style={{ marginTop: 10 }}>ชื่อผู้จอง : </Text>
+              <Text style={{ marginTop: 10 }}>สถานะการจอง : </Text>
+              <Text style={{ marginTop: 10 }}>ช่วงวันที่ :</Text>
+
+              {datePicker && (
+                <DateTimePicker
+                  value={date}
+                  mode={"date"}
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  is24Hour={true}
+                  onChange={onDateSelected}
+                  style={styles.datePicker}
+                />
+              )}
+
+              {timePicker && (
+                <DateTimePicker
+                  value={time}
+                  mode={"time"}
+                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  is24Hour={true}
+                  onChange={onTimeSelected}
+                  style={styles.datePicker}
+                />
+              )}
+              <View style={{ flexDirection: "row", marginTop: 10 }}>
+                <View
+                  style={{
+                    borderBottomWidth: 0.5,
+                    borderBottomColor: "#20262E",
+                    width: 200,
+                  }}
+                >
+                  <Text style={{ paddingTop: 5 }}>
+                    {date.toDateString()} {time.toLocaleTimeString("en-US")}
+                  </Text>
+                </View>
+
+                {!datePicker && (
+                  <View style={{ margin: 10 }}>
+                    <FaIcon name="calendar" onPress={showDatePicker} />
+                  </View>
+                )}
+
+                {!timePicker && (
+                  <View style={{ margin: 10 }}>
+                    <FaIcon name="clock-o" onPress={showTimePicker} />
+                  </View>
+                )}
+              </View>
+
+              <Text style={{ marginTop: 10 }}>รายละเอียดการจอง :</Text>
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="รายละเอียดการจอง"
+                  keyboardType="text"
+                  multiline={true}
+                  numberOfLines={4}
+                ></TextInput>
+              </View>
+
+              <Pressable style={[styles.btnConfirm]}>
+                <Text style={{ color: "#fff", fontWeight: "700" }}>ยืนยัน</Text>
+              </Pressable>
             </View>
           </View>
         </Modal>
@@ -211,5 +300,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  // Style for iOS ONLY...
+  datePicker: {
+    justifyContent: "center",
+    alignItems: "flex-start",
+    width: 320,
+    height: 260,
+    display: "flex",
+  },
+  input: {
+    borderWidth: 0.5,
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  btnConfirm: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#362FD9",
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 5,
   },
 });
