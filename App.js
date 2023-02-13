@@ -1,28 +1,47 @@
-import { StatusBar } from "expo-status-bar";
-import LoginPage from "./Login/LoginPage";
-import { StyleSheet, View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
+import LoginPage from "./Login/LoginPage";
+import Ionicons from "react-native-vector-icons";
+import TabBottom from "./Tab/TabBottom";
+import Booking from "./Page/Booking";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function App() {
-  const PageStack1 = createStackNavigator()
-  const tabPage1 =() =>{
-      <PageStack1.Navigator>
-        <PageStack1.Screen name="" />
-      </PageStack1.Navigator>
-  }
-  const Tab = createBottomTabNavigator();
+  const log = async () => {
+    const data = await AsyncStorage.getItem("@Login");
+    console.log(data);
+  };
+  useEffect(() => {
+    log();
+  }, []);
+  const Stack = createStackNavigator();
+  const navTheme = DefaultTheme;
+  navTheme.colors.background = "#edf2f4";
   return (
-    <View style={styles.container} >
-      
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer theme={navTheme}>
+      <Stack.Navigator
+        initialRouteName={"Login"}
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "#FFFFFF",
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+          options={{
+            title: null,
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: "white",
+            },
+          }}
+        />
+        <Stack.Screen name="Home" component={TabBottom} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    height:'100%'
-  },
-});
