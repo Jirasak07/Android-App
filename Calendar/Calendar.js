@@ -52,16 +52,16 @@ function Calendarr() {
   const handleDelete = () => {
     setVisible(false);
   };
-  const dateNow = new Date()
+  const dateNow = new Date();
   const [markedDate, setMarkedDate] = useState([]);
+  const workout = { key: "workout", color: "green" };
   useEffect(() => {
     setMarkedDate({
-      "2023-02-13": { selected: true, marked: true, selectedColor: "blue" },
+      "2023-02-13": { selected: true, marked: true, selectedColor: "skyblue" },
       "2023-02-14": { marked: true },
-      "2023-02-15": { marked: true, dotColor: "red", activeOpacity: 0 },
-      "2023-02-16": { disabled: true, disableTouchEvent: true },
+      "2023-02-15": { marked: true, activeOpacity: 0 },
     });
-  },[]);
+  }, []);
   return (
     <View>
       <Dialog.Container visible={visible}>
@@ -96,11 +96,13 @@ function Calendarr() {
         }}
         monthFormat={"MMMM yyyy"}
         theme={{
-          selectedDayTextColor: "#ffffff",
+          selectedDayTextColor: "red",
           todayTextColor: "white",
           todayBackgroundColor: "skyblue",
         }}
         hideExtraDays={true}
+        markingType={'multi-dot'}
+        markedDates={markedDate}
       />
     </View>
   );
