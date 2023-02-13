@@ -14,6 +14,7 @@ import { Card } from "react-native-shadow-cards";
 import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import Dialog from "react-native-dialog";
 
 const RequestMe = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -250,6 +251,18 @@ const RequestMe = () => {
               </View>
             </View>
           </Modal>
+
+          <View>
+            <Dialog.Container visible={modalC}>
+              <Dialog.Title style={{ fontWeight: "700" }}>
+                ยกเลิกการจอง
+              </Dialog.Title>
+              <Dialog.Description>โปรดระบุสาเหตุการจอง</Dialog.Description>
+              <Dialog.Input placeholder="ระบุสาเหตุ"></Dialog.Input>
+              <Dialog.Button label="ยืนยัน" />
+              <Dialog.Button label="ยกเลิก" onPress={() => setModalC(false)} />
+            </Dialog.Container>
+          </View>
         </View>
       </ScrollView>
     </View>
