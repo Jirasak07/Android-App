@@ -4,29 +4,31 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./Login/LoginPage";
 import Ionicons from "react-native-vector-icons";
 import TabBottom from "./Tab/TabBottom";
-import Booking from './Page/Booking'
+import Booking from "./Page/Booking";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function App() {
-  const log = async () =>{
-     const data =  await AsyncStorage.getItem('@Login')
-console.log(data)
-  }
- 
-  useEffect(() => {
-    log()
-  }, [])
-  const theme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      border: "transparent",
-    },
+  const log = async () => {
+    const data = await AsyncStorage.getItem("@Login");
+    console.log(data);
   };
+  useEffect(() => {
+    log();
+  }, []);
   const Stack = createStackNavigator();
+  const navTheme = DefaultTheme;
+  navTheme.colors.background = "#6096ba";
   return (
-    <NavigationContainer theme={theme}>
-      <Stack.Navigator initialRouteName={"Login"} screenOptions={{headerShown:false}} >
+    <NavigationContainer theme={navTheme}>
+      <Stack.Navigator
+        initialRouteName={"Login"}
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "#FFFFFF",
+          },
+        }}
+      >
         <Stack.Screen
           name="Login"
           component={LoginPage}
@@ -39,7 +41,6 @@ console.log(data)
           }}
         />
         <Stack.Screen name="Home" component={TabBottom} />
-        <Stack.Screen name="Home2" component={Booking} />
       </Stack.Navigator>
     </NavigationContainer>
   );

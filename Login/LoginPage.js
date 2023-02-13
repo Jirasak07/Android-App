@@ -41,7 +41,7 @@ function LoginPage({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1,backgroundColor:'#fdfffc' }}>
       <View style={styles.containerLogin}>
         <View style={styles.loginHead}>
           <Image
@@ -81,7 +81,7 @@ function LoginPage({ navigation }) {
               borderRadius: 5,
               marginTop: 10,
             }}
-            onPress={onClick}
+            onPress={()=>{ navigation.navigate("Home");}}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+
   },
   loginHead: {
     justifyContent: "center",
