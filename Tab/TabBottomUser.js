@@ -5,8 +5,8 @@ import FaIcon from "react-native-vector-icons/FontAwesome";
 import MCIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Booking from "../Page/Booking";
 import RequestMe from "../Page/RequestMe";
+import Booking from "../Page/Booking";
 export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (

@@ -63,7 +63,7 @@ function LoginPage({ navigation }) {
           <TextInput
             onChangeText={setpassword}
             placeholder=" รหัสผ่าน"
-            secureTextEntry="true"
+            
             autoCapitalize={'none'}
             keyboardType="default"
             inputMode="password"
