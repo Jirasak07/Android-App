@@ -47,175 +47,210 @@ const RequestMe = () => {
   }
   return (
     <View style={styles.container}>
-      <View>
-        <RequestMeList />
-      </View>
-
       <ScrollView style={{ flex: 1 }}>
-        <View style={styles.contentH}>
-          <Text style={styles.text_header}>ข้อมูลการจอง</Text>
-          <Card style={styles.card}>
-            <View style={styles.text_h}>
-              <Text>วันที่</Text>
-              <Text>รายละเอียดการจอง</Text>
-              <Text>สถานะ</Text>
-            </View>
-            <Pressable
-              style={styles.icon_h}
-              onPress={() => setModalVisible(true)}
-            >
-              <Fa5Icon name="ellipsis-h" />
-            </Pressable>
-          </Card>
-
-          <Card style={styles.card}>
-            <View style={styles.text_h}>
-              <Text>วันที่</Text>
-              <Text>รายละเอียดการจอง</Text>
-              <Text>สถานะ</Text>
-              <View style={{ flexDirection: "row", marginTop: 10 }}>
-                <Pressable style={styles.btnE} onPress={() => setModalE(true)}>
-                  <Text>แก้ไข</Text>
-                </Pressable>
-                <Pressable style={styles.btnC}>
-                  <Text style={{ color: "#ffffff" }}>ยกเลิก</Text>
-                </Pressable>
-              </View>
-            </View>
-
-            <Pressable
-              style={styles.icon_h}
-              onPress={() => setModalVisible(true)}
-            >
-              <Fa5Icon name="ellipsis-h" />
-            </Pressable>
-          </Card>
+        <View>
+          <RequestMeList />
         </View>
 
-        {/* modal approve and cancel detail */}
-        <Modal animationType="slide" transparent={true} visible={modalVisible}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginBottom: 10,
-                  borderBottomColor: "#424C55",
-                  borderBottomWidth: 0.5,
-                }}
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.contentH}>
+            <Text style={styles.text_header}>ข้อมูลการจอง</Text>
+            <Card style={styles.card}>
+              <View style={styles.text_h}>
+                <Text>วันที่</Text>
+                <Text>รายละเอียดการจอง</Text>
+                <Text>สถานะ</Text>
+              </View>
+              <Pressable
+                style={styles.icon_h}
+                onPress={() => setModalVisible(true)}
               >
-                <View style={[styles.text_h, { paddingBottom: 10 }]}>
-                  <Text>รายละเอียดการจอง</Text>
+                <Fa5Icon name="ellipsis-h" />
+              </Pressable>
+            </Card>
+
+            <Card style={styles.card}>
+              <View style={styles.text_h}>
+                <Text>วันที่</Text>
+                <Text>รายละเอียดการจอง</Text>
+                <Text>สถานะ</Text>
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <Pressable
+                    style={styles.btnE}
+                    onPress={() => setModalE(true)}
+                  >
+                    <Text>แก้ไข</Text>
+                  </Pressable>
+                  <Pressable
+                    style={styles.btnC}
+                    onPress={() => setModalC(true)}
+                  >
+                    <Text style={{ color: "#ffffff" }}>ยกเลิก</Text>
+                  </Pressable>
                 </View>
-                <Pressable
-                  onPress={() => setModalVisible(!modalVisible)}
-                  style={styles.icon_h}
-                >
-                  <FaIcon name="close" />
-                </Pressable>
               </View>
 
-              <Text style={styles.modalText}>ชื่อผู้จอง</Text>
-              <Text style={styles.modalText}>สถานะการจอง</Text>
-              <Text style={styles.modalText}>ช่วงวันที่</Text>
-              <Text style={styles.modalText}>รายละเอียดรถและคนขับ</Text>
-              <Text style={styles.modalText}>รายละเอียดการจอง</Text>
-              <Text style={styles.modalText}>สาเหตุการยกเลิก</Text>
-            </View>
+              <Pressable
+                style={styles.icon_h}
+                onPress={() => setModalVisible(true)}
+              >
+                <Fa5Icon name="ellipsis-h" />
+              </Pressable>
+            </Card>
           </View>
-        </Modal>
 
-        {/* modal edit */}
-        <Modal animationType="slide" transparent={true} visible={modalE}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginBottom: 10,
-                  borderBottomColor: "#424C55",
-                  borderBottomWidth: 0.5,
-                }}
-              >
-                <View style={[styles.text_h, { paddingBottom: 10 }]}>
-                  <Text>รายละเอียดการจอง</Text>
-                </View>
-                <Pressable
-                  onPress={() => setModalE(!modalE)}
-                  style={styles.icon_h}
-                >
-                  <FaIcon name="close" />
-                </Pressable>
-              </View>
-
-              <Text style={{ marginTop: 10 }}>ชื่อผู้จอง : </Text>
-              <Text style={{ marginTop: 10 }}>สถานะการจอง : </Text>
-              <Text style={{ marginTop: 10 }}>ช่วงวันที่ :</Text>
-
-              {datePicker && (
-                <DateTimePicker
-                  value={date}
-                  mode={"date"}
-                  display={Platform.OS === "ios" ? "spinner" : "default"}
-                  is24Hour={true}
-                  onChange={onDateSelected}
-                  style={styles.datePicker}
-                />
-              )}
-
-              {timePicker && (
-                <DateTimePicker
-                  value={time}
-                  mode={"time"}
-                  display={Platform.OS === "ios" ? "spinner" : "default"}
-                  is24Hour={true}
-                  onChange={onTimeSelected}
-                  style={styles.datePicker}
-                />
-              )}
-              <View style={{ flexDirection: "row", marginTop: 10 }}>
+          {/* modal approve and cancel detail */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
                 <View
                   style={{
+                    flexDirection: "row",
+                    marginBottom: 10,
+                    borderBottomColor: "#424C55",
                     borderBottomWidth: 0.5,
-                    borderBottomColor: "#20262E",
-                    width: 200,
                   }}
                 >
-                  <Text style={{ paddingTop: 5 }}>
-                    {date.toDateString()} {time.toLocaleTimeString("en-US")}
-                  </Text>
+                  <View
+                    style={[
+                      styles.text_h,
+                      { paddingBottom: 10, fontWeight: "900" },
+                    ]}
+                  >
+                    <Text>รายละเอียดการจอง</Text>
+                  </View>
+                  <Pressable
+                    onPress={() => setModalVisible(!modalVisible)}
+                    style={styles.icon_h}
+                  >
+                    <FaIcon name="close" style={{ fontSize: 18 }} />
+                  </Pressable>
                 </View>
 
-                {!datePicker && (
-                  <View style={{ margin: 10 }}>
-                    <FaIcon name="calendar" onPress={showDatePicker} />
-                  </View>
-                )}
-
-                {!timePicker && (
-                  <View style={{ margin: 10 }}>
-                    <FaIcon name="clock-o" onPress={showTimePicker} />
-                  </View>
-                )}
+                <Text style={styles.modalText}>ชื่อผู้จอง</Text>
+                <Text style={styles.modalText}>สถานะการจอง</Text>
+                <Text style={styles.modalText}>ช่วงวันที่</Text>
+                <Text style={styles.modalText}>รายละเอียดรถและคนขับ</Text>
+                <Text style={styles.modalText}>รายละเอียดการจอง</Text>
+                <Text style={styles.modalText}>สาเหตุการยกเลิก</Text>
               </View>
-
-              <Text style={{ marginTop: 10 }}>รายละเอียดการจอง :</Text>
-              <View>
-                <TextInput
-                  style={styles.input}
-                  placeholder="รายละเอียดการจอง"
-                  keyboardType="text"
-                  multiline={true}
-                  numberOfLines={4}
-                ></TextInput>
-              </View>
-
-              <Pressable style={[styles.btnConfirm]}>
-                <Text style={{ color: "#fff", fontWeight: "700" }}>ยืนยัน</Text>
-              </Pressable>
             </View>
-          </View>
-        </Modal>
+          </Modal>
+
+          {/* modal edit */}
+          <Modal animationType="slide" transparent={true} visible={modalE}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginBottom: 10,
+                    borderBottomColor: "#424C55",
+                    borderBottomWidth: 0.5,
+                  }}
+                >
+                  <View style={[styles.text_h, { paddingBottom: 10 }]}>
+                    <Text style={{ fontWeight: "900" }}>รายละเอียดการจอง</Text>
+                  </View>
+                  <Pressable
+                    onPress={() => setModalE(!modalE)}
+                    style={styles.icon_h}
+                  >
+                    <FaIcon name="close" style={{ fontSize: 18 }} />
+                  </Pressable>
+                </View>
+
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  ชื่อผู้จอง :{" "}
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  สถานะการจอง :{" "}
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  ช่วงวันที่ :
+                </Text>
+
+                {datePicker && (
+                  <DateTimePicker
+                    value={date}
+                    mode={"date"}
+                    display={Platform.OS === "ios" ? "spinner" : "default"}
+                    is24Hour={true}
+                    onChange={onDateSelected}
+                    style={styles.datePicker}
+                  />
+                )}
+
+                {timePicker && (
+                  <DateTimePicker
+                    value={time}
+                    mode={"time"}
+                    display={Platform.OS === "ios" ? "spinner" : "default"}
+                    is24Hour={true}
+                    onChange={onTimeSelected}
+                    style={styles.datePicker}
+                  />
+                )}
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <View
+                    style={{
+                      borderBottomWidth: 0.5,
+                      borderBottomColor: "#20262E",
+                      width: 200,
+                    }}
+                  >
+                    <Text style={{ paddingTop: 5 }}>
+                      {date.toDateString()} {time.toLocaleTimeString("en-US")}
+                    </Text>
+                  </View>
+
+                  {!datePicker && (
+                    <View style={{ margin: 10 }}>
+                      <FaIcon
+                        name="calendar"
+                        onPress={showDatePicker}
+                        style={{ fontSize: 16 }}
+                      />
+                    </View>
+                  )}
+
+                  {!timePicker && (
+                    <View style={{ margin: 10 }}>
+                      <FaIcon
+                        name="clock-o"
+                        onPress={showTimePicker}
+                        style={{ fontSize: 16 }}
+                      />
+                    </View>
+                  )}
+                </View>
+
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  รายละเอียดการจอง :
+                </Text>
+                <View>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="รายละเอียดการจอง"
+                    keyboardType="text"
+                    multiline={true}
+                    numberOfLines={4}
+                  ></TextInput>
+                </View>
+
+                <Pressable style={[styles.btnConfirm]}>
+                  <Text style={{ color: "#fff", fontWeight: "700" }}>
+                    ยืนยัน
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+        </View>
       </ScrollView>
     </View>
   );
@@ -251,6 +286,7 @@ const styles = StyleSheet.create({
   },
   text_h: {
     flexGrow: 2,
+    fontWeight: "900",
   },
   modalView: {
     margin: 20,
