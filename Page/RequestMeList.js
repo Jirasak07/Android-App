@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Card } from "react-native-shadow-cards";
-import FaIcon from "react-native-vector-icons/FontAwesome5";
+
 const RequestMeList = () => {
   return (
     <View style={styles.container}>
