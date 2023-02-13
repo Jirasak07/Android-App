@@ -117,28 +117,47 @@ const RequestMe = () => {
                     borderBottomWidth: 0.5,
                   }}
                 >
-                  <View
-                    style={[
-                      styles.text_h,
-                      { paddingBottom: 10, fontWeight: "900" },
-                    ]}
-                  >
-                    <Text>รายละเอียดการจอง</Text>
+                  <View style={[styles.text_h, { paddingBottom: 10 }]}>
+                    <Text style={{ fontWeight: "900", fontSize: 20 }}>
+                      รายละเอียดการจอง
+                    </Text>
                   </View>
                   <Pressable
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={() => setModalVisible(false)}
                     style={styles.icon_h}
                   >
                     <FaIcon name="close" style={{ fontSize: 18 }} />
                   </Pressable>
                 </View>
 
-                <Text style={styles.modalText}>ชื่อผู้จอง</Text>
-                <Text style={styles.modalText}>สถานะการจอง</Text>
-                <Text style={styles.modalText}>ช่วงวันที่</Text>
-                <Text style={styles.modalText}>รายละเอียดรถและคนขับ</Text>
-                <Text style={styles.modalText}>รายละเอียดการจอง</Text>
-                <Text style={styles.modalText}>สาเหตุการยกเลิก</Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  ชื่อผู้จอง :
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  สถานะการจอง :
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  ช่วงวันที่ :
+                </Text>
+
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  รายละเอียดการจอง :
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}></Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  รายละเอียดรถและคนขับ :
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}></Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  สาเหตุการยกเลิก :
+                </Text>
+                <Text style={{ marginTop: 10, fontWeight: "700" }}></Text>
+
+                <Pressable style={[styles.btnConfirm, { marginTop: 10 }]}>
+                  <Text style={{ color: "#fff", fontWeight: "700" }}>
+                    ยืนยัน
+                  </Text>
+                </Pressable>
               </View>
             </View>
           </Modal>
@@ -156,7 +175,9 @@ const RequestMe = () => {
                   }}
                 >
                   <View style={[styles.text_h, { paddingBottom: 10 }]}>
-                    <Text style={{ fontWeight: "900" }}>รายละเอียดการจอง</Text>
+                    <Text style={{ fontWeight: "900", fontSize: 20 }}>
+                      รายละเอียดการจอง
+                    </Text>
                   </View>
                   <Pressable
                     onPress={() => setModalE(!modalE)}
