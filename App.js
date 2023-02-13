@@ -41,7 +41,8 @@ export default function App() {
             },
           }}
         />
-        <Stack.Screen name="Home" component={TabBottomUser} />
+        <Stack.Screen name="user" component={TabBottomUser} />
+        <Stack.Screen name="admin" component={TabBottom} />
       </Stack.Navigator>
     </NavigationContainer>
   );
