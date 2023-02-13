@@ -62,7 +62,7 @@ export default function TabBottom() {
           shadowOpacity: 0.5,
           shadowRadius: 10,
           elevation: 15,
-          backgroundColor: "#edf2f4",
+          backgroundColor: "white",
         },
         headerShown: false,
       })}

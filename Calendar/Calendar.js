@@ -54,10 +54,14 @@ function Calendarr() {
   };
   const dateNow = new Date();
   const [markedDate, setMarkedDate] = useState([]);
-  const workout = { key: "workout", color: "green" };
+  const workout = { key: "workout", color: "#7dce82" };
+  const vacation = { key: "vacation", color: "#f4e04d" };
   useEffect(() => {
     setMarkedDate({
-      "2023-02-13": { selected: true, marked: true, selectedColor: "skyblue" },
+      "2023-02-13": {
+        marked: true,
+        dots: [workout, vacation],
+      },
       "2023-02-14": { marked: true },
       "2023-02-15": { marked: true, activeOpacity: 0 },
     });
@@ -95,13 +99,9 @@ function Calendarr() {
           console.log("month changed", month);
         }}
         monthFormat={"MMMM yyyy"}
-        theme={{
-          selectedDayTextColor: "red",
-          todayTextColor: "white",
-          todayBackgroundColor: "skyblue",
-        }}
+        theme={{}}
         hideExtraDays={true}
-        markingType={'multi-dot'}
+        markingType={"multi-dot"}
         markedDates={markedDate}
       />
     </View>
