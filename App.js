@@ -1,24 +1,49 @@
-import { StatusBar } from "expo-status-bar";
-import LoginPage from "./Login/LoginPage";
-import { StyleSheet, View, Text } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import DashBoard from "./Page/DashBoard";
-import FaIcon from "react-native-vector-icons/FontAwesome";
-import RequestMe from "./Page/RequestMe";
-
+import LoginPage from "./Login/LoginPage";
+import Ionicons from "react-native-vector-icons";
+import TabBottom from "./Tab/TabBottom";
+import Booking from "./Page/Booking";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import TabBottomUser from "./Tab/TabBottomUser";
 export default function App() {
-  const PageStack1 = createStackNavigator();
-  const tabPage1 = () => {
-    <PageStack1.Navigator>
-      <PageStack1.Screen name="" />
-    </PageStack1.Navigator>;
+  const log = async () => {
+    const data = await AsyncStorage.getItem("@Login");
+    console.log(data);
   };
-  const Tab = createBottomTabNavigator();
+  useEffect(() => {
+    log();
+  }, []);
+  const Stack = createStackNavigator();
+  const navTheme = DefaultTheme;
+  navTheme.colors.background = "#edf2f4";
   return (
-    <NavigationContainer>
-      <RequestMe/>
+    <NavigationContainer theme={navTheme}>
+      <Stack.Navigator
+        initialRouteName={"Login"}
+        screenOptions={{
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: "#FFFFFF",
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+          options={{
+            title: null,
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: "white",
+            },
+          }}
+        />
+        <Stack.Screen name="user" component={TabBottomUser} />
+        <Stack.Screen name="admin" component={TabBottom} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
