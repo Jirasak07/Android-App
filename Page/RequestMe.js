@@ -28,6 +28,7 @@ const RequestMe = () => {
   const [timePicker, setTimePicker] = useState(false);
 
   const [time, setTime] = useState(new Date(Date.now()));
+  const [now, setNow] = useState(new Date(Date.now()));
 
   function showDatePicker() {
     setDatePicker(true);
@@ -179,6 +180,7 @@ const RequestMe = () => {
                   <DateTimePicker
                     value={date}
                     mode={"date"}
+                    minimumDate={now}
                     display={Platform.OS === "ios" ? "spinner" : "default"}
                     is24Hour={true}
                     onChange={onDateSelected}
