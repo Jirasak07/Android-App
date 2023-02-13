@@ -82,7 +82,7 @@ function Calendarr() {
       </Dialog.Container>
 
       <Calendar
-        minDate={dateNow}
+        // minDate={JSON.stringify(dateNow)}
         locales={"th"}
         style={{ borderRadius: 10, padding: 10 }}
         // markingType={"period"}
