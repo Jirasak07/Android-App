@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    marginTop: 50,
-    padding: 10,
+   
   },
   items: {
     justifyContent: "center",

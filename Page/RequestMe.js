@@ -50,10 +50,6 @@ export default function RequestMe() {
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1 }}>
-        <View>
-          <RequestMeList />
-        </View>
-
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <View style={styles.contentH}>
             <Text style={styles.text_header}>ข้อมูลการจอง</Text>
@@ -297,6 +293,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#F5F5F5",
+    marginTop: 50,
   },
   contentH: {
     marginTop: 20,
