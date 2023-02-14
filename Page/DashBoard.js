@@ -10,22 +10,11 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Calendarr from "../Calendar/Calendar";
 import axios from "axios";
 
+
 export default function DashBoard({ navigation }) {
   const destro = async () => {
     await AsyncStorage.removeItem("@Login");
   };
-  const [bookiall, setBookiall] = useState();
-  useEffect(() => {
-    const myHeaders = new Headers();
-    fetch("http://localhost:2222/index.php/api/show/listdata", {
-      method: "GET",
-      headers: myHeaders,
-      mode: "cors",
-      cache: "default",
-    }).then((response) => {
-      console.log(response);
-    });
-  });
   return (
     <View style={globalStyles.containerContent}>
       <ScrollView style={{ paddingHorizontal: 10 }}>
@@ -42,7 +31,7 @@ export default function DashBoard({ navigation }) {
               >
                 ทั้งหมด
               </Text>
-              <Text style={{ fontSize: 50, color: "#073b4c" }}></Text>
+              <Text style={{ fontSize: 50, color: "#073b4c" }}>0</Text>
             </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#f7b26730" }]}>
