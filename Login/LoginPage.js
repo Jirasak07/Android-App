@@ -27,8 +27,8 @@ function LoginPage({ navigation }) {
       const FullName = name.FullName;
       console.log(FullName);
       await AsyncStorage.setItem("@Login", "1");
-      // const log = await AsyncStorage.getItem("Login");
-      // console.log(log);
+      const log = await AsyncStorage.getItem("Login");
+      console.log(log);
       Alert.alert("ยินดีต้อนรับ ", FullName , [
         {
           text: "ตกลง",
@@ -81,6 +81,7 @@ function LoginPage({ navigation }) {
               marginTop: 10,
             }}
             onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
+            // onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ
