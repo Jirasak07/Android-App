@@ -9,7 +9,6 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Calendarr from "../Calendar/Calendar";
 
-
 export default function DashBoard({ navigation }) {
   const destro = async () => {
     await AsyncStorage.removeItem("@Login");
@@ -24,39 +23,55 @@ export default function DashBoard({ navigation }) {
         <Text style={{ paddingHorizontal: 15, fontSize: 16 }}>รายการ</Text>
         <View style={style.cardContainer}>
           <View style={[style.cardInfo, { backgroundColor: "#073b4c30" }]}>
-            {/* <Entypo name="list" size={40} color={"#073b4c"} /> */}
-            <Text style={{ fontWeight: "bold", padding: 5, color: "#073b4c" }}>
-              ทั้งหมด
-            </Text>
-            <Text style={{ fontSize: 50, color: "#073b4c" }}>0</Text>
+            <Entypo name="list" size={40} color={"#073b4c"} />
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text
+                style={{ fontWeight: "bold", padding: 5, color: "#073b4c" }}
+              >
+                ทั้งหมด
+              </Text>
+              <Text style={{ fontSize: 50, color: "#073b4c" }}>0</Text>
+            </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#f7b26730" }]}>
-            {/* <MaterialCommunityIcons
+            <MaterialCommunityIcons
               name="timer-sand"
               size={40}
               color={"#f7b267"}
-            /> */}
-            <Text style={{ fontWeight: "bold", padding: 5, color: "#f7b267" }}>
-              รอดำเนินการ
-            </Text>
-            <Text style={{ fontSize: 50, color: "#f7b267" }}>0</Text>
+            />
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text
+                style={{ fontWeight: "bold", padding: 5, color: "#f7b267" }}
+              >
+                รอดำเนินการ
+              </Text>
+              <Text style={{ fontSize: 50, color: "#f7b267" }}>0</Text>
+            </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#49a07830" }]}>
-            {/* <FontAwesome5 name="check-square" size={40} color={"#49a078"} /> */}
-            <Text style={{ fontWeight: "bold", padding: 5, color: "#49a078" }}>
-              อนุมัติแล้ว
-            </Text>
-            <Text style={{ fontSize: 50, color: "#49a078" }}>0</Text>
+            <FontAwesome5 name="check-square" size={40} color={"#49a078"} />
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text
+                style={{ fontWeight: "bold", padding: 5, color: "#49a078" }}
+              >
+                อนุมัติแล้ว
+              </Text>
+              <Text style={{ fontSize: 50, color: "#49a078" }}>0</Text>
+            </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#e0526330" }]}>
-            {/* <MaterialIcons name="cancel" size={40} color={"#e05263"} /> */}
-            <Text style={{ fontWeight: "bold", padding: 5, color: "#e05263" }}>
-              ยกเลิกแล้ว
-            </Text>
-            <Text style={{ fontSize: 50, color: "#e05263" }}>0</Text>
+            <MaterialIcons name="cancel" size={40} color={"#e05263"} />
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text
+                style={{ fontWeight: "bold", padding: 5, color: "#e05263" }}
+              >
+                ยกเลิกแล้ว
+              </Text>
+              <Text style={{ fontSize: 50, color: "#e05263" }}>0</Text>
+            </View>
           </View>
         </View>
-        <View style={{ marginBottom: 40, paddingHorizontal: 10,marginTop:5 }}>
+        <View style={{ marginBottom: 40, paddingHorizontal: 10, marginTop: 5 }}>
           <Calendarr />
         </View>
       </ScrollView>
@@ -73,11 +88,13 @@ const style = StyleSheet.create({
   cardInfo: {
     // backgroundColor: "#edf2f4",
     width: 160,
-    height: 100,
+    height: 95,
     borderRadius: 10,
-    padding: 10,
+    padding: 20,
+    paddingTop:25,
     marginBottom: 10,
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
     alignItems: "center",
+    flexDirection: "row",
   },
 });
