@@ -10,6 +10,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Calendarr from "../Calendar/Calendar";
 import axios from "axios";
 
+
 export default function DashBoard({ navigation }) {
   const destro = async () => {
     await AsyncStorage.removeItem("@Login");
@@ -17,14 +18,14 @@ export default function DashBoard({ navigation }) {
   const [bookiall, setBookiall] = useState();
   useEffect(() => {
     const myHeaders = new Headers();
-    fetch("http://localhost:2222/index.php/api/show/listdata", {
+    fetch("http://127.0.0.1:2222/index.php/api/show/listdata", {
       method: "GET",
       headers: myHeaders,
       mode: "cors",
       cache: "default",
-    }).then((response) => {
-      console.log(response);
-    });
+    }).then((response)=>{
+      console.log(response)
+    })
   });
   return (
     <View style={globalStyles.containerContent}>
