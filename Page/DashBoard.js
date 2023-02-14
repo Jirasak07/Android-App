@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import globalStyles from "../Style/globalStyle";
@@ -8,12 +8,24 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Calendarr from "../Calendar/Calendar";
+import axios from "axios";
 
 export default function DashBoard({ navigation }) {
   const destro = async () => {
     await AsyncStorage.removeItem("@Login");
   };
-
+  const [bookiall, setBookiall] = useState();
+  useEffect(() => {
+    const myHeaders = new Headers();
+    fetch("http://localhost:2222/index.php/api/show/listdata", {
+      method: "GET",
+      headers: myHeaders,
+      mode: "cors",
+      cache: "default",
+    }).then((response) => {
+      console.log(response);
+    });
+  });
   return (
     <View style={globalStyles.containerContent}>
       <ScrollView style={{ paddingHorizontal: 10 }}>
@@ -30,7 +42,7 @@ export default function DashBoard({ navigation }) {
               >
                 ทั้งหมด
               </Text>
-              <Text style={{ fontSize: 50, color: "#073b4c" }}>0</Text>
+              <Text style={{ fontSize: 50, color: "#073b4c" }}></Text>
             </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#f7b26730" }]}>
@@ -91,7 +103,7 @@ const style = StyleSheet.create({
     height: 95,
     borderRadius: 10,
     padding: 20,
-    paddingTop:25,
+    paddingTop: 25,
     marginBottom: 10,
     justifyContent: "space-around",
     alignItems: "center",
