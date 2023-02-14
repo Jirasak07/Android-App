@@ -73,7 +73,7 @@ const style = StyleSheet.create({
   cardInfo: {
     // backgroundColor: "#edf2f4",
     width: 160,
-    height: 110,
+    height: 100,
     borderRadius: 10,
     padding: 10,
     marginBottom: 10,

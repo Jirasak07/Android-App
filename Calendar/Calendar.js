@@ -67,6 +67,7 @@ function Calendarr() {
       "2023-02-14": { marked: true },
       "2023-02-15": { marked: true, activeOpacity: 0 },
     });
+    console.log(dateNow)
   }, []);
   return (
     <View>
@@ -84,7 +85,7 @@ function Calendarr() {
       </Dialog.Container>
 
       <Calendar
-        // minDate={JSON.stringify(dateNow)}
+        minDate={dateNow}
         locales={"th"}
         style={{ borderRadius: 10, padding: 10 }}
         calendarWidth={320}
@@ -103,7 +104,7 @@ function Calendarr() {
         theme={{}}
         hideExtraDays={true}
         markingType={"multi-dot"}
-        markedDates={markedDate}
+        // markedDates={markedDate}
       />
     </View>
   );
