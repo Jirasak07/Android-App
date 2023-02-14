@@ -44,7 +44,7 @@ const RequestMeList = () => {
       <View style={[styles.items, styles.cardPadding]}>
         <Text
           style={{
-            color: "#F2921D",
+            color: "#FF5F00",
             fontSize: 14,
             fontWeight: "300",
             textAlign: "center",
@@ -55,7 +55,7 @@ const RequestMeList = () => {
         <View style={styles.text_content}>
           <Text
             style={{
-              color: "#F2921D",
+              color: "#FF5F00",
               fontSize: 30,
               fontWeight: "700",
               textAlign: "center",
@@ -65,7 +65,7 @@ const RequestMeList = () => {
           </Text>
           <Text
             style={{
-              color: "#F2921D",
+              color: "#FF5F00",
               fontSize: 14,
               fontWeight: "300",
               textAlign: "center",
@@ -79,7 +79,7 @@ const RequestMeList = () => {
       <View style={[styles.items, styles.cardApprove]}>
         <Text
           style={{
-            color: "#379237",
+            color: "#125C13",
             fontSize: 14,
             fontWeight: "300",
             textAlign: "center",
@@ -91,7 +91,7 @@ const RequestMeList = () => {
         <View style={styles.text_content}>
           <Text
             style={{
-              color: "#379237",
+              color: "#125C13",
               fontSize: 30,
               fontWeight: "700",
               textAlign: "center",
@@ -101,7 +101,7 @@ const RequestMeList = () => {
           </Text>
           <Text
             style={{
-              color: "#379237",
+              color: "#125C13",
               fontSize: 14,
               fontWeight: "300",
               textAlign: "center",
@@ -168,19 +168,19 @@ const styles = StyleSheet.create({
     height: 100,
   },
   cardAll: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#6096B4aa",
     borderRadius: 10,
   },
   cardPadding: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F99417aa",
     borderRadius: 10,
   },
   cardCancel: {
-    backgroundColor: "#fff",
+    backgroundColor: "#F48484aa",
     borderRadius: 10,
   },
   cardApprove: {
-    backgroundColor: "#fff",
+    backgroundColor: "#829460aa",
     borderRadius: 10,
   },
   icon: {

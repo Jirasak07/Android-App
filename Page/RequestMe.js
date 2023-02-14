@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#E1E2EF",
+    backgroundColor: "#F5F5F5",
   },
   contentH: {
     marginTop: 20,
