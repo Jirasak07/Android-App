@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cardPadding: {
-    backgroundColor: "#F99417aa",
+    backgroundColor: "#ffd100aa",
     borderRadius: 10,
   },
   cardCancel: {
