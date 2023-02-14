@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 const globalStyles = StyleSheet.create({
   containerContent: {
-   flex:1
+   flex:1,
+   marginTop:20
   },
   containerInfo:{
     justifyContent:'space-evenly',

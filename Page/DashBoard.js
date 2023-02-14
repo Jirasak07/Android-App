@@ -16,7 +16,7 @@ export default function DashBoard({ navigation }) {
 
   return (
     <View style={globalStyles.containerContent}>
-      <ScrollView style={{ paddingTop: 20, paddingHorizontal: 10 }}>
+      <ScrollView style={{ paddingHorizontal: 10 }}>
         <Text style={{ fontWeight: "bold", marginVertical: 10, fontSize: 18 }}>
           Dashboard
         </Text>
