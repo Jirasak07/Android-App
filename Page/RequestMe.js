@@ -96,13 +96,13 @@ export default function RequestMe() {
                     style={styles.btnE}
                     onPress={() => setModalE(true)}
                   >
-                    <Text>แก้ไข</Text>
+                    <Text style={{color:'#ff8800'}}>แก้ไข</Text>
                   </Pressable>
                   <Pressable
                     style={styles.btnC}
                     onPress={() => setModalC(true)}
                   >
-                    <Text>ยกเลิก</Text>
+                    <Text style={{color:'#DC0000'}}>ยกเลิก</Text>
                   </Pressable>
                 </View>
               </View>
