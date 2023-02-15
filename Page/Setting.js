@@ -151,13 +151,19 @@ function Setting({ navigation }) {
         <View
           style={{
             flex: 1,
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "center",
-            marginTop: 22,
+            marginTop: 50,
             backgroundColor: "white",
           }}
         >
-            <Button title="Close" onPress={()=>setModal(!modal)} />
+          <MaterialIcons
+            style={{ alignSelf: "flex-end", marginRight: 10, marginTop: 5 }}
+            color={"#c81d25"}
+            size={30}
+            name="cancel"
+            onPress={() => setModal(!modal)}
+          />
           <Text>5555</Text>
         </View>
       </Modal>
