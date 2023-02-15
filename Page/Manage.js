@@ -42,11 +42,13 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   cardInfo: {
     backgroundColor: "#001d3d",
     width: 170,
-    height: 200,
+    height: 130,
     borderRadius: 5,
     padding: 10,
     justifyContent: "flex-start",
