@@ -15,6 +15,7 @@ import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Dialog from "react-native-dialog";
+import SearchBar from "../search/SearchBar";
 
 export default function RequestMe() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,16 +48,30 @@ export default function RequestMe() {
     setTime(value);
     setTimePicker(false);
   }
+  function showSearch(){
+    
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1 }}>
-        <View>
-          <RequestMeList />
-        </View>
-
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <View style={styles.contentH}>
-            <Text style={styles.text_header}>ข้อมูลการจอง</Text>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flexGrow: 2 }}>
+                <Text style={[styles.text_header, { marginTop: 10 }]}>
+                  ข้อมูลการจอง
+                </Text>
+              </View>
+              <View style={{ flexGrow: 0 }}>
+                <Pressable onPress={()=>{}}>
+                  <FaIcon
+                    name="search"
+                    style={{ fontSize: 20, color: "#6c757d" }}
+                  />
+                </Pressable>
+              </View>
+            </View>
+
             <Card style={styles.card}>
               <View style={styles.text_h}>
                 <Text>วันที่</Text>
@@ -87,7 +102,7 @@ export default function RequestMe() {
                     style={styles.btnC}
                     onPress={() => setModalC(true)}
                   >
-                    <Text style={{ color: "#ffffff" }}>ยกเลิก</Text>
+                    <Text>ยกเลิก</Text>
                   </Pressable>
                 </View>
               </View>
@@ -153,7 +168,10 @@ export default function RequestMe() {
                 </Text>
                 <Text style={{ marginTop: 10, fontWeight: "700" }}></Text>
 
-                <Pressable style={[styles.btnConfirm, { marginTop: 10 }]}>
+                <Pressable
+                  style={[styles.btnConfirm, { marginTop: 10 }]}
+                  onPress={() => setModalVisible(false)}
+                >
                   <Text style={{ color: "#fff", fontWeight: "700" }}>
                     ยืนยัน
                   </Text>
@@ -297,6 +315,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#F5F5F5",
+    marginTop: 50,
   },
   contentH: {
     marginTop: 20,
@@ -345,7 +364,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   btnE: {
-    backgroundColor: "#E4FF1A",
+    backgroundColor: "#ffd100",
     padding: 10,
     borderRadius: 10,
     shadowColor: "#000",
@@ -359,7 +378,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   btnC: {
-    backgroundColor: "#DC0000",
+    backgroundColor: "#F48484",
     padding: 10,
     borderRadius: 10,
     shadowColor: "#000",
@@ -388,7 +407,7 @@ const styles = StyleSheet.create({
   btnConfirm: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#362FD9",
+    backgroundColor: "#0081C9",
     padding: 10,
     borderRadius: 10,
     shadowColor: "#000",

@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-    marginTop: 50,
-    padding: 10,
+   
   },
   items: {
     justifyContent: "center",
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cardPadding: {
-    backgroundColor: "#F99417aa",
+    backgroundColor: "#ffd100aa",
     borderRadius: 10,
   },
   cardCancel: {

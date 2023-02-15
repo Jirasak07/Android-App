@@ -7,6 +7,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import RequestMe from "../Page/RequestMe";
 import Booking from "../Page/Booking";
+import LogoutPage from "../Login/LogoutPage";
 export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (
@@ -62,8 +63,9 @@ export default function TabBottomUser() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Dashboard" component={RequestMe} />
-      <Tab.Screen name="Booking" component={Booking} />
+      <Tab.Screen name="Dashboard" component={Booking} />
+      <Tab.Screen name="Booking" component={RequestMe} />
+      <Tab.Screen name="User" component={LogoutPage} />
     </Tab.Navigator>
   );
 }
