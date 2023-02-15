@@ -12,8 +12,7 @@ export default function Manage({ navigation }) {
   return (
     <View>
       <Text style={{ marginTop: 40, fontWeight: "bold", fontSize: 18 }}>
-        {" "}
-        Configuration{" "}
+        Configuration
       </Text>
       <View style={styles.container}>
         <View style={styles.InfoContainer}>
@@ -68,7 +67,7 @@ const styles = StyleSheet.create({
     // marginTop: 20,
     height: "100%",
     alignItems: "center",
-    justifyContent: "start",
+    justifyContent: "flex-start",
   },
   cardInfo: {
     width: 170,
@@ -83,5 +82,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     paddingBottom: 30,
     marginTop: 30,
+    
+  },
+  shadowCard: {
+    shadowOpacity:1,
+    shadowColor:'#000',
+    shadowRadius:10,
+    shadowOffset:{
+      width:0,
+      height:0
+    }
   },
 });

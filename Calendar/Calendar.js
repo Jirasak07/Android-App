@@ -70,7 +70,9 @@ function Calendarr() {
     console.log(dateNow)
   }, []);
   return (
-    <View>
+    <View style={{shadowColor:'#4361ee',shadowOpacity:0.3,shadowRadius:6,shadowOffset:{
+      width:0,height:4,
+    }}} >
       <Dialog.Container visible={visible}>
         <Dialog.Title>Account delete</Dialog.Title>
         <Dialog.Description>
@@ -87,7 +89,7 @@ function Calendarr() {
       <Calendar
         minDate={dateNow}
         locales={"th"}
-        style={{ borderRadius: 10, padding: 10 }}
+        style={{ borderRadius: 10, padding: 10, }}
         calendarWidth={320}
         onDayPress={(day) => {
           Alert.alert(

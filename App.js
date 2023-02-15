@@ -19,7 +19,7 @@ import Setting from "./Page/Setting";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
-  navTheme.colors.background = "#eaf4f4";
+  navTheme.colors.background = "#ffffff";
   return (
     <NavigationContainer theme={navTheme}>
       <Stack.Navigator
