@@ -8,6 +8,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import RequestMe from "../Page/RequestMe";
 import Booking from "../Page/Booking";
 import LogoutPage from "../Login/LogoutPage";
+import Profile from "../Page/Profile";
 export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (
@@ -65,7 +66,7 @@ export default function TabBottomUser() {
     >
       <Tab.Screen name="Dashboard" component={Booking} />
       <Tab.Screen name="Booking" component={RequestMe} />
-      <Tab.Screen name="User" component={LogoutPage} />
+      <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
   );
 }
