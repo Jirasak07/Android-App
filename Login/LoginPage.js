@@ -87,6 +87,7 @@ function LoginPage({ navigation }) {
               เข้าสู่ระบบ
             </Text>
           </TouchableOpacity>
+          <Button title="Admin" onPress={()=>navigation.navigate("admin")} />
         </View>
       </View>
     </SafeAreaView>
