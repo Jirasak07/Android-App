@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   btnS: {
-    backgroundColor: "#362FD9",
+    backgroundColor: "#0081C9",
     padding: 10,
     borderRadius: 10,
     shadowColor: "#000",
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   btnC: {
-    backgroundColor: "#DC0000",
+    backgroundColor: "#EB455F",
     padding: 10,
     borderRadius: 10,
     shadowColor: "#000",

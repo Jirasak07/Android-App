@@ -15,6 +15,7 @@ import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Dialog from "react-native-dialog";
+import SearchBar from "../search/SearchBar";
 
 export default function RequestMe() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,6 +48,9 @@ export default function RequestMe() {
     setTime(value);
     setTimePicker(false);
   }
+  function showSearch(){
+    
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1 }}>
@@ -59,7 +63,7 @@ export default function RequestMe() {
                 </Text>
               </View>
               <View style={{ flexGrow: 0 }}>
-                <Pressable>
+                <Pressable onPress={()=>{}}>
                   <FaIcon
                     name="search"
                     style={{ fontSize: 20, color: "#6c757d" }}
@@ -403,7 +407,7 @@ const styles = StyleSheet.create({
   btnConfirm: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#362FD9",
+    backgroundColor: "#0081C9",
     padding: 10,
     borderRadius: 10,
     shadowColor: "#000",
