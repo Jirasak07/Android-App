@@ -2,8 +2,6 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./Login/LoginPage";
-import Ionicons from "react-native-vector-icons";
-import TabBottom from "./Tab/TabBottom";
 import DashBoard from "./Page/DashBoard";
 import Booking from "./Page/Booking";
 import { useEffect } from "react";
@@ -14,14 +12,11 @@ import LogoutPage from "./Login/LogoutPage";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import MCIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import CarManage from "./Page/CarManage";
+import UserManage from "./Page/UserManage";
+import DriverManager from "./Page/DriverManage";
+import Setting from "./Page/Setting";
 export default function App() {
-  // const log = async () => {
-  //   const data = await AsyncStorage.getItem("@Login");
-  //   console.log(data);
-  // };
-  // useEffect(() => {
-  //   log();
-  // }, []);
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
   navTheme.colors.background = "#eaf4f4";
@@ -118,7 +113,7 @@ const Manager = () => {
   const ManageStack = createStackNavigator();
   return (
     <ManageStack.Navigator
-    screenOptions={{
+      screenOptions={{
         title: null,
         headerShown: false,
         headerStyle: {
@@ -127,9 +122,10 @@ const Manager = () => {
       }}
     >
       <ManageStack.Screen name="Manage" component={Manage} />
-      {/* <ManageStack.Screen name="Car" component={CarManage} />
+      <ManageStack.Screen name="Car" component={CarManage} />
       <ManageStack.Screen name="UserManage" component={UserManage} />
-      <ManageStack.Screen name="Driver" component={DriverManager} /> */}
+      <ManageStack.Screen name="Driver" component={DriverManager} />
+      <ManageStack.Screen name="Setting" component={Setting} />
     </ManageStack.Navigator>
   );
 };
