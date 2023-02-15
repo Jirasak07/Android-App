@@ -96,7 +96,7 @@ export default function RequestMe() {
                     style={styles.btnE}
                     onPress={() => setModalE(true)}
                   >
-                    <Text style={{color:'#ff8800'}}>แก้ไข</Text>
+                    <Text style={{color:'#FF5F00'}}>แก้ไข</Text>
                   </Pressable>
                   <Pressable
                     style={styles.btnC}

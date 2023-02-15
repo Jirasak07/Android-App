@@ -12,6 +12,7 @@ import LogoutPage from "../Login/LogoutPage";
 import Manage from "../Page/Manage";
 import CarManage from "../Page/CarManage";
 import UserManage from "../Page/UserManage";
+import Profile from "../Page/Profile";
 export default function TabBottom() {
   const Tab = createBottomTabNavigator();
 
@@ -82,7 +83,7 @@ export default function TabBottom() {
       <Tab.Screen name="Dashboard" component={DashBoard} />
       <Tab.Screen name="Booking" component={Booking} />
       <Tab.Screen name="Config" component={Manager} />
-      <Tab.Screen name="User" component={LogoutPage} />
+      <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
   );
 }
