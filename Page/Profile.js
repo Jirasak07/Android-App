@@ -6,28 +6,20 @@ import FaIcon from "react-native-vector-icons/FontAwesome";
 
 const Profile = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "#dad7cd" }}>
       <View
         style={[
           globalStyles.containerContent,
           { paddingHorizontal: 10, paddingVertical: 10 },
         ]}
       >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "700",
-          }}
-        >
-          PROFILE
-        </Text>
         <View style={styles.content}>
           <Fa5Icon
             name="user-alt"
             size={40}
             style={{
               padding: 50,
-              backgroundColor: "#ccc5b9",
+              backgroundColor: "#e5e5e5",
               borderRadius: 100,
               color: "#111",
             }}
@@ -62,9 +54,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: "center",
     borderBottomColor: "#403d39",
-    borderBottomWidth: 0.5,
     alignItems: "center",
     padding: 30,
+    // backgroundColor: "#4361ee",
+    borderRadius: 8,
+    borderBottomWidth: 0.5,
   },
   btnLogout: {
     paddingHorizontal: 8,
