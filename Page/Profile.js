@@ -6,27 +6,34 @@ import FaIcon from "react-native-vector-icons/FontAwesome";
 
 const Profile = () => {
   return (
-    <View style={{ flex: 1, backgroundColor: "#dad7cd" }}>
-      <View
-        style={[
-          globalStyles.containerContent,
-          { paddingHorizontal: 10, paddingVertical: 10 },
-        ]}
-      >
+    <View
+      style={{
+        flex: 1,
+        paddingVertical: 10,
+        backgroundColor: "#e7ecef",
+      }}
+    >
+      <View style={globalStyles.containerContent}>
         <View style={styles.content}>
           <Fa5Icon
-            name="user-alt"
-            size={40}
+            name="user-tie"
+            size={50}
             style={{
               padding: 50,
-              backgroundColor: "#e5e5e5",
+              backgroundColor: "#F5A65B",
               borderRadius: 100,
-              color: "#111",
+              color: "#fff",
             }}
           />
           <Text style={{ marginTop: 20, fontWeight: "900", fontSize: 32 }}>
             Name
           </Text>
+        </View>
+        <View
+          style={{ marginTop: 10, flexDirection: "row", paddingHorizontal: 10 }}
+        >
+          <Text style={{ fontWeight: "600" }}>สถานะ : </Text>
+          <Text>ผู้ใช้งาน, ผู้ดูแล</Text>
         </View>
       </View>
       <View>
