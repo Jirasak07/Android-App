@@ -25,6 +25,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
+    "react-native-btr": "^2.2.0",
     "react-native-calendario": "^3.3.2",
     "react-native-calendars": "^1.1293.0",
     "react-native-dialog": "^9.3.0",

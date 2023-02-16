@@ -11,12 +11,14 @@ import {
 import Fa from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { BottomSheet } from 'react-native-btr';
 
 function Setting({ navigation }) {
-  const [modal, setModal] = useState(false);
-  const showModal = () => {
-    setModal(!modal);
-    console.log(modal);
+  const [visible, setVisible] = useState(false);
+
+  const toggleBottomNavigationView = () => {
+    //Toggling the visibility state of the bottom sheet
+    setVisible(!visible);
   };
   return (
     <View style={styles.constainer}>
@@ -53,7 +55,7 @@ function Setting({ navigation }) {
             </View>
             <TouchableOpacity
               onPress={() => {
-                showModal();
+                toggleBottomNavigationView();
               }}
               style={[styles.buttonEdit, { backgroundColor: "#a06cd5" }]}
             >
@@ -147,20 +149,18 @@ function Setting({ navigation }) {
           </View>
         </View>
       </ScrollView>
-      <Modal animationType="slide" visible={modal}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 22,
-            backgroundColor: "white",
-          }}
+      <BottomSheet
+          visible={visible}
+          //setting the visibility state of the bottom shee
+          onBackButtonPress={toggleBottomNavigationView}
+          //Toggling the visibility state on the click of the back botton
+          onBackdropPress={toggleBottomNavigationView}
+          //Toggling the visibility state on the clicking out side of the sheet
         >
-            <Button title="Close" onPress={()=>setModal(!modal)} />
-          <Text>5555</Text>
-        </View>
-      </Modal>
+          <View style={{backgroundColor:'white',height:350}} >
+            <Text>Hi</Text>
+          </View>
+        </BottomSheet>
     </View>
   );
 }

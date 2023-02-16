@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   cardInfo: {
     width: 170,
-    height: 130,
+    height: 230,
     borderRadius: 5,
     padding: 10,
     justifyContent: "space-evenly",
