@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   View,
   Text,
@@ -7,18 +7,52 @@ import {
   TouchableOpacity,
   Modal,
   Button,
+  Dimensions,
 } from "react-native";
 import Fa from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { BottomSheet } from 'react-native-btr';
-
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  runOnJS,
+} from "react-native-reanimated";
+import { BottomSheet } from "react-native-btr";
+const windowHeight = Dimensions.get("window").height;
 function Setting({ navigation }) {
-  const [visible, setVisible] = useState(false);
-
-  const toggleBottomNavigationView = () => {
-    //Toggling the visibility state of the bottom sheet
-    setVisible(!visible);
+  const translateYx = useSharedValue(0);
+  const context = useSharedValue({ y: 0 });
+  const gesture = Gesture.Pan()
+    .onStart(() => {
+      context.value = { y: translateYx.value };
+    })
+    .onUpdate((ev) => {
+      translateYx.value = ev.translationY + context.value.y;
+      translateYx.value = Math.max(translateYx.value, -windowHeight / 1.8);
+      console.log(translateYx.value);
+    })
+    .onEnd(() => {
+      if (translateYx.value > -windowHeight / 2.5) {
+        translateYx.value = withSpring(0, { damping: 100 });
+        ("worklet");
+        runOnJS(updateShare)(false);
+      } else {
+        translateYx.value = withSpring(-windowHeight / 1.8, { damping: 100 });
+      }
+    })
+    .onFinalize(() => {});
+  function updateShare() {
+    setShow(!show);
+  }
+  const rBottomSheetStyle = useAnimatedStyle(() => {
+    return { transform: [{ translateY: translateYx.value }] };
+  });
+  const [show, setShow] = useState(false);
+  const onPress = () => {
+    translateYx.value = withSpring(-windowHeight / 1.8, { damping: 100 });
+    setShow(!show);
   };
   return (
     <View style={styles.constainer}>
@@ -55,7 +89,7 @@ function Setting({ navigation }) {
             </View>
             <TouchableOpacity
               onPress={() => {
-                toggleBottomNavigationView();
+                onPress();
               }}
               style={[styles.buttonEdit, { backgroundColor: "#a06cd5" }]}
             >
@@ -149,18 +183,38 @@ function Setting({ navigation }) {
           </View>
         </View>
       </ScrollView>
+      {/* <View
+        style={{
+          height: windowHeight,
+          width: "100%",
+          backgroundColor: "#000a",
+          zIndex: 20,
+          position: "absolute",
+          // display: backdrop ? "block" : "none",
+          display: "none",
+        }}
+      ></View> */}
+
       <BottomSheet
-          visible={visible}
-          //setting the visibility state of the bottom shee
-          onBackButtonPress={toggleBottomNavigationView}
-          //Toggling the visibility state on the click of the back botton
-          onBackdropPress={toggleBottomNavigationView}
-          //Toggling the visibility state on the clicking out side of the sheet
-        >
-          <View style={{backgroundColor:'white',height:350}} >
-            <Text>Hi</Text>
-          </View>
-        </BottomSheet>
+        visible={show}
+        style={[{ backgroundColor: "red" }, rBottomSheetStyle]}
+        onBackdropPress={()=>{setShow(!show)}}
+      >
+        <GestureDetector gesture={gesture}>
+          <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
+            <View
+              style={{
+                width: 75,
+                height: 4,
+                backgroundColor: "grey",
+                alignSelf: "center",
+                marginVertical: 15,
+                borderRadius: 2,
+              }}
+            />
+          </Animated.View>
+        </GestureDetector>
+      </BottomSheet>
     </View>
   );
 }
@@ -171,6 +225,8 @@ const styles = StyleSheet.create({
   constainer: {
     flex: 1,
     paddingTop: 30,
+    zIndex: 10,
+    elevation: 10,
   },
   cardSetting: {
     width: 170,
@@ -213,5 +269,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginTop: 10,
+  },
+  BottomSheets: {
+    backgroundColor: "white",
+    height: windowHeight,
+    top: windowHeight,
+    borderRadius: 25,
+    width: "100%",
+    position: "absolute",
+    zIndex: 30,
+    elevation: 30,
   },
 });

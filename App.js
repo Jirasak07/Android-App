@@ -87,8 +87,8 @@ const TabBottoms = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 50,
-          borderTopLeftRadius: 25,
-          borderTopRightRadius: 25,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
@@ -96,7 +96,6 @@ const TabBottoms = () => {
           },
           shadowOpacity: 0.5,
           shadowRadius: 10,
-          elevation: 15,
           backgroundColor: "white",
         },
         headerShown: false,
