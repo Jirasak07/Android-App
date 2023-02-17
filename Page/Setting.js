@@ -29,6 +29,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { BottomSheet } from "react-native-btr";
 import { RadioButton } from "react-native-paper";
+import axios from 'axios';
 const windowHeight = Dimensions.get("window").height;
 function Setting({ navigation }) {
   const translateYx = useSharedValue(0);
@@ -58,7 +59,7 @@ function Setting({ navigation }) {
     return { transform: [{ translateY: translateYx.value }] };
   });
   const [show, setShow] = useState(false);
-  const onPress = () => {
+  const onPress = (ev) => {
     translateYx.value = withSpring(-windowHeight / 1.8, { damping: 20 });
     setShow(!show);
   };
@@ -70,6 +71,19 @@ function Setting({ navigation }) {
     setQty(qty - 1);
   };
   const [checked, setChecked] = React.useState("first");
+  const [bookMin,setBookMin] = useState({})
+  const [bookMax,setBookMax] = useState({})
+  const [periodMin,setPeriodMin] = useState({})
+  const [periodMax,setPeriodMax] = useState({})
+  useEffect(() => {
+    axios.get('http://192.168.10.226/api/show/setting').then((res)=>{
+      const data = res.data.setting
+      setBookMin(data[0])
+      setBookMax(data[1])
+      setPeriodMin(data[2])
+      setPeriodMax(data[3])
+    })
+  },[])
   return (
     <View style={styles.constainer}>
       <Text
@@ -97,15 +111,15 @@ function Setting({ navigation }) {
                 marginTop: 10,
               }}
             >
-              จองล่วงหน้าขั้นต่ำ
+              {bookMin.name}
             </Text>
             <View style={styles.inCard}>
-              <Text style={styles.inDetail}>30</Text>
-              <Text style={styles.inDetail2}>วัน</Text>
+              <Text style={styles.inDetail}>{bookMin.time}</Text>
+              <Text style={styles.inDetail2}>{bookMin.unit_th}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
-                onPress();
+                onPress(1);
               }}
               style={[styles.buttonEdit, { backgroundColor: "#a06cd5" }]}
             >
@@ -130,13 +144,16 @@ function Setting({ navigation }) {
                 marginTop: 10,
               }}
             >
-              จองล่วงหน้าสูงสุด
+             {bookMax.name}
             </Text>
             <View style={styles.inCard}>
-              <Text style={styles.inDetail}>30</Text>
-              <Text style={styles.inDetail2}>วัน</Text>
+              <Text style={styles.inDetail}>{bookMax.time}</Text>
+              <Text style={styles.inDetail2}>{bookMax.unit_th}</Text>
             </View>
             <TouchableOpacity
+             onPress={() => {
+              onPress(2);
+            }}
               style={[styles.buttonEdit, { backgroundColor: "#f4845f" }]}
             >
               <Text
@@ -155,11 +172,11 @@ function Setting({ navigation }) {
             <Text
               style={{ color: "#368f8b", fontSize: 20, fontWeight: "bold" }}
             >
-              ระยะจองขั้นต่ำ
+              {periodMin.name}
             </Text>
             <View style={styles.inCard}>
-              <Text style={styles.inDetail}>30</Text>
-              <Text style={styles.inDetail2}>วัน</Text>
+              <Text style={styles.inDetail}>{periodMin.time}</Text>
+              <Text style={styles.inDetail2}>{periodMin.unit_th}</Text>
             </View>
             <TouchableOpacity
               style={[styles.buttonEdit, { backgroundColor: "#67b99a" }]}
@@ -180,11 +197,11 @@ function Setting({ navigation }) {
             <Text
               style={{ color: "#da4167", fontSize: 20, fontWeight: "bold" }}
             >
-              ระยะจองสูงสุด
+              {periodMax.name}
             </Text>
             <View style={styles.inCard}>
-              <Text style={styles.inDetail}>30</Text>
-              <Text style={styles.inDetail2}>วัน</Text>
+              <Text style={styles.inDetail}>{periodMax.time}</Text>
+              <Text style={styles.inDetail2}>{periodMax.unit_th}</Text>
             </View>
             <TouchableOpacity
               style={[styles.buttonEdit, { backgroundColor: "#ef798a" }]}
@@ -201,11 +218,8 @@ function Setting({ navigation }) {
       </ScrollView>
       <BottomSheet
         visible={show}
-        onBackdropPress={() => {
-          setShow(!show);
-        }}
       >
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView style={{ flex: 1 }} >
           <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
               <View

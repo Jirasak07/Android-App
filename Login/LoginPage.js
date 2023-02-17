@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 function LoginPage({ navigation }) {
   const userName = useRef();
   const passWord = useRef();
@@ -19,29 +19,33 @@ function LoginPage({ navigation }) {
   const [password, setpassword] = useState("");
 
   const onClick = async () => {
-    const response = await axios.post("https://api.lanna.co.th/Profile/checkuser",{ username:username,password:password })
+    const response = await axios.post("https://api.lanna.co.th/Profile/checkuser", {
+      username: username,
+      password: password,
+    });
     const data = await response.data;
-    console.log(data.Result);
-    if (data.Result == "true") {
-      const name = data.Data[0];
-      const FullName = name.FullName;
-      console.log(FullName);
-      await AsyncStorage.setItem("@Login", "1");
-      const log = await AsyncStorage.getItem("Login");
-      console.log(log);
-      Alert.alert("ยินดีต้อนรับ ", FullName , [
-        {
-          text: "ตกลง",
-          onPress: () => {
-            navigation.navigate("Home");
-          },
-        },
-      ]);
-    }
+    console.log(data);
+
+    // if (data.Result == "true") {
+    //   const name = data.Data[0];
+    //   const FullName = name.FullName;
+    //   console.log(FullName);
+    //   await AsyncStorage.setItem("@Login", "1");
+    //   const log = await AsyncStorage.getItem("Login");
+    //   console.log(log);
+    //   Alert.alert("ยินดีต้อนรับ ", FullName , [
+    //     {
+    //       text: "ตกลง",
+    //       onPress: () => {
+    //         navigation.navigate("Home");
+    //       },
+    //     },
+    //   ]);
+    // }
   };
 
   return (
-    <SafeAreaView style={{ flex: 1,backgroundColor:'#fdfffc' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fdfffc" }}>
       <View style={styles.containerLogin}>
         <View style={styles.loginHead}>
           <Image
@@ -52,7 +56,7 @@ function LoginPage({ navigation }) {
         <View style={styles.bodyLogin}>
           <Text style={{ fontSize: 18, fontWeight: "bold" }}>ระบบจองรถ</Text>
           <TextInput
-            autoCapitalize={'none'}
+            autoCapitalize={"none"}
             inputMode="email"
             spellCheck={false}
             onChangeText={setUsername}
@@ -63,7 +67,7 @@ function LoginPage({ navigation }) {
           <TextInput
             onChangeText={setpassword}
             placeholder=" รหัสผ่าน"
-            autoCapitalize={'none'}
+            autoCapitalize={"none"}
             keyboardType="default"
             inputMode="password"
             style={styles.TextInput}
@@ -80,14 +84,17 @@ function LoginPage({ navigation }) {
               borderRadius: 5,
               marginTop: 10,
             }}
-            onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
+            onPress={() => {
+              onClick();
+            }}
+            // onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
             // onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ
             </Text>
           </TouchableOpacity>
-          <Button title="Admin" onPress={()=>navigation.navigate("admin")} />
+          <Button title="Admin" onPress={() => navigation.navigate("admin")} />
         </View>
       </View>
     </SafeAreaView>
@@ -100,7 +107,6 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-
   },
   loginHead: {
     justifyContent: "center",
