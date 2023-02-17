@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -19,31 +19,27 @@ function LoginPage({ navigation }) {
   const [password, setpassword] = useState("");
 
   const onClick = async () => {
-    const response = await axios.post("https://api.lanna.co.th/Profile/checkuser", {
-      username: username,
+    const response = await axios.post("http://192.168.10.226/api/chklogin", {
+      email: username,
       password: password,
     });
     const data = await response.data;
     console.log(data);
-
-    // if (data.Result == "true") {
-    //   const name = data.Data[0];
-    //   const FullName = name.FullName;
-    //   console.log(FullName);
-    //   await AsyncStorage.setItem("@Login", "1");
-    //   const log = await AsyncStorage.getItem("Login");
-    //   console.log(log);
-    //   Alert.alert("ยินดีต้อนรับ ", FullName , [
-    //     {
-    //       text: "ตกลง",
-    //       onPress: () => {
-    //         navigation.navigate("Home");
-    //       },
-    //     },
-    //   ]);
-    // }
+    if (data.status == "success") {
+      const role = data.role;
+      await AsyncStorage.setItem("@Login", "yes");
+      await AsyncStorage.setItem("@role", data.role);
+      await AsyncStorage.setItem("@iduser", JSON.stringify(data.id));
+      Alert.alert("ยินดีต้อนรับ ", "", [
+        {
+          text: "ตกลง",
+          onPress: () => {
+            navigation.navigate(role);
+          },
+        },
+      ]);
+    }
   };
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fdfffc" }}>
       <View style={styles.containerLogin}>
@@ -94,7 +90,6 @@ function LoginPage({ navigation }) {
               เข้าสู่ระบบ
             </Text>
           </TouchableOpacity>
-          <Button title="Admin" onPress={() => navigation.navigate("admin")} />
         </View>
       </View>
     </SafeAreaView>

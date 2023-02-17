@@ -12,14 +12,12 @@ import axios from "axios";
 
 
 export default function DashBoard({ navigation }) {
-  const destro = async () => {
-    await AsyncStorage.removeItem("@Login");
-  };
+
   return (
     <View style={globalStyles.containerContent}>
       <ScrollView style={{ paddingHorizontal: 10 }}>
         <Text style={{ fontWeight: "bold", marginVertical: 10, fontSize: 18 }}>
-          Dashboard
+          Dashboard 
         </Text>
         <Text style={{ paddingHorizontal: 15, fontSize: 16 }}>รายการ</Text>
         <View style={style.cardContainer}>

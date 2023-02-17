@@ -29,7 +29,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { BottomSheet } from "react-native-btr";
 import { RadioButton } from "react-native-paper";
-import axios from 'axios';
+import axios from "axios";
 const windowHeight = Dimensions.get("window").height;
 function Setting({ navigation }) {
   const translateYx = useSharedValue(0);
@@ -40,7 +40,7 @@ function Setting({ navigation }) {
     })
     .onUpdate((ev) => {
       translateYx.value = ev.translationY + context.value.y;
-      translateYx.value = Math.max(translateYx.value, -windowHeight / 1.1);
+      translateYx.value = Math.max(translateYx.value, -windowHeight / 1.8);
       console.log(translateYx.value);
       console.log(_WORKLET);
     })
@@ -55,35 +55,73 @@ function Setting({ navigation }) {
   function updateShare(val) {
     setShow(false);
   }
+  const subMit = () => {
+    if (qty > 0) {
+      axios
+        .patch("http://192.168.10.226/api/edit/setting", {
+          id: id,
+          time: qty,
+          unit: checked,
+        })
+        .then((res) => {
+          if (res.data.status == "edit_success") {
+            fethData();
+            setShow(!show);
+          } else {
+            Alert.alert("error");
+          }
+        });
+    }else{
+      
+      Alert.alert('กรุณากรอกข้อมูลให้ถูกต้อง')
+    }
+  };
   const rBottomSheetStyle = useAnimatedStyle(() => {
     return { transform: [{ translateY: translateYx.value }] };
   });
   const [show, setShow] = useState(false);
-  const onPress = (ev) => {
+  const onPress = async (ev) => {
     translateYx.value = withSpring(-windowHeight / 1.8, { damping: 20 });
+    const fetch = await axios.get("http://192.168.10.226/api/show/setting");
+    const data = await fetch.data.setting;
+    setId(ev);
+    setBookMin(data[0]);
+    setBookMax(data[1]);
+    setPeriodMin(data[2]);
+    setPeriodMax(data[3]);
+    setChecked(data[ev - 1].unit);
+    setSetting(data[ev - 1].name);
+    setQty(parseInt(data[ev - 1].time));
     setShow(!show);
   };
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState();
+  const [textSetting, setSetting] = useState();
   const plus = () => {
-    setQty(qty + 1);
+    let c = qty + 1;
+    setQty(c);
   };
   const minus = () => {
-    setQty(qty - 1);
+    let c = qty - 1;
+    setQty(c);
   };
   const [checked, setChecked] = React.useState("first");
-  const [bookMin,setBookMin] = useState({})
-  const [bookMax,setBookMax] = useState({})
-  const [periodMin,setPeriodMin] = useState({})
-  const [periodMax,setPeriodMax] = useState({})
+  const [bookMin, setBookMin] = useState({});
+  const [bookMax, setBookMax] = useState({});
+  const [periodMin, setPeriodMin] = useState({});
+  const [periodMax, setPeriodMax] = useState({});
+  const [id, setId] = useState();
+  const fethData = () => {
+    axios.get("http://192.168.10.226/api/show/setting").then((res) => {
+      const data = res.data.setting;
+      setBookMin(data[0]);
+      setBookMax(data[1]);
+      setPeriodMin(data[2]);
+      setPeriodMax(data[3]);
+    });
+  };
   useEffect(() => {
-    axios.get('http://192.168.10.226/api/show/setting').then((res)=>{
-      const data = res.data.setting
-      setBookMin(data[0])
-      setBookMax(data[1])
-      setPeriodMin(data[2])
-      setPeriodMax(data[3])
-    })
-  },[])
+    fethData();
+  }, []);
   return (
     <View style={styles.constainer}>
       <Text
@@ -144,16 +182,16 @@ function Setting({ navigation }) {
                 marginTop: 10,
               }}
             >
-             {bookMax.name}
+              {bookMax.name}
             </Text>
             <View style={styles.inCard}>
               <Text style={styles.inDetail}>{bookMax.time}</Text>
               <Text style={styles.inDetail2}>{bookMax.unit_th}</Text>
             </View>
             <TouchableOpacity
-             onPress={() => {
-              onPress(2);
-            }}
+              onPress={() => {
+                onPress(2);
+              }}
               style={[styles.buttonEdit, { backgroundColor: "#f4845f" }]}
             >
               <Text
@@ -179,6 +217,9 @@ function Setting({ navigation }) {
               <Text style={styles.inDetail2}>{periodMin.unit_th}</Text>
             </View>
             <TouchableOpacity
+              onPress={() => {
+                onPress(3);
+              }}
               style={[styles.buttonEdit, { backgroundColor: "#67b99a" }]}
             >
               <Text
@@ -204,6 +245,9 @@ function Setting({ navigation }) {
               <Text style={styles.inDetail2}>{periodMax.unit_th}</Text>
             </View>
             <TouchableOpacity
+              onPress={() => {
+                onPress(4);
+              }}
               style={[styles.buttonEdit, { backgroundColor: "#ef798a" }]}
             >
               <Text
@@ -216,10 +260,8 @@ function Setting({ navigation }) {
           </View>
         </View>
       </ScrollView>
-      <BottomSheet
-        visible={show}
-      >
-        <GestureHandlerRootView style={{ flex: 1 }} >
+      <BottomSheet visible={show}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
               <View
@@ -237,8 +279,7 @@ function Setting({ navigation }) {
                 <Text
                   style={{ color: "black", fontSize: 20, fontWeight: "bold" }}
                 >
-                  {" "}
-                  ตั้งค่าอะไร{" "}
+                  {textSetting}
                 </Text>
                 <View
                   style={{
@@ -250,7 +291,6 @@ function Setting({ navigation }) {
                 >
                   <TouchableOpacity
                     style={{
-                      backgroundColor: "#ce4257",
                       width: 50,
                       height: 50,
                       borderRadius: 5,
@@ -259,7 +299,7 @@ function Setting({ navigation }) {
                       minus();
                     }}
                   >
-                    <Entypo name="minus" size={50} color={"white"} />
+                    <Entypo name="minus" size={50} color={"#ce4257"} />
                   </TouchableOpacity>
                   <View style={styles.TextInput}>
                     <Text style={styles.text}>{qty}</Text>
@@ -269,29 +309,66 @@ function Setting({ navigation }) {
                       plus();
                     }}
                     style={{
-                      backgroundColor: "#00a896",
                       width: 50,
                       height: 50,
                       borderRadius: 5,
                     }}
                   >
-                    <Entypo name="plus" size={50} color={"white"} />
+                    <Entypo name="plus" size={50} color={"#00a896"} />
                   </TouchableOpacity>
                 </View>
-                <View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#edede9",
+                    borderRadius: 10,
+                    marginTop: 25,
+                    paddingHorizontal: 10,
+                  }}
+                >
                   <RadioButton
-                    value="first"
-                    status={checked === "first" ? "checked" : "unchecked"}
-                    onPress={() => setChecked("first")}
+                    value="hours"
+                    status={checked === "hours" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("hours")}
                   />
-                  <Text>Hi</Text>
+                  <Text>ชั่วโมง</Text>
                   <RadioButton
-                    value="second"
-                    status={checked === "second" ? "checked" : "unchecked"}
-                    onPress={() => setChecked("second")}
+                    value="day"
+                    status={checked === "day" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("day")}
                   />
-                  <Text>Hi</Text>
+                  <Text>วัน</Text>
+                  <RadioButton
+                    value="month"
+                    status={checked === "month" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("month")}
+                  />
+                  <Text>เดือน</Text>
                 </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    subMit();
+                  }}
+                  style={{
+                    backgroundColor: "#2a8d4f",
+                    width: "95%",
+                    position: "absolute",
+                    bottom: -165,
+                    height: 50,
+                    borderRadius: 6,
+                    padding: 5,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{ fontSize: 18, fontWeight: "bold", color: "white" }}
+                  >
+                    บันทึก
+                  </Text>
+                </TouchableOpacity>
               </View>
             </Animated.View>
           </GestureDetector>
