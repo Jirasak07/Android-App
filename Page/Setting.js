@@ -205,7 +205,7 @@ function Setting({ navigation }) {
           setShow(!show);
         }}
       >
-        <GestureHandlerRootView style={{flex:1}}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
               <View

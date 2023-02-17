@@ -18,7 +18,6 @@ export default class AgendaScreen extends Component<State> {
   // reservationsKeyExtractor = (item, index) => {
   //   return `${item?.reservation?.day}${index}`;
   // };
-
   render() {
     return (
       <Agenda
