@@ -15,7 +15,11 @@ import Fa from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -36,6 +40,8 @@ function Setting({ navigation }) {
     .onUpdate((ev) => {
       translateYx.value = ev.translationY + context.value.y;
       translateYx.value = Math.max(translateYx.value, -windowHeight / 1.1);
+      console.log(translateYx.value);
+      console.log(_WORKLET);
     })
     .onEnd(() => {
       if (translateYx.value > -windowHeight / 3.5) {
@@ -199,77 +205,83 @@ function Setting({ navigation }) {
           setShow(!show);
         }}
       >
-        <GestureDetector gesture={gesture}>
-          <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
-            <View
-              style={{
-                width: 75,
-                height: 5,
-                backgroundColor: "grey",
-                alignSelf: "center",
-                marginVertical: 15,
-                borderRadius: 2,
-                opacity: 0.3,
-              }}
-            />
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Text
-                style={{ color: "black", fontSize: 20, fontWeight: "bold" }}
-              >
-                {" "}
-                ตั้งค่าอะไร{" "}
-              </Text>
+        <GestureHandlerRootView style={{flex:1}}>
+          <GestureDetector gesture={gesture}>
+            <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
               <View
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: 30,
+                  width: 75,
+                  height: 5,
+                  backgroundColor: "grey",
+                  alignSelf: "center",
+                  marginVertical: 15,
+                  borderRadius: 2,
+                  opacity: 0.3,
                 }}
-              >
-                <TouchableOpacity
+              />
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
+                <Text
+                  style={{ color: "black", fontSize: 20, fontWeight: "bold" }}
+                >
+                  {" "}
+                  ตั้งค่าอะไร{" "}
+                </Text>
+                <View
                   style={{
-                    backgroundColor: "#ce4257",
-                    width: 50,
-                    height: 50,
-                    borderRadius: 5,
-                  }}
-                  onPress={() => {
-                    minus();
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 30,
                   }}
                 >
-                  <Entypo name="minus" size={50} color={"white"} />
-                </TouchableOpacity>
-                <View style={styles.TextInput}>
-                  <Text style={styles.text}>{qty}</Text>
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: "#ce4257",
+                      width: 50,
+                      height: 50,
+                      borderRadius: 5,
+                    }}
+                    onPress={() => {
+                      minus();
+                    }}
+                  >
+                    <Entypo name="minus" size={50} color={"white"} />
+                  </TouchableOpacity>
+                  <View style={styles.TextInput}>
+                    <Text style={styles.text}>{qty}</Text>
+                  </View>
+                  <TouchableOpacity
+                    onPress={() => {
+                      plus();
+                    }}
+                    style={{
+                      backgroundColor: "#00a896",
+                      width: 50,
+                      height: 50,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <Entypo name="plus" size={50} color={"white"} />
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  onPress={() => {
-                    plus();
-                  }}
-                  style={{
-                    backgroundColor: "#00a896",
-                    width: 50,
-                    height: 50,
-                    borderRadius: 5,
-                  }}
-                >
-                  <Entypo name="plus" size={50} color={"white"} />
-                </TouchableOpacity>
+                <View>
+                  <RadioButton
+                    value="first"
+                    status={checked === "first" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("first")}
+                  />
+                  <Text>Hi</Text>
+                  <RadioButton
+                    value="second"
+                    status={checked === "second" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("second")}
+                  />
+                  <Text>Hi</Text>
+                </View>
               </View>
-              <RadioButton
-                value="first"
-                status={checked === "first" ? "checked" : "unchecked"}
-                onPress={() => setChecked("first")}
-              />
-              <RadioButton
-                value="second"
-                status={checked === "second" ? "checked" : "unchecked"}
-                onPress={() => setChecked("second")}
-              />
-            </View>
-          </Animated.View>
-        </GestureDetector>
+            </Animated.View>
+          </GestureDetector>
+        </GestureHandlerRootView>
       </BottomSheet>
     </View>
   );
