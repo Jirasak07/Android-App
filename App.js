@@ -48,6 +48,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
+const d = new Date()
+console.log(d)
 const TabBottoms = () => {
   const Tab = createBottomTabNavigator();
   return (
