@@ -43,15 +43,16 @@ export default class AgendaScreen extends Component<State> {
         testID={testIDs.agenda.CONTAINER}
         items={this.state.items}
         loadItemsForMonth={this.loadItems}
-        selected={moment(new Date()).format("YYYY-mm-dd")}
+        selected={moment(new Date()).format("YYYY-MM-DD")}
         renderItem={this.renderItem}
         renderEmptyDate={this.renderEmptyDate}
         rowHasChanged={this.rowHasChanged}
         showClosingKnob={true}
-        minDate={moment(new Date())}
+        minDate={moment(new Date()).format("YYYY-MM-DD")}
         markingType={"multi-dot"}
         markedDates={this.state.events}
         theme={{ calendarBackground: "#fff", agendaKnobColor: "#111" }}
+        // calendarStyle={{marginTop:30}}
       />
     );
   }
