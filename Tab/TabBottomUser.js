@@ -1,15 +1,21 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import MCIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import RequestMe from "../Page/RequestMe";
 import Booking from "../Page/Booking";
 import LogoutPage from "../Login/LogoutPage";
 import Profile from "../Page/Profile";
 import BottomSheets from "../Calendar/BottomSheet";
+import AddRequest from "../Page/AddRequest";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+import Setting from "../Page/Setting";
+import { event } from "react-native-reanimated";
 export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (
@@ -44,6 +50,15 @@ export default function TabBottomUser() {
                   size={tintSize}
                 />
               );
+
+            case "addRequest":
+              return (
+                <FontAwesome5
+                  name="calendar-plus"
+                  color={tintColor}
+                  size={tintSize}
+                />
+              );
           }
         },
         tabBarShowLabel: false,
@@ -70,6 +85,12 @@ export default function TabBottomUser() {
       <Tab.Screen name="Add" component={BottmShett} options={{
         tabBarIcon:()=><BottomSheets/>
       }} />
+      <Tab.Screen
+        name="addRequest"
+        component={AddRequest}
+        options={{ animationEnabled: true }}
+      />
+      <Tab.Screen name="Config" component={Setting} />
       <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
   );

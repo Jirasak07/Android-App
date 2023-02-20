@@ -15,7 +15,7 @@ import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Dialog from "react-native-dialog";
-import SearchBar from "../search/SearchBar";
+
 
 export default function RequestMe() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -62,14 +62,14 @@ export default function RequestMe() {
                   ข้อมูลการจอง
                 </Text>
               </View>
-              <View style={{ flexGrow: 0 }}>
+              {/* <View style={{ flexGrow: 0 }}>
                 <Pressable onPress={()=>{}}>
                   <FaIcon
                     name="search"
                     style={{ fontSize: 20, color: "#6c757d" }}
                   />
                 </Pressable>
-              </View>
+              </View> */}
             </View>
 
             <Card style={styles.card}>
