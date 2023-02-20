@@ -66,8 +66,7 @@ export default function TabBottom() {
 
         tabBarStyle: {
           height: 50,
-          borderTopLeftRadius: 25,
-          borderTopRightRadius: 25,
+
           shadowColor: "#000",
           shadowOffset: {
             width: 0,

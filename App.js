@@ -19,6 +19,10 @@ import Setting from "./Page/Setting";
 import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 import BottomSheets from "./Calendar/BottomSheet";
+import RequestAddmin from "./Page/RequestAddmin";
+import RequestMe from "./Page/RequestMe";
+import RequestAll from "./Page/RequestAll";
+import HistoryList from "./Page/HistoryList";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
@@ -89,21 +93,11 @@ const TabBottoms = () => {
                   size={tintSize}
                 />
               );
-            // case "Add":
-            //   return (
-            //     <Ionicons
-            //       name="add-circle-outline"
-            //       color={tintColor}
-            //       size={30}
-            //     />
-            //   );
           }
         },
         tabBarShowLabel: false,
         tabBarStyle: {
           height: 50,
-          borderTopLeftRadius: 25,
-          borderTopRightRadius: 25,
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
@@ -118,22 +112,41 @@ const TabBottoms = () => {
       })}
     >
       <Tab.Screen name="Dashboard" component={DashBoard} />
-      <Tab.Screen name="Booking" component={Booking} />
+      <Tab.Screen name="Booking" component={RequestAdminD} />
       <Tab.Screen
         name="Add"
         component={BottomAdd}
         options={{
           tabBarButton: () => <BottomSheets />,
-          }}
+        }}
       />
       <Tab.Screen name="Config" component={Manager} />
       <Tab.Screen name="User" component={LogoutPage} />
     </Tab.Navigator>
   );
 };
-const BottomAdd=()=>{
-  return null
-}
+const BottomAdd = () => {
+  return null;
+};
+const RequestAdminD = () => {
+  const RequestStack = createStackNavigator();
+  return (
+    <RequestStack.Navigator
+      screenOptions={{
+        title: null,
+        headerShown: false,
+        headerStyle: {
+          backgroundColor: "white",
+        },
+      }}
+    >
+      <RequestStack.Screen name="RequestAd" component={RequestAddmin} />
+      <RequestStack.Screen name="Requestme" component={RequestMe} />
+      <RequestStack.Screen name="Requestall" component={RequestAll} />
+      <RequestStack.Screen name="Historyrequest" component={HistoryList} />
+    </RequestStack.Navigator>
+  );
+};
 const Manager = () => {
   const ManageStack = createStackNavigator();
   return (

@@ -4,7 +4,7 @@ import globalStyles from "../Style/globalStyle";
 export default function HistoryList() {
   return (
     <View style={globalStyles.containerContent} >
-      <Text>Booking</Text>
+      <Text>history</Text>
     </View>
   );
 }

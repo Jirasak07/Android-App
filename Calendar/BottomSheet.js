@@ -68,7 +68,7 @@ const BottomSheets = () => {
             paddingLeft:2    
     }}
       >
-        <Ionicons name="add-circle-outline" size={45} color={'black'}  />
+        <Ionicons name="add-circle-outline" size={45} color={'gray'}  />
       </TouchableOpacity>
       <View>
         <BottomSheet

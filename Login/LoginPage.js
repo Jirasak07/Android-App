@@ -84,10 +84,39 @@ function LoginPage({ navigation }) {
             //   onClick();
             // }}
             // onPress={()=>{  {navigation.navigate("admin")}}}
-            onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
+            onPress={() => {
+              {
+                username == "1"
+                  ? navigation.navigate("user")
+                  : navigation.navigate("user");
+              }
+            }}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.1}
+            style={{
+              backgroundColor: "#2a9d8f",
+              paddingHorizontal: 50,
+              height: 40,
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 5,
+              marginTop: 10,
+            }}
+            // onPress={() => {
+            //   onClick();
+            // }}
+            // onPress={()=>{  {navigation.navigate("admin")}}}
+            onPress={() => {
+              navigation.navigate("admin");
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+              Admin
             </Text>
           </TouchableOpacity>
         </View>

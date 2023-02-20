@@ -11,14 +11,14 @@ import {
 export default function Manage({ navigation }) {
   return (
     <View>
-      <Text style={{ marginTop: 40, fontWeight: "bold", fontSize: 18 }}>
+      <Text style={{ marginTop: 30, fontWeight: "700", fontSize: 18,marginLeft:10 }}>
         Configuration
       </Text>
       <View style={styles.container}>
         <View style={styles.InfoContainer}>
           <TouchableOpacity
             onPress={() => navigation.navigate("Setting")}
-            style={[styles.cardInfo, { backgroundColor: "#3d348b50" }]}
+            style={[styles.cardInfo, { borderColor: "#3d348b" }]}
           >
             <Ionicons name="settings-sharp" color={"#3d348b"} size={80} />
             <Text style={{ color: "#3d348b", fontSize: 18, fontWeight: "700" }}>
@@ -26,7 +26,7 @@ export default function Manage({ navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.cardInfo, { backgroundColor: "#2a9d8f50" }]}
+            style={[styles.cardInfo, { borderColor: "#2a9d8f" }]}
           >
             <FontAwesome5 name="car-side" color={"#2a9d8f"} size={80} />
             <Text style={{ color: "#2a9d8f", fontSize: 18, fontWeight: "700" }}>
@@ -36,7 +36,7 @@ export default function Manage({ navigation }) {
           <TouchableOpacity
             style={[
               styles.cardInfo,
-              { marginTop: 15, backgroundColor: "#eb5e2850" },
+              { marginTop: 15, borderColor: "#eb5e28" },
             ]}
           >
             <FontAwesome name="drivers-license" color={"#eb5e28"} size={80} />
@@ -47,7 +47,7 @@ export default function Manage({ navigation }) {
           <TouchableOpacity
             style={[
               styles.cardInfo,
-              { marginTop: 15, backgroundColor: "#ff9e0050" },
+              { marginTop: 15, borderColor: "#ff9e00" },
             ]}
           >
             <Ionicons name="person" color={"#ff9e00"} size={80} />
@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: "space-evenly",
     alignItems: "center",
+    backgroundColor: "#e7ecef",
+    borderTopWidth:7
   },
   InfoContainer: {
     flexWrap: "wrap",
