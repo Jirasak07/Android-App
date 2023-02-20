@@ -18,6 +18,7 @@ import DriverManager from "./Page/DriverManage";
 import Setting from "./Page/Setting";
 import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
+import BottomSheet from "./Calendar/BottomSheet";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
@@ -118,7 +119,7 @@ const TabBottoms = () => {
     >
       <Tab.Screen name="Dashboard" component={DashBoard} />
       <Tab.Screen name="Booking" component={Booking} />
-      <Tab.Screen name="Add" component={Booking}/>
+      <Tab.Screen name="Add" component={BottomSheet}/>
       <Tab.Screen name="Config" component={Manager} />
       <Tab.Screen name="User" component={LogoutPage} />
     </Tab.Navigator>
