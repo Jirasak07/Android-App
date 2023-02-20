@@ -22,6 +22,7 @@ import Animated, {
   runOnJS,
   withTiming,
 } from "react-native-reanimated";
+import AddRequest from "../Page/AddRequest";
 const windowHeight = Dimensions.get("window").height;
 const BottomSheets = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -87,9 +88,8 @@ const BottomSheets = () => {
                   opacity: 0.3,
                 }}
               />
-                <View >
-                  <Text style={styles.contentTitle}>Hi 👋!</Text>
-                  <Text>Hello from Overlay!</Text>
+                <View style={{flex:1}} >
+          <AddRequest/>
                 </View>
               </Animated.View>
             </GestureDetector>

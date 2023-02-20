@@ -82,7 +82,7 @@ const AddRequest = ({ navigation }) => {
             <Text style={{ fontWeight: "900", fontSize: 20 }}>จองคิวรถ</Text>
           </View>
           <Pressable
-            onPress={() => navigation.navigate("Booking")}
+            // onPress={() => navigation.navigate("Booking")}
             style={styles.icon_h}
           >
             <FaIcon name="close" style={{ fontSize: 18 }} />
@@ -259,23 +259,13 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    padding: 20,
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
   },
   centeredView: {
-    backgroundColor: "#000000aa",
     flex: 1,
   },
   btnS: {

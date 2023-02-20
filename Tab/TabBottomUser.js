@@ -85,11 +85,11 @@ export default function TabBottomUser() {
       <Tab.Screen name="Add" component={BottmShett} options={{
         tabBarIcon:()=><BottomSheets/>
       }} />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="addRequest"
         component={AddRequest}
         options={{ animationEnabled: true }}
-      />
+      /> */}
       <Tab.Screen name="Config" component={Setting} />
       <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
