@@ -16,8 +16,8 @@ import CarManage from "./Page/CarManage";
 import UserManage from "./Page/UserManage";
 import DriverManager from "./Page/DriverManage";
 import Setting from "./Page/Setting";
+import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
-import Loading from "./Page/Loading";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
@@ -34,7 +34,6 @@ export default function App() {
             },
           }}
         >
-          <Stack.Screen name="loading" component={Loading} />
           <Stack.Screen
             name="Login"
             component={LoginPage}
@@ -89,6 +88,14 @@ const TabBottoms = () => {
                   size={tintSize}
                 />
               );
+            case "Add":
+              return (
+                <Ionicons
+                  name="add-circle-outline"
+                  color={tintColor}
+                  size={30}
+                />
+              );
           }
         },
         tabBarShowLabel: false,
@@ -111,6 +118,7 @@ const TabBottoms = () => {
     >
       <Tab.Screen name="Dashboard" component={DashBoard} />
       <Tab.Screen name="Booking" component={Booking} />
+      <Tab.Screen name="Add" component={Booking}/>
       <Tab.Screen name="Config" component={Manager} />
       <Tab.Screen name="User" component={LogoutPage} />
     </Tab.Navigator>

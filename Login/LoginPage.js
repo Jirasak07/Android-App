@@ -80,10 +80,10 @@ function LoginPage({ navigation }) {
               borderRadius: 5,
               marginTop: 10,
             }}
-            onPress={() => {
-              onClick();
-            }}
-            // onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
+            // onPress={() => {
+            //   onClick();
+            // }}
+            onPress={()=>{  {navigation.navigate("admin")}}}
             // onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
