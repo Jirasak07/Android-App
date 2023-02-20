@@ -18,7 +18,7 @@ import DriverManager from "./Page/DriverManage";
 import Setting from "./Page/Setting";
 import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
-import BottomSheet from "./Calendar/BottomSheet";
+import BottomSheets from "./Calendar/BottomSheet";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
@@ -89,14 +89,14 @@ const TabBottoms = () => {
                   size={tintSize}
                 />
               );
-            case "Add":
-              return (
-                <Ionicons
-                  name="add-circle-outline"
-                  color={tintColor}
-                  size={30}
-                />
-              );
+            // case "Add":
+            //   return (
+            //     <Ionicons
+            //       name="add-circle-outline"
+            //       color={tintColor}
+            //       size={30}
+            //     />
+            //   );
           }
         },
         tabBarShowLabel: false,
@@ -119,12 +119,21 @@ const TabBottoms = () => {
     >
       <Tab.Screen name="Dashboard" component={DashBoard} />
       <Tab.Screen name="Booking" component={Booking} />
-      <Tab.Screen name="Add" component={BottomSheet}/>
+      <Tab.Screen
+        name="Add"
+        component={BottomAdd}
+        options={{
+          tabBarButton: () => <BottomSheets />,
+          }}
+      />
       <Tab.Screen name="Config" component={Manager} />
       <Tab.Screen name="User" component={LogoutPage} />
     </Tab.Navigator>
   );
 };
+const BottomAdd=()=>{
+  return null
+}
 const Manager = () => {
   const ManageStack = createStackNavigator();
   return (

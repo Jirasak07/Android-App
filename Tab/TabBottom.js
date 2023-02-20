@@ -13,6 +13,7 @@ import Manage from "../Page/Manage";
 import CarManage from "../Page/CarManage";
 import UserManage from "../Page/UserManage";
 import Profile from "../Page/Profile";
+import BottomSheets from "../Calendar/BottomSheet";
 export default function TabBottom() {
   const Tab = createBottomTabNavigator();
 
@@ -82,8 +83,14 @@ export default function TabBottom() {
     >
       <Tab.Screen name="Dashboard" component={DashBoard} />
       <Tab.Screen name="Booking" component={Booking} />
+      <Tab.Screen name="Add" component={BottmShett} options={{
+        tabBarIcon:()=><BottomSheets/>
+      }} />
       <Tab.Screen name="Config" component={Manager} />
       <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
   );
+}
+const BottmShett=()=>{
+  return null
 }

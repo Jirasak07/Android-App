@@ -83,8 +83,8 @@ function LoginPage({ navigation }) {
             // onPress={() => {
             //   onClick();
             // }}
-            onPress={()=>{  {navigation.navigate("admin")}}}
-            // onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
+            // onPress={()=>{  {navigation.navigate("admin")}}}
+            onPress={()=>{  {username =="1"? navigation.navigate("admin"):navigation.navigate("user")}}}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ

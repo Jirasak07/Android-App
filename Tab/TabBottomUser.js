@@ -9,6 +9,7 @@ import RequestMe from "../Page/RequestMe";
 import Booking from "../Page/Booking";
 import LogoutPage from "../Login/LogoutPage";
 import Profile from "../Page/Profile";
+import BottomSheets from "../Calendar/BottomSheet";
 export default function TabBottomUser() {
   const Tab = createBottomTabNavigator();
   return (
@@ -66,7 +67,13 @@ export default function TabBottomUser() {
     >
       <Tab.Screen name="Dashboard" component={Booking} />
       <Tab.Screen name="Booking" component={RequestMe} />
+      <Tab.Screen name="Add" component={BottmShett} options={{
+        tabBarIcon:()=><BottomSheets/>
+      }} />
       <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
   );
+}
+const BottmShett=()=>{
+  return null
 }
