@@ -8,6 +8,7 @@ import {
   Modal,
   StyleSheet,
   TextInput,
+  Button,
 } from "react-native";
 import React, { useState } from "react";
 import { format } from "date-fns";
@@ -15,57 +16,80 @@ import FaIcon from "@expo/vector-icons/FontAwesome";
 import Fa5Icon from "@expo/vector-icons/FontAwesome5";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { NavigationContainer } from "@react-navigation/native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const AddRequest = ({ navigation }) => {
   const [modalAdd, setModalAdd] = useState(false);
   const dateNow = format(new Date(), "yyyy-MM-dd");
   //เดินทางไป
-  const [datePickerGo, setDatePickerGo] = useState(false);
-  const [timePickerGo, setTimePickerGo] = useState(false);
+  //date
+  const [selectedDateGo, setSelectedDateGo] = useState(new Date());
+  const [datePickerVisibleGo, setDatePickerVisibleGo] = useState(false);
 
-  const [timeGo, setTimeGo] = useState(new Date(Date.now()));
-  const [dateGo, setDateGo] = useState(new Date());
+  const showDatePickerGo = () => {
+    setDatePickerVisibleGo(true);
+  };
 
-  function showDatePickerGo() {
-    setDatePickerGo(true);
-  }
+  const hideDatePickerGo = () => {
+    setDatePickerVisibleGo(false);
+  };
 
-  function showTimePickerGo() {
-    setTimePickerGo(true);
-  }
+  const handleConfirmGo = (date) => {
+    setSelectedDateGo(date);
+    hideDatePickerGo();
+  };
 
-  function onDateSelectedGo(event, value) {
-    setDateGo(value);
-    setDatePickerGo(false);
-  }
+  //time
+  const [selectedTimeGo, setSelectedTimeGo] = useState(new Date());
+  const [timePickerVisibleGo, setTimePickerVisibleGo] = useState(false);
 
-  function onTimeSelectedGo(event, value) {
-    setTimeGo(value);
-    setTimePickerGo(false);
-  }
+  const showTimePickerGo = () => {
+    setTimePickerVisibleGo(true);
+  };
+
+  const hideTimePickerGo = () => {
+    setTimePickerVisibleGo(false);
+  };
+
+  const handleTimeConfirmGo = (date) => {
+    setSelectedTimeGo(date);
+    hideTimePickerGo();
+  };
   //เดินทางกลับ
-  const [datePicker, setDatePicker] = useState(false);
-  const [timePicker, setTimePicker] = useState(false);
 
-  const [time, setTime] = useState(new Date(Date.now()));
-  const [date, setDate] = useState(new Date());
-  function showDatePicker() {
-    setDatePicker(true);
-  }
+  //date
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [datePickerVisible, setDatePickerVisible] = useState(false);
 
-  function showTimePicker() {
-    setTimePicker(true);
-  }
+  const showDatePicker = () => {
+    setDatePickerVisible(true);
+  };
 
-  function onDateSelected(event, value) {
-    setDate(value);
-    setDatePicker(false);
-  }
+  const hideDatePicker = () => {
+    setDatePickerVisible(false);
+  };
 
-  function onTimeSelected(event, value) {
-    setTime(value);
-    setTimePicker(false);
-  }
+  const handleConfirm = (date) => {
+    setSelectedDate(date);
+    hideDatePicker();
+  };
+
+  //time
+  const [selectedTime, setSelectedTime] = useState(new Date());
+  const [timePickerVisible, setTimePickerVisible] = useState(false);
+
+  const showTimePicker = () => {
+    setTimePickerVisible(true);
+  };
+
+  const hideTimePicker = () => {
+    setTimePickerVisible(false);
+  };
+
+  const handleTimeConfirm = (date) => {
+    setSelectedTime(date);
+    hideTimePicker();
+  };
   return (
     //<Modal animationType="slide" transparent={true} visible={modalAdd}>
     <View style={styles.centeredView}>
@@ -73,49 +97,38 @@ const AddRequest = ({ navigation }) => {
         <View
           style={{
             flexDirection: "row",
-            marginBottom: 10,
             borderBottomColor: "#424C55",
             borderBottomWidth: 0.5,
           }}
         >
-          <View style={[styles.text_h, { paddingBottom: 10 }]}>
+          <View style={[styles.text_h, { paddingBottom: 5 }]}>
             <Text style={{ fontWeight: "900", fontSize: 20 }}>จองคิวรถ</Text>
           </View>
-          <Pressable
-            // onPress={() => navigation.navigate("Booking")}
-            style={styles.icon_h}
-          >
-            <FaIcon name="close" style={{ fontSize: 18 }} />
-          </Pressable>
         </View>
 
         <Text style={{ marginTop: 10, fontWeight: "700" }}>ชื่อผู้จอง : </Text>
+        <DateTimePickerModal
+          date={selectedDateGo}
+          isVisible={datePickerVisibleGo}
+          mode="date"
+          onConfirm={handleConfirmGo}
+          onCancel={hideDatePickerGo}
+          minimumDate={new Date(Date.now())}
+        />
+
+        <DateTimePickerModal
+          date={selectedTimeGo}
+          isVisible={timePickerVisibleGo}
+          mode="time"
+          onConfirm={handleTimeConfirmGo}
+          onCancel={hideTimePickerGo}
+          locale="th"
+        />
+
         <Text style={{ marginTop: 10, fontWeight: "700" }}>
           วันที่เดินทางไป :
         </Text>
 
-        {datePickerGo && (
-          <DateTimePicker
-            value={dateGo}
-            mode={"date"}
-            minimumDate={dateNow}
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            is24Hour={true}
-            onChange={onDateSelectedGo}
-            style={styles.datePicker}
-          />
-        )}
-
-        {timePickerGo && (
-          <DateTimePicker
-            value={timeGo}
-            mode={"time"}
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            is24Hour={true}
-            onChange={onTimeSelectedGo}
-            style={styles.datePicker}
-          />
-        )}
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <View
             style={{
@@ -125,57 +138,48 @@ const AddRequest = ({ navigation }) => {
             }}
           >
             <Text style={{ paddingTop: 5 }}>
-              {dateGo.toDateString()} {timeGo.toLocaleTimeString("en-US")}
+              {selectedDateGo.toDateString()}{" "}
+              {selectedTimeGo.toLocaleTimeString("en-US")}
             </Text>
           </View>
-
-          {!datePickerGo && (
-            <View style={{ margin: 10 }}>
-              <FaIcon
-                name="calendar"
-                onPress={showDatePickerGo}
-                style={{ fontSize: 16 }}
-              />
-            </View>
-          )}
-
-          {!timePickerGo && (
-            <View style={{ margin: 10 }}>
-              <FaIcon
-                name="clock-o"
-                onPress={showTimePickerGo}
-                style={{ fontSize: 16 }}
-              />
-            </View>
-          )}
+          <View style={{ margin: 5 }}>
+            <FaIcon
+              name="calendar"
+              onPress={showDatePickerGo}
+              style={{ fontSize: 20 }}
+            />
+          </View>
+          <View style={{ margin: 5 }}>
+            <FaIcon
+              name="clock-o"
+              onPress={showTimePickerGo}
+              style={{ fontSize: 20 }}
+            />
+          </View>
         </View>
+
+        <DateTimePickerModal
+          date={selectedDate}
+          isVisible={datePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+          minimumDate={new Date(Date.now())}
+        />
+
+        <DateTimePickerModal
+          date={selectedTime}
+          isVisible={timePickerVisible}
+          mode="time"
+          onConfirm={handleTimeConfirm}
+          onCancel={hideTimePicker}
+          locale="th"
+        />
 
         <Text style={{ marginTop: 10, fontWeight: "700" }}>
           วันที่เดินทางกลับ :
         </Text>
 
-        {datePicker && (
-          <DateTimePicker
-            value={date}
-            mode={"date"}
-            minimumDate={dateNow}
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            is24Hour={true}
-            onChange={onDateSelected}
-            style={styles.datePicker}
-          />
-        )}
-
-        {timePicker && (
-          <DateTimePicker
-            value={time}
-            mode={"time"}
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            is24Hour={true}
-            onChange={onTimeSelected}
-            style={styles.datePicker}
-          />
-        )}
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <View
             style={{
@@ -185,29 +189,24 @@ const AddRequest = ({ navigation }) => {
             }}
           >
             <Text style={{ paddingTop: 5 }}>
-              {date.toDateString()} {time.toLocaleTimeString("en-US")}
+              {selectedDate.toDateString()}{" "}
+              {selectedTime.toLocaleTimeString("en-US")}
             </Text>
           </View>
-
-          {!datePicker && (
-            <View style={{ margin: 10 }}>
-              <FaIcon
-                name="calendar"
-                onPress={showDatePicker}
-                style={{ fontSize: 16 }}
-              />
-            </View>
-          )}
-
-          {!timePicker && (
-            <View style={{ margin: 10 }}>
-              <FaIcon
-                name="clock-o"
-                onPress={showTimePicker}
-                style={{ fontSize: 16 }}
-              />
-            </View>
-          )}
+          <View style={{ margin: 5 }}>
+            <FaIcon
+              name="calendar"
+              onPress={showDatePicker}
+              style={{ fontSize: 20 }}
+            />
+          </View>
+          <View style={{ margin: 5 }}>
+            <FaIcon
+              name="clock-o"
+              onPress={showTimePicker}
+              style={{ fontSize: 20 }}
+            />
+          </View>
         </View>
 
         <Text style={{ marginTop: 10, fontWeight: "700" }}>
@@ -231,7 +230,7 @@ const AddRequest = ({ navigation }) => {
                 <Text style={{ color: "#fff", fontWeight: "700" }}>ยืนยัน</Text>
               </Pressable>
               <Pressable
-                onPress={() => navigation.navigate("Booking")}
+                //onPress={() => navigation.navigate("Booking")}
                 style={[styles.btnC, { marginTop: 10 }]}
               >
                 <Text style={{ color: "#fff", fontWeight: "700" }}>ยกเลิก</Text>
