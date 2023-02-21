@@ -139,7 +139,7 @@ const AddRequest = ({ navigation }) => {
           >
             <Text style={{ paddingTop: 5 }}>
               {selectedDateGo.toDateString()}{" "}
-              {selectedTimeGo.toLocaleTimeString("en-US")}
+              {selectedTimeGo.toLocaleTimeString("th-TH")}
             </Text>
           </View>
           <View style={{ margin: 5 }}>
@@ -190,7 +190,7 @@ const AddRequest = ({ navigation }) => {
           >
             <Text style={{ paddingTop: 5 }}>
               {selectedDate.toDateString()}{" "}
-              {selectedTime.toLocaleTimeString("en-US")}
+              {selectedTime.toLocaleTimeString("th-TH")}
             </Text>
           </View>
           <View style={{ margin: 5 }}>
