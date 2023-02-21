@@ -33,14 +33,14 @@ const RequestAll = () => {
   const Cancel = () => {
     // const temp = data.filter((item) => item.id !== id);
     // setData(temp);
-    setTextCancel("");
+
     setModal(!modal);
   };
   const subMitCancel = () => {
     if (!textCancel) {
       console.log("กรุณากรอกข้อมูล");
     } else {
-      console.log("Success " + textCancel);
+      console.log("Success " + textCancel + id);
     }
   };
   const RenderRight = (progress, dragX) => {
@@ -103,13 +103,14 @@ const RequestAll = () => {
         renderRightActions={RenderRight}
         onSwipeableRightWillOpen={() => {
           [...rowRefs.entries()].forEach(([key, ref]) => {
+            setTextCancel("");
             setId(item.id);
             if (key !== item.id && ref) {
               ref.close();
             } else {
               // setTimeout(() => {
               //   ref.close();
-              // }, 1000);
+              // }, 2000);
             }
           });
         }}
@@ -175,7 +176,7 @@ const RequestAll = () => {
       </View>
       <View>
         <Dialog.Container visible={modal}>
-          <Dialog.Title style={{color:'red'}}>ยกเลิกรายการ</Dialog.Title>
+          <Dialog.Title style={{ color: "red" }}>ยกเลิกรายการ</Dialog.Title>
           <Dialog.Input
             onChangeText={(ev) => {
               onChangeText(ev);
@@ -183,17 +184,22 @@ const RequestAll = () => {
             textInputRef={cancels}
             placeholder="หมายเหตุการยกเลิก"
           />
-          <Dialog.Button label="Save" onPress={subMitCancel} />
-          <Dialog.Button label="Cancel" onPress={() => setModal(!modal)} />
+          <Dialog.Button label="บันทึก" onPress={subMitCancel} />
+          <Dialog.Button label="ยกเลิก" onPress={() => setModal(!modal)} />
         </Dialog.Container>
       </View>
       <View>
         <Dialog.Container visible={modalApprove}>
           <Dialog.Title>การอนุมัติรายการ</Dialog.Title>
-          <Dialog.Description style={{fontSize:16,color:'red'}}>กรุณาเลือกประเภทรถ *</Dialog.Description>
-          <Dialog.Button label="รถภายใน"  />
-          <Dialog.Button label="รถภายนอก"  />
-          <Dialog.Button label="ยกเลิก" onPress={() => setModalApprove(!modalApprove)} />
+          <Dialog.Description style={{ fontSize: 16, color: "red" }}>
+            กรุณาเลือกประเภทรถ *
+          </Dialog.Description>
+          <Dialog.Button label="รถภายใน" />
+          <Dialog.Button label="รถภายนอก" />
+          <Dialog.Button
+            label="ยกเลิก"
+            onPress={() => setModalApprove(!modalApprove)}
+          />
         </Dialog.Container>
       </View>
     </View>
