@@ -72,6 +72,7 @@ const BottomSheets = () => {
       </TouchableOpacity>
       <View>
         <BottomSheet
+        onBackdropPress={updateShare}
           visible={modalVisible}
         >
           <GestureHandlerRootView style={{ flex: 1 }}>

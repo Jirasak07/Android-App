@@ -1,171 +1,205 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
 import {
   FlatList,
+  ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
-  Dimensions,
   Animated,
-  SafeAreaView,
   Alert,
 } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
 import { Data } from "../data";
-import moment from "moment";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-const { width, height } = Dimensions.get("screen");
-import { FontAwesome } from "@expo/vector-icons";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import Dialog from "react-native-dialog";
+import { TextInput } from "react-native-gesture-handler";
 
-const RenderRight = (progress, dragX) => {
-  const scale = dragX.interpolate({
-    inputRange: [-50, 0.5],
-    outputRange: [1, 0.1],
-  });
-  console.log(scale);
-  const Style = {
-    opacity: [
-      {
-        scale,
-      },
-    ],
+const RequestAll = () => {
+  const [id, setId] = useState();
+  const [data, setData] = useState(Data);
+  const [modal, setModal] = useState(false);
+  const [modalApprove, setModalApprove] = useState(false);
+  const [textCancel, setTextCancel] = useState("");
+  const cancels = useRef();
+  let rowRefs = new Map();
+  const Approve = () => {
+    setModalApprove(!modalApprove);
+  };
+  const onChangeText = (ev) => {
+    setTextCancel(ev);
+    // console.log(textCancel)
+  };
+  const Cancel = () => {
+    // const temp = data.filter((item) => item.id !== id);
+    // setData(temp);
+    setTextCancel("");
+    setModal(!modal);
+  };
+  const subMitCancel = () => {
+    if (!textCancel) {
+      console.log("กรุณากรอกข้อมูล");
+    } else {
+      console.log("Success " + textCancel);
+    }
+  };
+  const RenderRight = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [-60, 100],
+      outputRange: [0, -1],
+    });
+    return (
+      <Animated.View
+        style={{
+          width: 190,
+          flexDirection: "row",
+          alignSelf: "center",
+          justifyContent: "space-evenly",
+          opacity: trans,
+          marginRight: 10,
+        }}
+      >
+        <TouchableOpacity
+          onPress={Approve}
+          style={{
+            backgroundColor: "#ffffff",
+            height: 80,
+            width: 80,
+            borderRadius: 5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Ionicons name="ios-checkbox" size={30} color={"#38b000"} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={Cancel}
+          style={{
+            backgroundColor: "#ffffff",
+            height: 80,
+            width: 80,
+            borderRadius: 5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Ionicons name="ios-trash-outline" size={30} color={"red"} />
+        </TouchableOpacity>
+      </Animated.View>
+    );
+  };
+  const renderItem = ({ item }) => {
+    return (
+      <Swipeable
+        key={item.id}
+        ref={(ref) => {
+          if (ref && !rowRefs.get(item.id)) {
+            rowRefs.set(item.id, ref);
+          }
+        }}
+        useNativeAnimations
+        overshootRight={false}
+        overshootLeft={false}
+        renderRightActions={RenderRight}
+        onSwipeableRightWillOpen={() => {
+          [...rowRefs.entries()].forEach(([key, ref]) => {
+            setId(item.id);
+            if (key !== item.id && ref) {
+              ref.close();
+            } else {
+              // setTimeout(() => {
+              //   ref.close();
+              // }, 1000);
+            }
+          });
+        }}
+      >
+        <TouchableOpacity
+          activeOpacity={1}
+          key={item.id}
+          style={{
+            flex: 1,
+            backgroundColor: "#ffff",
+            flexDirection: "row",
+            marginVertical: 6,
+            height: 80,
+            marginHorizontal: 5,
+            padding: 20,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            borderLeftColor: "#00b4d8",
+            borderLeftWidth: 5,
+            borderRadius: 5,
+          }}
+        >
+          <FontAwesome name="warning" color={"#00b4d8"} size={30} />
+          <Text>{item.id}</Text>
+          <Text>{item.name}</Text>
+          <Text>{item.Message}</Text>
+        </TouchableOpacity>
+      </Swipeable>
+    );
   };
 
   return (
     <View
       style={{
-        width: 150,
-        alignItems: "center",
-        justifyContent: "center",
-        justifyContent: "center",
-        alignItems: "center",
+        flex: 1,
+        backgroundColor: "#eeee",
+        // paddingHorizontal: 10,
       }}
     >
-      <Animated.Text style={[{ color: "black", fontWeight: "600" }]}>
-        Delete
-      </Animated.Text>
-    </View>
-  );
-};
-const RenderItem = ({ item, index, deleteItem, likeItem }) => {
-  return (
-    <Swipeable
-      useNativeAnimations
-      overshootLeft={false}
-      onSwipeableLeftOpen={() => likeItem(item.id)}
-      overshootRight={false}
-      onSwipeableRightOpen={() => deleteItem(item.id)}
-      renderRightActions={RenderRight}
-    >
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() => {
-          Alert.alert("Approve");
+      <View
+        style={{
+          height: 80,
+          backgroundColor: "#ffffff",
+          paddingTop: 20,
+          borderBottomColor: "#eeee",
+          borderBottomWidth: 2,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "20%",
-          }}
-        >
-          <Text style={{ fontWeight: "600" }}>{item.name}</Text>
-          <Text style={{ fontSize: 12 }}>{item.likes || 0}</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingVertical: 5,
-          }}
-        >
-          <Text>{item.Message}</Text>
-          <Text>{moment(item.timeStamp).format("LT")}</Text>
-        </View>
-      </TouchableOpacity>
-    </Swipeable>
+        <Text style={{ fontWeight: "600", fontSize: 16 }}>
+          รายการจองทั้งหมด
+        </Text>
+      </View>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => item + index}
+          style={{ flexlex: 1 }}
+          contentContainerStyle={{ marginTop: 10 }}
+        />
+      </View>
+      <View>
+        <Dialog.Container visible={modal}>
+          <Dialog.Title style={{color:'red'}}>ยกเลิกรายการ</Dialog.Title>
+          <Dialog.Input
+            onChangeText={(ev) => {
+              onChangeText(ev);
+            }}
+            textInputRef={cancels}
+            placeholder="หมายเหตุการยกเลิก"
+          />
+          <Dialog.Button label="Save" onPress={subMitCancel} />
+          <Dialog.Button label="Cancel" onPress={() => setModal(!modal)} />
+        </Dialog.Container>
+      </View>
+      <View>
+        <Dialog.Container visible={modalApprove}>
+          <Dialog.Title>การอนุมัติรายการ</Dialog.Title>
+          <Dialog.Description style={{fontSize:16,color:'red'}}>กรุณาเลือกประเภทรถ *</Dialog.Description>
+          <Dialog.Button label="รถภายใน"  />
+          <Dialog.Button label="รถภายนอก"  />
+          <Dialog.Button label="ยกเลิก" onPress={() => setModalApprove(!modalApprove)} />
+        </Dialog.Container>
+      </View>
+    </View>
   );
 };
 
-export default function RequestAll() {
-  const [data, setData] = useState(Data);
-  const [displayerVisible, setDisplayerVisible] = useState(false);
+export default RequestAll;
 
-  const deleteItem = (id) => {
-    const temp = data.filter((item) => item.id !== id);
-    setData(temp);
-  };
-
-  const likeItem = (id) => {
-    setDisplayerVisible(true);
-
-    const currentItem = data.find((item) => item.id == id);
-    const updatedItem = {
-      ...currentItem,
-      likes: currentItem.likes ? currentItem.likes + 1 : 1,
-    };
-
-    const temp = data.map((item) =>
-      item.id == currentItem.id ? updatedItem : item
-    );
-
-    setData(temp);
-
-    setTimeout(() => {
-      setDisplayerVisible(false);
-    }, 400);
-  };
-
-  return (
-    <View style={styles.container}>
-      <SafeAreaView />
-      <FlatList
-        style={{ flex: 1 }}
-        contentContainerStyle={{ flex: 1 }}
-        data={data}
-        ListEmptyComponent={() => (
-          <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
-            <Text>NO ITEMS TO DISPLAY</Text>
-          </View>
-        )}
-        renderItem={({ item, index }) => (
-          <RenderItem
-            item={item}
-            index={index}
-            deleteItem={deleteItem}
-            likeItem={likeItem}
-          />
-        )}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-  item: {
-    padding: 15,
-    backgroundColor: "#fff",
-    shadowColor: "#ccc",
-    shadowOffset: { width: 3, height: 3 },
-    shadowOpacity: 0.9,
-    marginVertical: 10,
-  },
-  likeDisplayer: {
-    position: "absolute",
-    zIndex: 100000,
-    left: "20%",
-    top: "35%",
-  },
-});
+const styles = StyleSheet.create({});

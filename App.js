@@ -23,6 +23,7 @@ import RequestAddmin from "./Page/RequestAddmin";
 import RequestMe from "./Page/RequestMe";
 import RequestAll from "./Page/RequestAll";
 import HistoryList from "./Page/HistoryList";
+import TestSwipe from "./TestSwipe";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
@@ -144,6 +145,8 @@ const RequestAdminD = () => {
       <RequestStack.Screen name="Requestme" component={RequestMe} />
       <RequestStack.Screen name="Requestall" component={RequestAll} />
       <RequestStack.Screen name="Historyrequest" component={HistoryList} />
+      <RequestStack.Screen name="ApproveIn" component={HistoryList} />
+      <RequestStack.Screen name="ApproveOut" component={HistoryList} />
     </RequestStack.Navigator>
   );
 };

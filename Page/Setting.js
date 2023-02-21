@@ -260,7 +260,7 @@ function Setting({ navigation }) {
           </View>
         </View>
       </ScrollView>
-      <BottomSheet visible={show}>
+      <BottomSheet visible={show} onBackdropPress={()=>{setShow(!show)}} >
         <GestureHandlerRootView style={{ flex: 1 }}>
           <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.BottomSheets, rBottomSheetStyle]}>
