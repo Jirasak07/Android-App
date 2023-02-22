@@ -14,26 +14,43 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Dialog from "react-native-dialog";
 import { TextInput } from "react-native-gesture-handler";
+import axios from "axios";
+import moment from "moment";
 
-const RequestAll = () => {
+const RequestAll = ({ navigation }) => {
+  const [seconds, setSeconds] = useState(0);
   const [id, setId] = useState();
-  const [data, setData] = useState(Data);
+  const [data, setData] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalApprove, setModalApprove] = useState(false);
   const [textCancel, setTextCancel] = useState("");
+  const [count,setCount] =useState(0)
   const cancels = useRef();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((seconds) => seconds + 1);
+      axios.get("http://192.168.10.226/api/show/booking").then((res) => {
+        const datares = res.data["showbooking"];
+        setCount(datares.length)
+        setData(datares);
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  },[]);
+
   let rowRefs = new Map();
+  const ApproveCarIn = (val) => {
+    setModalApprove(!modalApprove);
+    navigation.navigate("ApproveIn", { id:val });
+  };
   const Approve = () => {
     setModalApprove(!modalApprove);
   };
   const onChangeText = (ev) => {
     setTextCancel(ev);
-    // console.log(textCancel)
   };
   const Cancel = () => {
-    // const temp = data.filter((item) => item.id !== id);
-    // setData(temp);
-
     setModal(!modal);
   };
   const subMitCancel = () => {
@@ -48,6 +65,7 @@ const RequestAll = () => {
       inputRange: [-60, 100],
       outputRange: [0, -1],
     });
+
     return (
       <Animated.View
         style={{
@@ -89,6 +107,8 @@ const RequestAll = () => {
     );
   };
   const renderItem = ({ item }) => {
+    const start = moment(item.booking_start).format("DD-MM-YYYY H:m");
+    const end = moment(item.booking_end).format("DD-MM-YYYY H:m");
     return (
       <Swipeable
         key={item.id}
@@ -103,14 +123,14 @@ const RequestAll = () => {
         renderRightActions={RenderRight}
         onSwipeableRightWillOpen={() => {
           [...rowRefs.entries()].forEach(([key, ref]) => {
-            setTextCancel("");
+            // setTextCancel("");
             setId(item.id);
             if (key !== item.id && ref) {
               ref.close();
             } else {
-              // setTimeout(() => {
-              //   ref.close();
-              // }, 2000);
+              setTimeout(() => {
+                ref.close();
+              }, 2000);
             }
           });
         }}
@@ -133,10 +153,15 @@ const RequestAll = () => {
             borderRadius: 5,
           }}
         >
-          <FontAwesome name="warning" color={"#00b4d8"} size={30} />
-          <Text>{item.id}</Text>
-          <Text>{item.name}</Text>
-          <Text>{item.Message}</Text>
+          {/* <FontAwesome name="warning" color={"#00b4d8"} size={30} /> */}
+          <View>
+            <Text>{item.username}</Text>
+            <Text>{item.id}</Text>
+            <Text>{item.booking_detail}</Text>
+            <Text>
+              {start} - {end}
+            </Text>
+          </View>
         </TouchableOpacity>
       </Swipeable>
     );
@@ -162,7 +187,7 @@ const RequestAll = () => {
         }}
       >
         <Text style={{ fontWeight: "600", fontSize: 16 }}>
-          รายการจองทั้งหมด
+          รายการจองทั้งหมด {id}
         </Text>
       </View>
       <View style={{ flex: 1 }}>
@@ -194,7 +219,7 @@ const RequestAll = () => {
           <Dialog.Description style={{ fontSize: 16, color: "red" }}>
             กรุณาเลือกประเภทรถ *
           </Dialog.Description>
-          <Dialog.Button label="รถภายใน" />
+          <Dialog.Button label="รถภายใน" onPress={() => ApproveCarIn()} />
           <Dialog.Button label="รถภายนอก" />
           <Dialog.Button
             label="ยกเลิก"

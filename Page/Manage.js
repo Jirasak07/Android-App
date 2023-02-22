@@ -11,7 +11,14 @@ import {
 export default function Manage({ navigation }) {
   return (
     <View>
-      <Text style={{ marginTop: 30, fontWeight: "700", fontSize: 18,marginLeft:10 }}>
+      <Text
+        style={{
+          marginTop: 30,
+          fontWeight: "700",
+          fontSize: 18,
+          marginLeft: 10,
+        }}
+      >
         Configuration
       </Text>
       <View style={styles.container}>
@@ -26,6 +33,7 @@ export default function Manage({ navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate("Car")}
             style={[styles.cardInfo, { borderColor: "#2a9d8f" }]}
           >
             <FontAwesome5 name="car-side" color={"#2a9d8f"} size={80} />
@@ -34,10 +42,7 @@ export default function Manage({ navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[
-              styles.cardInfo,
-              { marginTop: 15, borderColor: "#eb5e28" },
-            ]}
+            style={[styles.cardInfo, { marginTop: 15, borderColor: "#eb5e28" }]}
           >
             <FontAwesome name="drivers-license" color={"#eb5e28"} size={80} />
             <Text style={{ color: "#eb5e28", fontSize: 18, fontWeight: "700" }}>
@@ -45,10 +50,7 @@ export default function Manage({ navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[
-              styles.cardInfo,
-              { marginTop: 15, borderColor: "#ff9e00" },
-            ]}
+            style={[styles.cardInfo, { marginTop: 15, borderColor: "#ff9e00" }]}
           >
             <Ionicons name="person" color={"#ff9e00"} size={80} />
             <Text style={{ color: "#ff9e00", fontSize: 18, fontWeight: "700" }}>
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: "#e7ecef",
-    borderTopWidth:7
+    borderTopWidth: 7,
   },
   InfoContainer: {
     flexWrap: "wrap",
