@@ -24,6 +24,8 @@ import RequestMe from "./Page/RequestMe";
 import RequestAll from "./Page/RequestAll";
 import HistoryList from "./Page/HistoryList";
 import TestSwipe from "./TestSwipe";
+import CarIn from "./Approve/CarIn";
+import CarOut from "./Approve/CarOut";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
@@ -140,13 +142,14 @@ const RequestAdminD = () => {
           backgroundColor: "white",
         },
       }}
-    >
+    >  
+     <RequestStack.Screen name="ApproveIn" component={CarIn} />
       <RequestStack.Screen name="RequestAd" component={RequestAddmin} />
       <RequestStack.Screen name="Requestme" component={RequestMe} />
       <RequestStack.Screen name="Requestall" component={RequestAll} />
       <RequestStack.Screen name="Historyrequest" component={HistoryList} />
-      <RequestStack.Screen name="ApproveIn" component={HistoryList} />
-      <RequestStack.Screen name="ApproveOut" component={HistoryList} />
+   
+      <RequestStack.Screen name="ApproveOut" component={CarOut} />
     </RequestStack.Navigator>
   );
 };
