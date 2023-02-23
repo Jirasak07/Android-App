@@ -50,6 +50,7 @@ export default function Manage({ navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+          onPress={()=>navigation.navigate("UserManage")}
             style={[styles.cardInfo, { marginTop: 15, borderColor: "#ff9e00" }]}
           >
             <Ionicons name="person" color={"#ff9e00"} size={80} />

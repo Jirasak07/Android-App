@@ -68,6 +68,7 @@ const TabBottoms = () => {
     <Tab.Navigator
       labeled={false}
       screenOptions={({ route }) => ({
+        unmountOnBlur: true,
         tabBarIcon: ({ focused }) => {
           const tintColor = focused ? "#dc2f02" : "#8a817c";
           const tintSize = focused ? 22 : 18;
@@ -141,6 +142,7 @@ const RequestAdminD = () => {
         headerStyle: {
           backgroundColor: "white",
         },
+        unmountOnBlur: true,
       }}
     >
       <RequestStack.Screen name="RequestAd" component={RequestAddmin} />
@@ -162,6 +164,7 @@ const Manager = () => {
         headerStyle: {
           backgroundColor: "white",
         },
+        unmountOnBlur: true,
       }}
     >
       <ManageStack.Screen name="Manage" component={Manage} />

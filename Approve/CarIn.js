@@ -49,7 +49,7 @@ const CarIn = ({ route, navigation }) => {
       driver_id: iddriver,
       type: 1,
     }).then((res)=>{
-      // console.log(res.data)
+      console.log(res.status)
     })
   };
   return (

@@ -19,7 +19,6 @@ import moment from "moment";
 import "moment/locale/th";
 
 const RequestAll = ({ navigation }) => {
-  const [seconds, setSeconds] = useState(0);
   const [id, setId] = useState();
   const [dataList, setData] = useState([]);
   const [modal, setModal] = useState(false);
@@ -27,35 +26,24 @@ const RequestAll = ({ navigation }) => {
   const [textCancel, setTextCancel] = useState("");
   const [count, setCount] = useState(0);
   const cancels = useRef();
-
   useEffect(() => {
-    const FetchData = async () => {
-      const response = await axios.get(
-        "http://192.168.10.226/api/show/booking"
-      );
-      console.log(response.data.showbooking);
-      setData(response.data.showbooking);
+    const FetchBooking = async () => {
+      axios.get("http://192.168.10.226/api/show/booking").then((res) => {
+        const num = res.data.showbooking.length
+        setCount(num)
+        setData(res.data.showbooking);
+      });
     };
-    try {
-      setInterval(() => {
-        FetchData();
-      }, 10000);
-    } catch (error) {
-      console.log(error);
-    }
-    // return () => clearInterval(interval);
-  });
-  useEffect(()=>{
-    const FetchData = async () => {
-      const response = await axios.get(
-        "http://192.168.10.226/api/show/booking"
-      );
-      console.log(response.data.showbooking);
-      setData(response.data.showbooking);
+    FetchBooking();
+    console.log("Component mounted");
+    const intervalId = setInterval(() => {
+      FetchBooking()
+    }, 3000);
+    return () => {
+      console.log("Component unmounted");
+      clearInterval(intervalId);
     };
-    FetchData()
-  },[id])
-
+  }, []);
   let rowRefs = new Map();
   const ApproveCarIn = () => {
     setModalApprove(!modalApprove);
@@ -201,8 +189,12 @@ const RequestAll = ({ navigation }) => {
           borderBottomWidth: 2,
           justifyContent: "center",
           alignItems: "center",
+          flexDirection:'row'
         }}
       >
+      <TouchableOpacity onPress={()=>{navigation.goBack()}} style={{position:'absolute',left:5,justifyContent:'center',alignItems:'center'}} >
+<Ionicons name="md-caret-back-outline" size={30} />
+      </TouchableOpacity>
         <Text style={{ fontWeight: "600", fontSize: 16 }}>
           รายการจองทั้งหมด {count}
         </Text>

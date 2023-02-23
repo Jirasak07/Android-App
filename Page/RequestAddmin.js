@@ -8,19 +8,32 @@ const RequestAddmin = ({ navigation }) => {
   const [all, setAll] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [history, setHistory] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
+  const [count, setCount] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds + 1);
+    console.log("Component mounted");
+    const FetchAll = async () => {
       axios.get("http://192.168.10.226/api/show/booking").then((res) => {
-        const datares = res.data["showbooking"];
-        setAll(datares.length);
+        console.log(res.data.showbooking.length);
+        setAll(res.data.showbooking.length);
       });
+    };
+    const FetchHistory = async () => {
       axios.get("http://192.168.10.226/api/show/history").then((res) => {
-        const datares = res.data;
-        setHistory(datares.length);
+        setHistory(res.data.length);
       });
-    }, 2000);
-    return () => clearInterval(interval);
+    };
+    FetchAll();
+    FetchHistory();
+    const intervalId = setInterval(() => {
+      FetchAll();
+      FetchHistory();
+    }, 3000);
+
+    return () => {
+      console.log("Component unmounted");
+      clearInterval(intervalId);
+    };
   }, []);
   return (
     <ScrollView style={styles.container}>
@@ -40,7 +53,7 @@ const RequestAddmin = ({ navigation }) => {
             การจองของฉัน
           </Text>
           <Text style={{ color: "#52b788", fontSize: 25, fontWeight: "600" }}>
-          {seconds}
+            {seconds}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
