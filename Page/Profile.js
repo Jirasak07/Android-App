@@ -1,55 +1,45 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import globalStyles from "../Style/globalStyle";
 import Fa5Icon from "react-native-vector-icons/FontAwesome5";
-import FaIcon from "react-native-vector-icons/FontAwesome";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Profile = () => {
+const Profile = ({navigation}) => {
+  const Logout = async()=>{
+    await AsyncStorage.removeItem('@Login')
+    await AsyncStorage.removeItem('@role')
+    await AsyncStorage.removeItem('@iduser')
+    await AsyncStorage.removeItem('@name')
+    navigation.navigate("Login")
+  }
   return (
     <View
       style={{
         flex: 1,
-        paddingVertical: 10,
         backgroundColor: "#e7ecef",
       }}
     >
-      <View style={globalStyles.containerContent}>
-        <View style={styles.content}>
-          <Fa5Icon
-            name="user-tie"
-            size={50}
-            style={{
-              padding: 50,
-              backgroundColor: "#F5A65B",
-              borderRadius: 100,
-              color: "#fff",
-            }}
-          />
-          <Text style={{ marginTop: 20, fontWeight: "900", fontSize: 32 }}>
-            Name
-          </Text>
-        </View>
-        <View
-          style={{ marginTop: 10, flexDirection: "row", paddingHorizontal: 10 }}
-        >
-          <Text style={{ fontWeight: "600" }}>สถานะ : </Text>
-          <Text>ผู้ใช้งาน, ผู้ดูแล</Text>
+      <View style={styles.content}>
+        <Image
+          style={styles.Profile}
+          source={require("../assets/Image/ดาวน์โหลด.jpeg")}
+        />
+        <View style={styles.containerProfile}>
+          <Text style={styles.name}>Name</Text>
+         <Text>
+          Role : user
+         </Text>
         </View>
       </View>
-      <View>
-        <Pressable style={styles.btnLogout}>
-          <Text
-            style={{
-              color: "#fff",
-              textAlign: "center",
-              fontWeight: "900",
-              fontSize: 20,
-            }}
-          >
-            LOGOUT
-          </Text>
-        </Pressable>
-      </View>
+
+      <TouchableOpacity style={styles.LogoutBtn} onPress={()=>{Logout()}} >
+        <MaterialIcons name="logout" color={"white"} size={35} />
+        <Text style={{ color: "white", fontWeight: "600", fontSize: 18 }}>
+          Logout
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -58,33 +48,33 @@ export default Profile;
 
 const styles = StyleSheet.create({
   content: {
-    marginTop: 20,
-    justifyContent: "center",
-    borderBottomColor: "#403d39",
+    flex: 1,
+    justifyContent: "flex-start",
     alignItems: "center",
-    padding: 30,
-    // backgroundColor: "#4361ee",
-    borderRadius: 8,
-    borderBottomWidth: 0.5,
+    paddingTop: 30,
   },
-  btnLogout: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 8,
-    backgroundColor: "#df3b57",
-    alignSelf: "center",
-    marginHorizontal: "1%",
-    marginBottom: 6,
-    minWidth: "50%",
-    justifyContent: "flex-end",
+  Profile: {
+    width: 150,
+    height: 130,
+    borderRadius: 10,
+  },
+  LogoutBtn: {
+    backgroundColor: "#e63946",
+    height: 50,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    flexDirection: "row",
+  },
+  containerProfile: {
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  name: {
+    fontSize: 40,
+    color: "#000814",
+    fontWeight: "700",
   },
 });

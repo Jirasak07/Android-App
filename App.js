@@ -3,12 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./Login/LoginPage";
 import DashBoard from "./Page/DashBoard";
-import Booking from "./Page/Booking";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TabBottomUser from "./Tab/TabBottomUser";
 import Manage from "./Page/Manage";
-import LogoutPage from "./Login/LogoutPage";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import MCIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -16,20 +14,28 @@ import CarManage from "./Page/CarManage";
 import UserManage from "./Page/UserManage";
 import DriverManager from "./Page/DriverManage";
 import Setting from "./Page/Setting";
-import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 import BottomSheets from "./Calendar/BottomSheet";
 import RequestAddmin from "./Page/RequestAddmin";
 import RequestMe from "./Page/RequestMe";
 import RequestAll from "./Page/RequestAll";
 import HistoryList from "./Page/HistoryList";
-import TestSwipe from "./TestSwipe";
 import CarIn from "./Approve/CarIn";
 import CarOut from "./Approve/CarOut";
+import Profile from "./Page/Profile";
 export default function App() {
   const Stack = createStackNavigator();
   const navTheme = DefaultTheme;
   navTheme.colors.background = "#ffffff";
+  const [Login, setLogin] = useState(null);
+  useEffect(()=>{
+    const check = async()=>{
+      const logined = await AsyncStorage.getItem('@Login')
+      console.log(logined)
+    }
+    check()
+    console.log('App')
+  })
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer theme={navTheme}>
@@ -55,6 +61,7 @@ export default function App() {
           />
           <Stack.Screen name="user" component={TabBottomUser} />
           <Stack.Screen name="admin" component={TabBottoms} />
+          <Stack.Screen name="Driver" component={TabBottoms} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
@@ -125,7 +132,7 @@ const TabBottoms = () => {
         }}
       />
       <Tab.Screen name="Config" component={Manager} />
-      <Tab.Screen name="User" component={LogoutPage} />
+      <Tab.Screen name="User" component={Profile} />
     </Tab.Navigator>
   );
 };

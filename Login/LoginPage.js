@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRef, useState, useEffect } from "react";
+import { Keyboard } from "react-native";
 import {
   StyleSheet,
   Text,
@@ -12,6 +13,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TouchableNativeFeedback } from "react-native-gesture-handler";
 function LoginPage({ navigation }) {
   const userName = useRef();
   const passWord = useRef();
@@ -20,16 +22,17 @@ function LoginPage({ navigation }) {
 
   const onClick = async () => {
     const response = await axios.post("http://192.168.10.226/api/chklogin", {
-      email: username,
-      password: password,
+      email:username,
+      password:password,
     });
     const data = await response.data;
-    console.log(data);
+    console.log(data.status);
     if (data.status == "success") {
       const role = data.role;
-      await AsyncStorage.setItem("@Login", "yes");
+      await AsyncStorage.setItem("@Login", "Logined");
       await AsyncStorage.setItem("@role", data.role);
       await AsyncStorage.setItem("@iduser", JSON.stringify(data.id));
+      await AsyncStorage.setItem('@name',data.name)
       Alert.alert("ยินดีต้อนรับ ", "", [
         {
           text: "ตกลง",
@@ -41,7 +44,12 @@ function LoginPage({ navigation }) {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fdfffc" }}>
+    <TouchableNativeFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+      style={{ flex: 1, backgroundColor: "#fdfffc" }}
+    >
       <View style={styles.containerLogin}>
         <View style={styles.loginHead}>
           <Image
@@ -80,17 +88,17 @@ function LoginPage({ navigation }) {
               borderRadius: 5,
               marginTop: 10,
             }}
-            // onPress={() => {
-            //   onClick();
-            // }}
-            // onPress={()=>{  {navigation.navigate("admin")}}}
             onPress={() => {
-              {
-                username == "1"
-                  ? navigation.navigate("user")
-                  : navigation.navigate("user");
-              }
+              onClick();
             }}
+            // onPress={()=>{  {navigation.navigate("admin")}}}
+            // onPress={() => {
+            //   {
+            //     username == "1"
+            //       ? navigation.navigate("user")
+            //       : navigation.navigate("user");
+            //   }
+            // }}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ
@@ -121,7 +129,7 @@ function LoginPage({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </TouchableNativeFeedback>
   );
 }
 

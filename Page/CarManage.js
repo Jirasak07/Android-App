@@ -7,13 +7,21 @@ import axios from "axios";
 export default function CarManage() {
   const [ListData, setListData] = useState([]);
   useEffect(() => {
+    console.log("mou");
+    axios.get("http://192.168.10.226/api/show/car").then((res) => {
+      const resdata = res.data["car"];
+      setListData(resdata);
+    });
     const interval = setInterval(() => {
       axios.get("http://192.168.10.226/api/show/car").then((res) => {
         const resdata = res.data["car"];
         setListData(resdata);
       });
-    }, 1000);
-    return () => clearInterval(interval);
+    }, 2000);
+    return () => {
+      console.log("unmount");
+      clearInterval(interval);
+    };
   }, []);
   const setStatus = (id) => {
     axios
@@ -46,7 +54,6 @@ export default function CarManage() {
     );
   };
 
-  
   return (
     <View
       style={[

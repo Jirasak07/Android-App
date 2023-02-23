@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { Button } from "react-native-paper";
@@ -6,6 +6,7 @@ import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from "axios";
 import moment from "moment";
+import Swal from "sweetalert2";
 const CarIn = ({ route, navigation }) => {
   const [idcar, setIdCar] = useState(null);
   const [iddriver, setIdDriver] = useState(null);
@@ -25,32 +26,45 @@ const CarIn = ({ route, navigation }) => {
         const start = moment(daata.sdate).format("DD-MMMM-yyyy H:m น.");
         const end = moment(daata.edate).format("DD-MMMM-yyyy H:m น.");
         console.log(start);
-        setName(daata.name_user);
+        setName(daata.user);
         setStart(start);
         setEnd(end);
         setDetail(daata.booking_detail);
       });
-  }, []);
-  useEffect(() => {
-    axios.get("http://192.168.10.226/api/caranddrive/aprove/" + id)
+    axios
+      .get("http://192.168.10.226/api/caranddrive/aprove/" + id)
       .then((res) => {
         const car = res.data.car;
         const driver = res.data.driver;
-        console.log(driver[0].name);
-        setCar(car);
-        setDriver(driver);
+        if (car.length == 0 && driver.length == 0) {
+        } else {
+          setCar(car);
+          setDriver(driver);
+        }
       });
-  },[]);
+  }, []);
   const Submit = () => {
     console.log(id);
-    axios.patch("http://192.168.10.226/api/Aprove/car/in", {
-      id: id,
-      car_id: idcar,
-      driver_id: iddriver,
-      type: 1,
-    }).then((res)=>{
-      console.log(res.status)
-    })
+    axios
+      .patch("http://192.168.10.226/api/Aprove/car/in", {
+        id: id,
+        car_id: idcar,
+        driver_id: iddriver,
+        type: 1,
+      })
+      .then((res) => {
+        console.log(res.status);
+        if (res.status == 200) {
+          Alert.alert("อนุมัติสำเร็จ", "", [
+            {
+              text: "ตกลง",
+              onPress: () => {
+                navigation.navigate("Requestall");
+              },
+            },
+          ]);
+        }
+      });
   };
   return (
     <View
@@ -70,9 +84,7 @@ const CarIn = ({ route, navigation }) => {
           การอนุมัติรายการจอง
         </Text>
         <View style={styles.CardInfo}>
-          <Text style={styles.TextInfo}>
-            ผู้จอง :{id} {name}
-          </Text>
+          <Text style={styles.TextInfo}>ผู้จอง : {name}</Text>
           <Text style={styles.TextInfo}>วันเริ่มต้น : {start} </Text>
           <Text style={styles.TextInfo}>วันสิ้นสุด : {end}</Text>
           <Text style={styles.TextInfo}>สถานที่ : {detail}</Text>
@@ -230,5 +242,6 @@ const styles = StyleSheet.create({
   CardInfo: {
     paddingHorizontal: 20,
     marginTop: 10,
+    justifyContent: "space-evenly",
   },
 });

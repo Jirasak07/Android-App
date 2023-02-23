@@ -42,6 +42,7 @@ export default function Manage({ navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={()=>navigation.navigate("Driver")}
             style={[styles.cardInfo, { marginTop: 15, borderColor: "#eb5e28" }]}
           >
             <FontAwesome name="drivers-license" color={"#eb5e28"} size={80} />

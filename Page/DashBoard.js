@@ -10,14 +10,42 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Calendarr from "../Calendar/Calendar";
 import axios from "axios";
 
-
 export default function DashBoard({ navigation }) {
+  const [all, setAll] = useState(0);
+  const [pending, setPending] = useState(0);
+  const [approve, setApprove] = useState(0);
+  const [cancel, setCancel] = useState(0);
+  useEffect(() => {
+    console.log("dashboard mount");
+    axios.get("http://192.168.10.226/api/show/listdata").then((res) => {
+      console.log(res.data);
+      const item = res.data;
+      setAll(item.allbooking);
+      setPending(item.pending);
+      setApprove(item.approve);
+      setCancel(item.cancel);
+    });
+    const interval = setInterval(() => {
+      axios.get("http://192.168.10.226/api/show/listdata").then((res) => {
+        console.log(res.data);
+        const item = res.data;
+        setAll(item.allbooking);
+        setPending(item.pending);
+        setApprove(item.approve);
+        setCancel(item.cancel);
+      });
+    }, 8000);
+    return () => {
+      console.log("dashboard unmount");
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <View style={globalStyles.containerContent}>
       <ScrollView style={{ paddingHorizontal: 10 }}>
         <Text style={{ fontWeight: "bold", marginVertical: 10, fontSize: 18 }}>
-          Dashboard 
+          Dashboard
         </Text>
         <Text style={{ paddingHorizontal: 15, fontSize: 16 }}>รายการ</Text>
         <View style={style.cardContainer}>
@@ -29,7 +57,7 @@ export default function DashBoard({ navigation }) {
               >
                 ทั้งหมด
               </Text>
-              <Text style={{ fontSize: 50, color: "#073b4c" }}>0</Text>
+              <Text style={{ fontSize: 50, color: "#073b4c" }}>{all}</Text>
             </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#f7b26730" }]}>
@@ -44,7 +72,7 @@ export default function DashBoard({ navigation }) {
               >
                 รอดำเนินการ
               </Text>
-              <Text style={{ fontSize: 50, color: "#f7b267" }}>0</Text>
+              <Text style={{ fontSize: 50, color: "#f7b267" }}>{pending}</Text>
             </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#49a07830" }]}>
@@ -55,7 +83,7 @@ export default function DashBoard({ navigation }) {
               >
                 อนุมัติแล้ว
               </Text>
-              <Text style={{ fontSize: 50, color: "#49a078" }}>0</Text>
+              <Text style={{ fontSize: 50, color: "#49a078" }}>{approve}</Text>
             </View>
           </View>
           <View style={[style.cardInfo, { backgroundColor: "#e0526330" }]}>
@@ -66,7 +94,7 @@ export default function DashBoard({ navigation }) {
               >
                 ยกเลิกแล้ว
               </Text>
-              <Text style={{ fontSize: 50, color: "#e05263" }}>0</Text>
+              <Text style={{ fontSize: 50, color: "#e05263" }}>{cancel}</Text>
             </View>
           </View>
         </View>
