@@ -35,7 +35,7 @@ const CarIn = ({ route, navigation }) => {
         setCar(car);
         setDriver(driver);
       });
-  }, [id]);
+  }, [route.params.id]);
   const Submit = () => {
     console.log(id)
     axios.patch("http://192.168.10.226/api/Aprove/car/in", {
