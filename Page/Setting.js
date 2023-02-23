@@ -144,7 +144,7 @@ function Setting({ navigation }) {
             <Text
               style={{
                 color: "#480ca890",
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: "bold",
                 marginTop: 10,
               }}
@@ -177,7 +177,7 @@ function Setting({ navigation }) {
             <Text
               style={{
                 color: "#ff8500",
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: "bold",
                 marginTop: 10,
               }}
@@ -208,7 +208,7 @@ function Setting({ navigation }) {
           >
             <Fa color={"#368f8b"} name="clock-start" size={60} />
             <Text
-              style={{ color: "#368f8b", fontSize: 20, fontWeight: "bold" }}
+              style={{ color: "#368f8b", fontSize: 18, fontWeight: "bold" }}
             >
               {periodMin.name}
             </Text>
@@ -236,7 +236,7 @@ function Setting({ navigation }) {
           >
             <MaterialIcons color={"#da4167"} name="timelapse" size={60} />
             <Text
-              style={{ color: "#da4167", fontSize: 20, fontWeight: "bold" }}
+              style={{ color: "#da4167", fontSize: 18, fontWeight: "bold" }}
             >
               {periodMax.name}
             </Text>
@@ -277,7 +277,7 @@ function Setting({ navigation }) {
               />
               <View style={{ justifyContent: "center", alignItems: "center" }}>
                 <Text
-                  style={{ color: "black", fontSize: 20, fontWeight: "bold" }}
+                  style={{ color: "black", fontSize: 18, fontWeight: "bold" }}
                 >
                   {textSetting}
                 </Text>
