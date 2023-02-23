@@ -8,49 +8,91 @@ import {
   TextInput,
   Button,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RequestMeList from "./RequestMeList";
 import { Card } from "react-native-shadow-cards";
 import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import FaIcon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Dialog from "react-native-dialog";
-
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RequestMe() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalE, setModalE] = useState(false);
   const [modalC, setModalC] = useState(false);
 
-  const [datePicker, setDatePicker] = useState(false);
+  //เดินทางไป
+  //date
+  const [selectedDateGo, setSelectedDateGo] = useState(new Date());
+  const [datePickerVisibleGo, setDatePickerVisibleGo] = useState(false);
 
-  const [date, setDate] = useState(new Date());
+  const showDatePickerGo = () => {
+    setDatePickerVisibleGo(true);
+  };
 
-  const [timePicker, setTimePicker] = useState(false);
+  const hideDatePickerGo = () => {
+    setDatePickerVisibleGo(false);
+  };
 
-  const [time, setTime] = useState(new Date(Date.now()));
-  const [now, setNow] = useState(new Date(Date.now()));
+  const handleConfirmGo = (date) => {
+    setSelectedDateGo(date);
+    hideDatePickerGo();
+  };
 
-  function showDatePicker() {
-    setDatePicker(true);
-  }
+  //time
+  const [selectedTimeGo, setSelectedTimeGo] = useState(new Date());
+  const [timePickerVisibleGo, setTimePickerVisibleGo] = useState(false);
 
-  function showTimePicker() {
-    setTimePicker(true);
-  }
+  const showTimePickerGo = () => {
+    setTimePickerVisibleGo(true);
+  };
 
-  function onDateSelected(event, value) {
-    setDate(value);
-    setDatePicker(false);
-  }
+  const hideTimePickerGo = () => {
+    setTimePickerVisibleGo(false);
+  };
 
-  function onTimeSelected(event, value) {
-    setTime(value);
-    setTimePicker(false);
-  }
-  function showSearch(){
-    
-  }
+  const handleTimeConfirmGo = (date) => {
+    setSelectedTimeGo(date);
+    hideTimePickerGo();
+  };
+  //เดินทางกลับ
+
+  //date
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [datePickerVisible, setDatePickerVisible] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisible(false);
+  };
+
+  const handleConfirm = (date) => {
+    setSelectedDate(date);
+    hideDatePicker();
+  };
+
+  //time
+  const [selectedTime, setSelectedTime] = useState(new Date());
+  const [timePickerVisible, setTimePickerVisible] = useState(false);
+
+  const showTimePicker = () => {
+    setTimePickerVisible(true);
+  };
+
+  const hideTimePicker = () => {
+    setTimePickerVisible(false);
+  };
+
+  const handleTimeConfirm = (date) => {
+    setSelectedTime(date);
+    hideTimePicker();
+  };
+  function showSearch() {}
   return (
     <View style={styles.container}>
       <ScrollView style={{ flex: 1 }}>
@@ -59,7 +101,7 @@ export default function RequestMe() {
             <View style={{ flexDirection: "row" }}>
               <View style={{ flexGrow: 2 }}>
                 <Text style={[styles.text_header, { marginTop: 10 }]}>
-                  ข้อมูลการจอง
+                  ข้อมูลการจอง {id}
                 </Text>
               </View>
               {/* <View style={{ flexGrow: 0 }}>
@@ -96,13 +138,13 @@ export default function RequestMe() {
                     style={styles.btnE}
                     onPress={() => setModalE(true)}
                   >
-                    <Text style={{color:'#FF5F00'}}>แก้ไข</Text>
+                    <Text style={{ color: "#FF5F00" }}>แก้ไข</Text>
                   </Pressable>
                   <Pressable
                     style={styles.btnC}
                     onPress={() => setModalC(true)}
                   >
-                    <Text style={{color:'#DC0000'}}>ยกเลิก</Text>
+                    <Text style={{ color: "#DC0000" }}>ยกเลิก</Text>
                   </Pressable>
                 </View>
               </View>
@@ -211,32 +253,28 @@ export default function RequestMe() {
                 <Text style={{ marginTop: 10, fontWeight: "700" }}>
                   สถานะการจอง :{" "}
                 </Text>
+                <DateTimePickerModal
+                  date={selectedDateGo}
+                  isVisible={datePickerVisibleGo}
+                  mode="date"
+                  onConfirm={handleConfirmGo}
+                  onCancel={hideDatePickerGo}
+                  minimumDate={new Date(Date.now())}
+                />
+
+                <DateTimePickerModal
+                  date={selectedTimeGo}
+                  isVisible={timePickerVisibleGo}
+                  mode="time"
+                  onConfirm={handleTimeConfirmGo}
+                  onCancel={hideTimePickerGo}
+                  locale="th"
+                />
+
                 <Text style={{ marginTop: 10, fontWeight: "700" }}>
-                  ช่วงวันที่ :
+                  วันที่เดินทางไป :
                 </Text>
 
-                {datePicker && (
-                  <DateTimePicker
-                    value={date}
-                    mode={"date"}
-                    minimumDate={now}
-                    display={Platform.OS === "ios" ? "spinner" : "default"}
-                    is24Hour={true}
-                    onChange={onDateSelected}
-                    style={styles.datePicker}
-                  />
-                )}
-
-                {timePicker && (
-                  <DateTimePicker
-                    value={time}
-                    mode={"time"}
-                    display={Platform.OS === "ios" ? "spinner" : "default"}
-                    is24Hour={true}
-                    onChange={onTimeSelected}
-                    style={styles.datePicker}
-                  />
-                )}
                 <View style={{ flexDirection: "row", marginTop: 10 }}>
                   <View
                     style={{
@@ -246,29 +284,75 @@ export default function RequestMe() {
                     }}
                   >
                     <Text style={{ paddingTop: 5 }}>
-                      {date.toDateString()} {time.toLocaleTimeString("en-US")}
+                      {selectedDateGo.toDateString()}{" "}
+                      {selectedTimeGo.toLocaleTimeString("th-TH")}
                     </Text>
                   </View>
+                  <View style={{ margin: 5 }}>
+                    <FaIcon
+                      name="calendar"
+                      onPress={showDatePickerGo}
+                      style={{ fontSize: 20 }}
+                    />
+                  </View>
+                  <View style={{ margin: 5 }}>
+                    <FaIcon
+                      name="clock-o"
+                      onPress={showTimePickerGo}
+                      style={{ fontSize: 20 }}
+                    />
+                  </View>
+                </View>
 
-                  {!datePicker && (
-                    <View style={{ margin: 10 }}>
-                      <FaIcon
-                        name="calendar"
-                        onPress={showDatePicker}
-                        style={{ fontSize: 16 }}
-                      />
-                    </View>
-                  )}
+                <DateTimePickerModal
+                  date={selectedDate}
+                  isVisible={datePickerVisible}
+                  mode="date"
+                  onConfirm={handleConfirm}
+                  onCancel={hideDatePicker}
+                  minimumDate={new Date(Date.now())}
+                />
 
-                  {!timePicker && (
-                    <View style={{ margin: 10 }}>
-                      <FaIcon
-                        name="clock-o"
-                        onPress={showTimePicker}
-                        style={{ fontSize: 16 }}
-                      />
-                    </View>
-                  )}
+                <DateTimePickerModal
+                  date={selectedTime}
+                  isVisible={timePickerVisible}
+                  mode="time"
+                  onConfirm={handleTimeConfirm}
+                  onCancel={hideTimePicker}
+                  locale="th"
+                />
+
+                <Text style={{ marginTop: 10, fontWeight: "700" }}>
+                  วันที่เดินทางกลับ :
+                </Text>
+
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <View
+                    style={{
+                      borderBottomWidth: 0.5,
+                      borderBottomColor: "#20262E",
+                      width: 200,
+                    }}
+                  >
+                    <Text style={{ paddingTop: 5 }}>
+                      {selectedDate.toDateString()}{" "}
+                      {selectedTime.toLocaleTimeString("th-TH")}
+                    </Text>
+                  </View>
+                  <View style={{ margin: 5 }}>
+                    <FaIcon
+                      name="calendar"
+                      onPress={showDatePicker}
+                      style={{ fontSize: 20 }}
+                    />
+                  </View>
+                  <View style={{ margin: 5 }}>
+                    <FaIcon
+                      name="clock-o"
+                      onPress={showTimePicker}
+                      style={{ fontSize: 20 }}
+                    />
+                  </View>
                 </View>
 
                 <Text style={{ marginTop: 10, fontWeight: "700" }}>
