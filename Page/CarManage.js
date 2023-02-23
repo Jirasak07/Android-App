@@ -27,7 +27,7 @@ export default function CarManage() {
         }
       });
   };
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item }) => {
     const statuse = item.car_status == "1" ? true : false;
     return (
       <ScrollView>
@@ -45,6 +45,8 @@ export default function CarManage() {
       </ScrollView>
     );
   };
+
+  
   return (
     <View
       style={[

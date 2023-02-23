@@ -21,7 +21,7 @@ import "moment/locale/th";
 const RequestAll = ({ navigation }) => {
   const [seconds, setSeconds] = useState(0);
   const [id, setId] = useState();
-  const [data, setData] = useState([]);
+  const [dataList, setData] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalApprove, setModalApprove] = useState(false);
   const [textCancel, setTextCancel] = useState("");
@@ -29,16 +29,32 @@ const RequestAll = ({ navigation }) => {
   const cancels = useRef();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds + 1);
-      axios.get("http://192.168.10.226/api/show/booking").then((res) => {
-        const datares = res.data["showbooking"];
-        setCount(datares.length);
-        setData(datares);
-      });
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    const FetchData = async () => {
+      const response = await axios.get(
+        "http://192.168.10.226/api/show/booking"
+      );
+      console.log(response.data.showbooking);
+      setData(response.data.showbooking);
+    };
+    try {
+      setInterval(() => {
+        FetchData();
+      }, 10000);
+    } catch (error) {
+      console.log(error);
+    }
+    // return () => clearInterval(interval);
+  });
+  useEffect(()=>{
+    const FetchData = async () => {
+      const response = await axios.get(
+        "http://192.168.10.226/api/show/booking"
+      );
+      console.log(response.data.showbooking);
+      setData(response.data.showbooking);
+    };
+    FetchData()
+  },[id])
 
   let rowRefs = new Map();
   const ApproveCarIn = () => {
@@ -193,7 +209,7 @@ const RequestAll = ({ navigation }) => {
       </View>
       <View style={{ flex: 1 }}>
         <FlatList
-          data={data}
+          data={dataList}
           renderItem={renderItem}
           keyExtractor={(item, index) => item + index}
           style={{ flexlex: 1 }}

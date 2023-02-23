@@ -6,16 +6,21 @@ import axios from "axios";
 
 const RequestAddmin = ({ navigation }) => {
   const [all, setAll] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const [history, setHistory] = useState(0);
   useEffect(() => {
-    axios.get("http://192.168.10.226/api/show/booking").then((res) => {
-      const datares = res.data["showbooking"];
-      setAll(datares.length);
-    });
-    axios.get("http://192.168.10.226/api/show/history").then((res) => {
-      const datares = res.data;
-      setHistory(datares.length);
-    });
+    const interval = setInterval(() => {
+      setSeconds((seconds) => seconds + 1);
+      axios.get("http://192.168.10.226/api/show/booking").then((res) => {
+        const datares = res.data["showbooking"];
+        setAll(datares.length);
+      });
+      axios.get("http://192.168.10.226/api/show/history").then((res) => {
+        const datares = res.data;
+        setHistory(datares.length);
+      });
+    }, 2000);
+    return () => clearInterval(interval);
   }, []);
   return (
     <ScrollView style={styles.container}>
@@ -35,7 +40,7 @@ const RequestAddmin = ({ navigation }) => {
             การจองของฉัน
           </Text>
           <Text style={{ color: "#52b788", fontSize: 25, fontWeight: "600" }}>
-            0
+          {seconds}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity

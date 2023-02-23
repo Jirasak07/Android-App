@@ -18,33 +18,38 @@ const CarIn = ({ route, navigation }) => {
   const [car, setCar] = useState();
   const [driver, setDriver] = useState();
   useEffect(() => {
-    axios.get("http://192.168.10.226/api/show/booking/" + id).then((res) => {
-      const daata = res.data.booking[0];
-      const start = moment(daata.booking_start).format("DD-MMMM-yyyy H:m น.");
-      const end = moment(daata.booking_end).format("DD-MMMM-yyyy H:m น.");
-      console.log(start);
-      setName(daata.username);
-      setStart(start);
-      setEnd(end);
-      setDetail(daata.booking_detail);
-    });
+    axios
+      .get("http://192.168.10.226/api/show/booking/detail/" + id)
+      .then((res) => {
+        const daata = res.data.detail[0];
+        const start = moment(daata.sdate).format("DD-MMMM-yyyy H:m น.");
+        const end = moment(daata.edate).format("DD-MMMM-yyyy H:m น.");
+        console.log(start);
+        setName(daata.name_user);
+        setStart(start);
+        setEnd(end);
+        setDetail(daata.booking_detail);
+      });
+  }, []);
+  useEffect(() => {
     axios.get("http://192.168.10.226/api/caranddrive/aprove/" + id)
       .then((res) => {
         const car = res.data.car;
         const driver = res.data.driver;
+        console.log(driver[0].name);
         setCar(car);
         setDriver(driver);
       });
-  }, [route.params.id]);
+  },[]);
   const Submit = () => {
-    console.log(id)
+    console.log(id);
     axios.patch("http://192.168.10.226/api/Aprove/car/in", {
       id: id,
       car_id: idcar,
       driver_id: iddriver,
       type: 1,
     }).then((res)=>{
-      console.log(res.data)
+      // console.log(res.data)
     })
   };
   return (
@@ -65,7 +70,9 @@ const CarIn = ({ route, navigation }) => {
           การอนุมัติรายการจอง
         </Text>
         <View style={styles.CardInfo}>
-          <Text style={styles.TextInfo}>ผู้จอง :{id} {name}</Text>
+          <Text style={styles.TextInfo}>
+            ผู้จอง :{id} {name}
+          </Text>
           <Text style={styles.TextInfo}>วันเริ่มต้น : {start} </Text>
           <Text style={styles.TextInfo}>วันสิ้นสุด : {end}</Text>
           <Text style={styles.TextInfo}>สถานที่ : {detail}</Text>
@@ -107,10 +114,10 @@ const CarIn = ({ route, navigation }) => {
             setIdDriver(selectedItem.id);
           }}
           buttonTextAfterSelection={(selectedItem) => {
-            return selectedItem.driver_fullname;
+            return selectedItem.name;
           }}
           rowTextForSelection={(item) => {
-            return item.driver_fullname;
+            return item.name;
           }}
           buttonStyle={styles.dropdown2BtnStyle}
           buttonTextStyle={styles.dropdown2BtnTxtStyle}
