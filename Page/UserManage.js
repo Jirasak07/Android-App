@@ -10,13 +10,13 @@ export default function UserManage() {
     const interval = setInterval(() => {
       axios.get("http://192.168.10.226/api/show/user").then((res) => {
         const user = res.data.user;
-        setUsers(user);
-        console.log(user);
+        setUsers(user.name);
       });
     }, 3000);
 
     return () => {
       console.log("com[pnent unmount");
+      clearInterval(interval)
     };
   }, []);
   return (
@@ -27,21 +27,9 @@ export default function UserManage() {
       <ScrollView style={{ flex: 1 }}>
         <View style={style.container}>
           <View style={style.card}>
-            <Text>TR-Wirunsak Chairin</Text>
+            <Text>{users[0].name}</Text>
             <TouchableOpacity style={style.BtnRole}>
               <Text style={{ color: "white", fontWeight: "700" }}>Admin</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.card}>
-            <Text>TR-Jirasak Singhabutr</Text>
-            <TouchableOpacity style={style.BtnRole}>
-              <Text style={{ color: "white", fontWeight: "700" }}>User</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.card}>
-            <Text>TR-Patcharawang Gerdpan</Text>
-            <TouchableOpacity style={style.BtnRole}>
-              <Text style={{ color: "white", fontWeight: "700" }}>Driver</Text>
             </TouchableOpacity>
           </View>
         </View>

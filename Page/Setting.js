@@ -64,7 +64,8 @@ function Setting({ navigation }) {
           unit: checked,
         })
         .then((res) => {
-          if (res.data.status == "edit_success") {
+          console.log(res.data)
+          if (res.status == "200") {
             fethData();
             setShow(!show);
           } else {

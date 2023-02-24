@@ -44,7 +44,8 @@ function LoginPage({ navigation }) {
     }
   };
   return (
-    <TouchableNativeFeedback
+    <TouchableOpacity
+    activeOpacity={1}
       onPress={() => {
         Keyboard.dismiss();
       }}
@@ -121,7 +122,7 @@ function LoginPage({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 }
 
