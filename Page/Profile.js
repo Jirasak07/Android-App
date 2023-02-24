@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import globalStyles from "../Style/globalStyle";
 import Fa5Icon from "react-native-vector-icons/FontAwesome5";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Entypo, MaterialIcons } from "@expo/vector-icons";
+import { Entypo, MaterialIcons, Octicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Profile = ({navigation}) => {
@@ -24,12 +24,12 @@ const Profile = ({navigation}) => {
       <View style={styles.content}>
         <Image
           style={styles.Profile}
-          source={require("../assets/Image/ดาวน์โหลด.jpeg")}
+          source={require("../assets/Image/pic.jpeg")}
         />
         <View style={styles.containerProfile}>
-          <Text style={styles.name}>Name</Text>
+          <Text style={styles.name}>TR-Jirasak Singhabutr</Text>
          <Text>
-          Role : user
+          สถานะ : กำลังใช้งาน <Octicons name="dot-fill" color={'green'} />
          </Text>
         </View>
       </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   LogoutBtn: {
     backgroundColor: "#e63946",
-    height: 50,
+    height: 40,
     borderRadius: 10,
     marginHorizontal: 10,
     marginBottom: 10,
@@ -73,8 +73,9 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   name: {
-    fontSize: 40,
+    fontSize: 30,
     color: "#000814",
     fontWeight: "700",
+    marginTop:20
   },
 });

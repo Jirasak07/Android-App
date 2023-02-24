@@ -58,19 +58,19 @@ function LoginPage({ navigation }) {
           />
         </View>
         <View style={styles.bodyLogin}>
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>ระบบจองรถ</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>ระบบจองรถบริษัท</Text>
           <TextInput
             autoCapitalize={"none"}
             inputMode="email"
             spellCheck={false}
             onChangeText={setUsername}
-            placeholder="example@lanna.co.th"
+            placeholder="Email"
             style={styles.TextInput}
             ref={userName}
           />
           <TextInput
             onChangeText={setpassword}
-            placeholder=" รหัสผ่าน"
+            placeholder=" Password"
             autoCapitalize={"none"}
             keyboardType="default"
             inputMode="password"
@@ -80,25 +80,17 @@ function LoginPage({ navigation }) {
           <TouchableOpacity
             activeOpacity={0.1}
             style={{
-              backgroundColor: "#2a9d8f",
-              paddingHorizontal: 50,
+              backgroundColor: "#fb6107",
               height: 40,
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 5,
-              marginTop: 10,
+              marginTop: 30,
+              width:300
             }}
             onPress={() => {
               onClick();
             }}
-            // onPress={()=>{  {navigation.navigate("admin")}}}
-            // onPress={() => {
-            //   {
-            //     username == "1"
-            //       ? navigation.navigate("user")
-            //       : navigation.navigate("user");
-            //   }
-            // }}
           >
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               เข้าสู่ระบบ
@@ -149,8 +141,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   TextInput: {
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 10,
     paddingLeft: 10,
     backgroundColor: "#e5e5e5",
     width: 300,

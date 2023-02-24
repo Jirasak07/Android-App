@@ -29,15 +29,15 @@ const RequestAll = ({ navigation }) => {
   useEffect(() => {
     const FetchBooking = async () => {
       axios.get("http://192.168.10.226/api/show/booking").then((res) => {
-        const num = res.data.showbooking.length
-        setCount(num)
+        const num = res.data.showbooking.length;
+        setCount(num);
         setData(res.data.showbooking);
       });
     };
     FetchBooking();
     console.log("Component mounted");
     const intervalId = setInterval(() => {
-      FetchBooking()
+      FetchBooking();
     }, 3000);
     return () => {
       console.log("Component unmounted");
@@ -189,12 +189,22 @@ const RequestAll = ({ navigation }) => {
           borderBottomWidth: 2,
           justifyContent: "center",
           alignItems: "center",
-          flexDirection:'row'
+          flexDirection: "row",
         }}
       >
-      <TouchableOpacity onPress={()=>{navigation.goBack()}} style={{position:'absolute',left:5,justifyContent:'center',alignItems:'center'}} >
-<Ionicons name="md-caret-back-outline" size={30} />
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={{
+            position: "absolute",
+            left: 5,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Ionicons name="arrow-back" size={30} />
+        </TouchableOpacity>
         <Text style={{ fontWeight: "600", fontSize: 16 }}>
           รายการจองทั้งหมด {count}
         </Text>
