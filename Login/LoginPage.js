@@ -97,7 +97,7 @@ function LoginPage({ navigation }) {
               เข้าสู่ระบบ
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             activeOpacity={0.1}
             style={{
               backgroundColor: "#2a9d8f",
@@ -119,7 +119,7 @@ function LoginPage({ navigation }) {
             <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
               Admin
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </TouchableOpacity>

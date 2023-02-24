@@ -61,7 +61,7 @@ export default function App() {
           />
           <Stack.Screen name="user" component={TabBottomUser} />
           <Stack.Screen name="admin" component={TabBottoms} />
-          <Stack.Screen name="Driver" component={TabBottoms} />
+          <Stack.Screen name="Driver" component={TabBottomUser} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

@@ -62,6 +62,15 @@ const RequestAll = ({ navigation }) => {
     if (!textCancel) {
       console.log("กรุณากรอกข้อมูล");
     } else {
+      axios.patch('http://192.168.10.226/api/cancle',{
+        id:id,
+        reason:textCancel,
+      }).then((res)=>{
+        console.log(res)
+        if(res == '201'){
+          setModal(!modal)
+        }
+      })
       console.log("Success " + textCancel + id);
     }
   };

@@ -7,6 +7,7 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
+import { Keyboard } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheet } from "react-native-btr";
@@ -35,8 +36,6 @@ const BottomSheets = () => {
     .onUpdate((ev) => {
       translateYx.value = ev.translationY + context.value.y;
       translateYx.value = Math.max(translateYx.value, -windowHeight / 1.3);
-      console.log(translateYx.value);
-      console.log(_WORKLET);
     })
     .onEnd(() => {
       if (translateYx.value > -windowHeight / 3.5) {
@@ -63,35 +62,38 @@ const BottomSheets = () => {
           openSheet();
         }}
         style={{
-            marginHorizontal:5,
-            alignItems:'center',
-            paddingLeft:2    
-    }}
+          marginHorizontal: 5,
+          alignItems: "center",
+          paddingLeft: 2,
+        }}
       >
-        <Ionicons name="add-circle-outline" size={45} color={'gray'}  />
+        <Ionicons name="add-circle-outline" size={45} color={"gray"} />
       </TouchableOpacity>
       <View>
-        <BottomSheet
-        onBackdropPress={updateShare}
-          visible={modalVisible}
-        >
+        <BottomSheet onBackdropPress={updateShare} visible={modalVisible}>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <GestureDetector gesture={gesture}>
               <Animated.View style={[styles.BottomSheetst, rBottomSheetStyle]}>
-              <View
-                style={{
-                  width: 75,
-                  height: 5,
-                  backgroundColor: "grey",
-                  alignSelf: "center",
-                  marginVertical: 15,
-                  borderRadius: 2,
-                  opacity: 0.3,
-                }}
-              />
-                <View style={{flex:1}} >
-          <AddRequest/>
-                </View>
+                <TouchableOpacity
+                  style={{
+                    width: 75,
+                    height: 5,
+                    backgroundColor: "grey",
+                    alignSelf: "center",
+                    marginVertical: 15,
+                    borderRadius: 2,
+                    opacity: 0.3,
+                  }}
+                />
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => {
+                    Keyboard.dismiss();
+                  }}
+                  style={{ flex: 1 }}
+                >
+                  <AddRequest />
+                </TouchableOpacity>
               </Animated.View>
             </GestureDetector>
           </GestureHandlerRootView>

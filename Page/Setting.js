@@ -41,8 +41,6 @@ function Setting({ navigation }) {
     .onUpdate((ev) => {
       translateYx.value = ev.translationY + context.value.y;
       translateYx.value = Math.max(translateYx.value, -windowHeight / 1.8);
-      console.log(translateYx.value);
-      console.log(_WORKLET);
     })
     .onEnd(() => {
       if (translateYx.value > -windowHeight / 3.5) {
