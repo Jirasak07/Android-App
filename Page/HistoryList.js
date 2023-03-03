@@ -32,7 +32,7 @@ const HistoryList = ({ navigation }) => {
     return (
       <ScrollView
         style={{
-          flex: 1,
+     
           paddingHorizontal: 20,
           paddingTop: 20,
           backgroundColor: "#edf2f4",
@@ -63,7 +63,7 @@ const HistoryList = ({ navigation }) => {
         <Text style={styles.txtHead}>HistoryList</Text>
         <View></View>
       </View>
-      <FlatList data={history} renderItem={renderItem} />
+      <FlatList data={history} renderItem={renderItem}  />
     </View>
   );
 };

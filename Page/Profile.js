@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import globalStyles from "../Style/globalStyle";
 import Fa5Icon from "react-native-vector-icons/FontAwesome5";
@@ -7,6 +7,7 @@ import { Entypo, MaterialIcons, Octicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Profile = ({navigation}) => {
+  const [name,setName]=useState("")
   const Logout = async()=>{
     await AsyncStorage.removeItem('@Login')
     await AsyncStorage.removeItem('@role')
@@ -14,6 +15,13 @@ const Profile = ({navigation}) => {
     await AsyncStorage.removeItem('@name')
     navigation.navigate("Login")
   }
+  useEffect(() => {
+    const findName = async()=>{
+      const naame = await AsyncStorage.getItem('@name');
+      setName(naame)
+    }
+    findName()
+  }, [])
   return (
     <View
       style={{
@@ -27,7 +35,7 @@ const Profile = ({navigation}) => {
           source={require("../assets/Image/pic.jpeg")}
         />
         <View style={styles.containerProfile}>
-          <Text style={styles.name}>TR-Jirasak Singhabutr</Text>
+          <Text style={styles.name}>{name}</Text>
          <Text>
           สถานะ : กำลังใช้งาน <Octicons name="dot-fill" color={'green'} />
          </Text>

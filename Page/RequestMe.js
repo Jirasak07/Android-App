@@ -101,7 +101,7 @@ export default function RequestMe() {
             <View style={{ flexDirection: "row" }}>
               <View style={{ flexGrow: 2 }}>
                 <Text style={[styles.text_header, { marginTop: 10 }]}>
-                  ข้อมูลการจอง {id}
+                  ข้อมูลการจอง
                 </Text>
               </View>
               {/* <View style={{ flexGrow: 0 }}>
