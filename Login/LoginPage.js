@@ -21,27 +21,45 @@ function LoginPage({ navigation }) {
   const [password, setpassword] = useState("");
 
   const onClick = async () => {
-    const response = await axios.post("http://192.168.10.226/api/chklogin", {
-      email:username,
-      password:password,
-    });
-    const data = await response.data;
-    console.log(data.status);
-    if (data.status == "success") {
-      const role = data.role;
-      await AsyncStorage.setItem("@Login", "Logined");
-      await AsyncStorage.setItem("@role", data.role);
-      await AsyncStorage.setItem("@iduser", JSON.stringify(data.id));
-      await AsyncStorage.setItem('@name',data.name)
-      Alert.alert("ยินดีต้อนรับ ", "", [
-        {
-          text: "ตกลง",
-          onPress: () => {
-            navigation.navigate(role);
-          },
+    Alert.alert("ยินดีต้อนรับ ", "", [
+      {
+        text: "ตกลง",
+        onPress: () => {
+          navigation.navigate("admin");
         },
-      ]);
-    }
+      },
+    ]);
+    // const response = await axios.post("http://192.168.10.226/api/chklogin", {
+    //   email:username,
+    //   password:password,
+    // });
+    // const data = await response.data;
+
+    // console.log(data.status);
+    // if (data.status == "success") {
+    //   const role = data.role;
+    //   await AsyncStorage.setItem("@Login", "Logined");
+    //   await AsyncStorage.setItem("@role", data.role);
+    //   await AsyncStorage.setItem("@iduser", JSON.stringify(data.id));
+    //   await AsyncStorage.setItem('@name',data.name)
+    //   Alert.alert("ยินดีต้อนรับ ", "", [
+    //     {
+    //       text: "ตกลง",
+    //       onPress: () => {
+    //         navigation.navigate(role);
+    //       },
+    //     },
+    //   ]);
+    // }else{
+    //   Alert.alert("ยินดีต้อนรับ ", "", [
+    //     {
+    //       text: "ตกลง",
+    //       onPress: () => {
+    //         navigation.navigate(role);
+    //       },
+    //     },
+    //   ]);
+    // }
   };
   return (
     <TouchableOpacity
